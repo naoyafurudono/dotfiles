@@ -45,10 +45,10 @@ define_keymap(None, {
     K("CAPSLOCK"): K("M-BACKSLASH")
 }, "eisu caps")
 
-define_keymap(re.compile("gnome-terminal", re.IGNORECASE), {
-    K("C-TAB"): K("C-t"),
-    K("C-Shift-TAB"): K("C-Shift-t")
-}, "gterm ctab")
+# define_keymap(re.compile("gnome-terminal", re.IGNORECASE), {
+#     K("C-TAB"): K("C-t"),
+#     K("C-Shift-TAB"): K("C-Shift-t")
+# }, "gterm ctab")
 
 # Keybindings for Firefox/Chrome
 # define_keymap(re.compile("Firefox|Google-chrome"), {

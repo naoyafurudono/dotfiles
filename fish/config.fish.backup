@@ -1,0 +1,10 @@
+function kk; stack exec koka; end
+function rekk; stack build --fast && kk; end
+
+function ls; exa $argv; end
+function less; bat $argv; end
+function gi; curl -sLw n https://www.toptal.com/developers/gitignore/api/$argv; end
+function madkk; cd ~/prg/koka/2020-floating/floating; madoko-local -r -l .; end
+function mad; madoko --pdf -vv --odir=out floating && open out/floating.pdf; end
+set PATH /Users/nfurudono/.cargo/bin $PATH
+set PATH ~/go/bin $PATH

@@ -3,3 +3,5 @@
 !*/
 !.gitignore
 !xkeysnail/*
+!fish/*
+!nvim/*

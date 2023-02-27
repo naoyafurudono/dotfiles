@@ -1,0 +1,10 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = Naoya Furudono
+	email = naoyafurudono@gmail.com
+[init]
+	defaultBranch = main
+[alias]
+  c = commit -m
+  s = status

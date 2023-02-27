@@ -10,3 +10,5 @@
 !mozc/ibus_config.textproto
 !systemd/user/xkeysnail.service
 !git/*
+!bat/*
+

@@ -2,6 +2,9 @@
 */
 !*/
 !.gitignore
+!readme.md
+
 !xkeysnail/*
 !fish/*
 !nvim/*
+!mozc/*

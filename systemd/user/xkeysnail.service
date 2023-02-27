@@ -1,0 +1,16 @@
+[Unit]
+Description=xkeysnail
+
+[Service]
+KillMode=process
+#ExecStartPre=/usr/bin/xhost +SI:localuser:root
+ExecStart=/home/furudono/.local/bin/xkeysnail -q /home/furudono/.config/xkeysnail/config.py
+Type=simple
+Restart=always
+RestartSec=10s
+
+# たぶん :0 で問題ないと思いますが環境にもよります。`echo $DISPLAY`の値を設定してください
+Environment=DISPLAY=:0
+
+[Install]
+WantedBy=default.target

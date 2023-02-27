@@ -8,3 +8,4 @@
 !fish/*
 !nvim/*
 !mozc/ibus_config.textproto
+!systemd/user/xkeysnail.service

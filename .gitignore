@@ -2,7 +2,7 @@
 */
 !*/
 !.gitignore
-!readme.md
+#!readme.md
 
 !xkeysnail/*
 !fish/*

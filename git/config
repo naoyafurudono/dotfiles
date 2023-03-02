@@ -1,10 +1,13 @@
-# This is Git's per-user configuration file.
 [user]
-# Please adapt and uncomment the following lines:
-	name = Naoya Furudono
+	name = naoyafurudono
 	email = naoyafurudono@gmail.com
 [init]
 	defaultBranch = main
+[pull]
+	rebase = false
+[core]
+  editor = nvim
 [alias]
-  c = commit -m
   s = status
+  c = commit -m
+

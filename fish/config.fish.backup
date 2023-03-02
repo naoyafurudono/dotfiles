@@ -1,10 +1,36 @@
-function kk; stack exec koka; end
-function rekk; stack build --fast && kk; end
+if status --is-interactive
+  set -g fish_user_abbreviations
 
-function ls; exa $argv; end
-function less; bat $argv; end
-function gi; curl -sLw n https://www.toptal.com/developers/gitignore/api/$argv; end
-function madkk; cd ~/prg/koka/2020-floating/floating; madoko-local -r -l .; end
-function mad; madoko --pdf -vv --odir=out floating && open out/floating.pdf; end
-set PATH /Users/nfurudono/.cargo/bin $PATH
+  abbr --add ls       exa
+  abbr --add v        nvim
+  abbr --add gg       git grep -n -1
+
+  if test (uname -s) = "Darwin"
+    abbr --add less bat
+  else
+    abbr --add less batcat
+    abbr --add xremap   xremap ~/.config/xremap/xremap.conf --device 'Topre REALFORCE 87 US' 
+  end
+
+end
+
 set PATH ~/go/bin $PATH
+set PATH /usr/local/go/bin $PATH
+set PATH ~/.local/bin $PATH
+set PATH ~/.cargo/bin $PATH
+set EDITOR nvim
+set VISUAL nvim
+# set PAGER bat
+
+set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/furudono/.ghcup/bin $PATH # ghcup-env
+
+# -- vi mode --
+
+fish_vi_key_bindings
+
+# Do after `fish_vi_key_bindings`, which overwrites follows
+set fish_cursor_default     block      blink
+set fish_cursor_insert      line       # blink
+set fish_cursor_replace_one underscore # blink
+set fish_cursor_visual      block
+

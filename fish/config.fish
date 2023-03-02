@@ -1,4 +1,3 @@
-
 # ---- environment ----
 
 set PATH ~/go/bin $PATH
@@ -49,4 +48,5 @@ set fish_cursor_replace_one underscore # blink
 set fish_cursor_visual      block
 
 # no greeting
-set -U fish_config
+set fish_greeting
+

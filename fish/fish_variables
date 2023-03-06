@@ -5,7 +5,7 @@ SETUVAR __fish_initialized:3400
 SETUVAR _fish_abbr_add:git\x20add
 SETUVAR _fish_abbr_commit:git\x20commit
 SETUVAR _fish_abbr_gg:git\x20grep\x20\x2dn\x20\x2d1
-SETUVAR _fish_abbr_less:batcat
+SETUVAR _fish_abbr_less:bat
 SETUVAR _fish_abbr_ls:exa
 SETUVAR _fish_abbr_push:git\x20push
 SETUVAR _fish_abbr_status:git\x20status

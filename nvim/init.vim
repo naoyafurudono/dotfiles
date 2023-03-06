@@ -2,11 +2,6 @@ if &compatible
   set nocompatible               " Be iMproved
 endif
 
-if has('mac')
-	set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-	inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-endif
-
 " カーソル位置記憶
 autocmd BufReadPost *
       \ if line("'\"") > 0 && line ("'\"") <= line("$") |

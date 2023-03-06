@@ -4,11 +4,11 @@
 !.gitignore
 #!readme.md
 
-!xkeysnail/*
-!fish/*
-!nvim/*
+!xkeysnail/**
+!fish/**
+!nvim/**
 !mozc/ibus_config.textproto
 !systemd/user/xkeysnail.service
-!git/*
-!bat/*
+!git/**
+!bat/**
 

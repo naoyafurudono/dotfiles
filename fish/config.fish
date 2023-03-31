@@ -13,13 +13,18 @@ set VISUAL nvim
 
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/furudono/.ghcup/bin $PATH # ghcup-env
 
-pyenv init - | source
+if test (uname -s) = "Darwin"
+  ;
+else
+  pyenv init - | source
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/furudono/dev/google-cloud-sdk/path.fish.inc' ]; . '/home/furudono/dev/google-cloud-sdk/path.fish.inc'; end
+  if [ -f '/home/furudono/dev/google-cloud-sdk/path.fish.inc' ]; . '/home/furudono/dev/google-cloud-sdk/path.fish.inc'; end
 
 # opam configuration
-source /home/furudono/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
+  source /home/furudono/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
+end
+
 
 # --- interactive ---
 

@@ -14,7 +14,7 @@ set VISUAL nvim
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/furudono/.ghcup/bin $PATH # ghcup-env
 
 if test (uname -s) = "Darwin"
-  ;
+  set PATH /opt/homebrew/bin $PATH
 else
   pyenv init - | source
 

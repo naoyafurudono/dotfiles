@@ -1,20 +1,19 @@
 # ---- environment ----
 
-set PATH ~/go/bin $PATH
-set PATH /usr/local/go/bin $PATH
-set PATH ~/.local/bin $PATH
-set PATH ~/.cargo/bin $PATH
-set PATH ~/.local/swift-5.7.3-RELEASE-ubuntu22.04/usr/bin $PATH
+set -x PATH ~/go/bin $PATH
+set -x PATH /usr/local/go/bin $PATH
+set -x PATH ~/.local/bin $PATH
+set -x PATH ~/.cargo/bin $PATH
+set -x PATH ~/.local/swift-5.7.3-RELEASE-ubuntu22.04/usr/bin $PATH
 
-set XDG_CONFIG_PATH ~/.config
-set EDITOR nvim
-set VISUAL nvim
-# set PAGER bat
+set -x XDG_CONFIG_PATH ~/.config
+set -x EDITOR nvim
+set -x VISUAL nvim
 
-set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/furudono/.ghcup/bin $PATH # ghcup-env
+set -x -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/furudono/.ghcup/bin $PATH # ghcup-env
 
 if test (uname -s) = "Darwin"
-  set PATH /opt/homebrew/bin $PATH
+  set -x PATH /opt/homebrew/bin $PATH
 else
   pyenv init - | source
 
@@ -40,6 +39,7 @@ if status --is-interactive
   else
     abbr --add less batcat
     abbr --add xremap   xremap ~/.config/xremap/xremap.conf --device 'Topre REALFORCE 87 US' 
+    source ~/.local/fish/init.fish
   end
 
 end

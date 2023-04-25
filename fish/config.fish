@@ -6,8 +6,6 @@ set -x PATH ~/.local/bin $PATH
 set -x PATH ~/.cargo/bin $PATH
 
 set -x XDG_CONFIG_PATH ~/.config
-set -x EDITOR nvim
-set -x VISUAL nvim
 
 if test (uname -s) = Darwin
     set -x PATH /opt/homebrew/bin $PATH
@@ -35,6 +33,10 @@ if status --is-interactive
     abbr --add ls exa
     abbr --add v nvim
     abbr --add gg git grep -n -1
+
+    set -x EDITOR nvim
+    set -x VISUAL nvim
+
 
   if test (uname -s) = "Darwin"
     abbr --add less bat

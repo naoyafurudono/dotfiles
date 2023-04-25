@@ -4,7 +4,6 @@ set -x PATH ~/go/bin $PATH
 set -x PATH /usr/local/go/bin $PATH
 set -x PATH ~/.local/bin $PATH
 set -x PATH ~/.cargo/bin $PATH
-set -x PATH ~/.local/swift-5.7.3-RELEASE-ubuntu22.04/usr/bin $PATH
 
 set -x XDG_CONFIG_PATH ~/.config
 set -x EDITOR nvim
@@ -14,7 +13,6 @@ if test (uname -s) = Darwin
     set -x PATH /opt/homebrew/bin $PATH
 else
     set -x -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/furudono/.ghcup/bin $PATH # ghcup-env
-    set -x OPENAI_API_KEY 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
 
     pyenv init - | source
 
@@ -25,6 +23,7 @@ else
 
     # opam configuration
     source /home/furudono/.opam/opam-init/init.fish >/dev/null 2>/dev/null; or true
+    set -x PATH ~/.local/swift-5.7.3-RELEASE-ubuntu22.04/usr/bin $PATH
 end
 
 

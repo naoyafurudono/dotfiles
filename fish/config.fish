@@ -31,8 +31,9 @@ if status --is-interactive
     set -x -g fish_user_abbreviations
 
     abbr --add ls exa
-    abbr --add v nvim
+    abbr --add v  nvim
     abbr --add gg git grep -n -1
+    abbr --add cc 'fzf --print0 | xargs -0 -o code'
 
     set -x EDITOR nvim
     set -x VISUAL nvim
@@ -58,3 +59,4 @@ if status --is-interactive
   set -x fish_greeting
 end
 
+# rvm default

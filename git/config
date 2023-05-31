@@ -1,6 +1,3 @@
-[user]
-	name = Naoya Furudono
-	email = naoyafurudono@gmail.com
 [init]
 	defaultBranch = main
 [pull]
@@ -10,4 +7,12 @@
 [alias]
   s = status
   c = commit -m
+
+[include]
+  # set! user
+  path = ~/.local/git/config
+
+# [user]
+# 	name = Naoya Furudono
+# 	email = naoyafurudono@gmail.com
 

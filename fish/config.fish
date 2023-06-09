@@ -5,7 +5,7 @@ set -x PATH\
   /usr/local/go/bin\
   ~/.local/bin\
   ~/.cargo/bin\
-  ~/.embulk/bin
+  ~/.embulk/bin\
   $PATH
 
 set -x XDG_CONFIG_PATH ~/.config

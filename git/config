@@ -12,7 +12,9 @@
   # set! user
   path = ~/.local/git/config
 
+# cat << EOS
 # [user]
 # 	name = Naoya Furudono
 # 	email = naoyafurudono@gmail.com
+# EOS > ~/.local/git/config
 

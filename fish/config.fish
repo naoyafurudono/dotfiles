@@ -1,10 +1,12 @@
 # ---- environment ----
 
-set -x PATH ~/go/bin $PATH
-set -x PATH /usr/local/go/bin $PATH
-set -x PATH ~/.local/bin $PATH
-set -x PATH ~/.cargo/bin $PATH
-set -x PATH ~/.embulk/bin $PATH
+set -x PATH\
+  ~/go/bin\
+  /usr/local/go/bin\
+  ~/.local/bin\
+  ~/.cargo/bin\
+  ~/.embulk/bin
+  $PATH
 
 set -x XDG_CONFIG_PATH ~/.config
 
@@ -34,7 +36,6 @@ if status --is-interactive
     abbr --add ls exa
     abbr --add v  nvim
     abbr --add gg git grep -n -1
-    abbr --add cc 'fzf --print0 | xargs -0 -o code'
 
     set -x EDITOR nvim
     set -x VISUAL nvim

@@ -13,6 +13,11 @@ set -x XDG_CONFIG_HOME ~/.config
 
 if test (uname -s) = Darwin
     set -x PATH /opt/homebrew/bin $PATH
+
+    # The next line updates PATH for the Google Cloud SDK.
+    if [ -f '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc' ]
+      source '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc'
+    end
 else
     set -x -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/furudono/.ghcup/bin $PATH # ghcup-env
 
@@ -62,8 +67,7 @@ if status --is-interactive
   set -x fish_greeting
 end
 
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc' ]; . '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc'; end
+# ---- load ----
 
 source ~/.local/fish/init.fish
+

@@ -1,5 +1,0 @@
-[[plugins]]
-repo = 'neoclide/coc.nvim'
-source = 'release'
-build = 'coc#util#install()'
-

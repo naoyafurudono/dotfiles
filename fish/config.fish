@@ -9,6 +9,7 @@ set -x PATH\
   $PATH
 
 set -x XDG_CONFIG_PATH ~/.config
+set -x XDG_CONFIG_HOME ~/.config
 
 if test (uname -s) = Darwin
     set -x PATH /opt/homebrew/bin $PATH
@@ -39,11 +40,11 @@ if status --is-interactive
 
     set -x EDITOR nvim
     set -x VISUAL nvim
-    source ~/.local/fish/init.fish
 
 
   if test (uname -s) = "Darwin"
     abbr --add less bat
+    # rvm default
   else
     abbr --add less batcat
     abbr --add xremap   xremap ~/.config/xremap/xremap.conf --device 'Topre REALFORCE 87 US' 
@@ -61,7 +62,8 @@ if status --is-interactive
   set -x fish_greeting
 end
 
-# rvm default
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc' ]; . '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc'; end
+
+source ~/.local/fish/init.fish

@@ -4,6 +4,7 @@ set -x PATH ~/go/bin $PATH
 set -x PATH /usr/local/go/bin $PATH
 set -x PATH ~/.local/bin $PATH
 set -x PATH ~/.cargo/bin $PATH
+set -x PATH ~/.embulk/bin $PATH
 
 set -x XDG_CONFIG_PATH ~/.config
 
@@ -37,6 +38,7 @@ if status --is-interactive
 
     set -x EDITOR nvim
     set -x VISUAL nvim
+    source ~/.local/fish/init.fish
 
 
   if test (uname -s) = "Darwin"
@@ -44,7 +46,6 @@ if status --is-interactive
   else
     abbr --add less batcat
     abbr --add xremap   xremap ~/.config/xremap/xremap.conf --device 'Topre REALFORCE 87 US' 
-    source ~/.local/fish/init.fish
   end
 
   fish_vi_key_bindings
@@ -60,3 +61,6 @@ if status --is-interactive
 end
 
 # rvm default
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc' ]; . '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc'; end

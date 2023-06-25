@@ -1,15 +1,15 @@
 # ---- environment ----
 
-set -x PATH\
-  ~/go/bin\
-  /usr/local/go/bin\
-  ~/.local/bin\
-  ~/.cargo/bin\
-  ~/.embulk/bin\
+set -x PATH \
+  $HOME/go/bin \
+  /usr/local/go/bin \
+  $HOME/.local/bin \
+  $HOME/.cargo/bin \
+  $HOME/.embulk/bin \
   $PATH
 
-set -x XDG_CONFIG_PATH ~/.config
-set -x XDG_CONFIG_HOME ~/.config
+set -x XDG_CONFIG_PATH $HOME/.config
+set -x XDG_CONFIG_HOME $HOME/.config
 
 if test (uname -s) = Darwin
     set -x PATH /opt/homebrew/bin $PATH
@@ -25,12 +25,12 @@ else
 
     # The next line updates PATH for the Google Cloud SDK.
     if [ -f '/home/furudono/dev/google-cloud-sdk/path.fish.inc' ]
-        . '/home/furudono/dev/google-cloud-sdk/path.fish.inc'
+        source '/home/furudono/dev/google-cloud-sdk/path.fish.inc'
     end
 
     # opam configuration
     source /home/furudono/.opam/opam-init/init.fish >/dev/null 2>/dev/null; or true
-    set -x PATH ~/.local/swift-5.7.3-RELEASE-ubuntu22.04/usr/bin $PATH
+    set -x PATH $HOME/.local/swift-5.7.3-RELEASE-ubuntu22.04/usr/bin $PATH
 end
 
 
@@ -52,7 +52,7 @@ if status --is-interactive
     # rvm default
   else
     abbr --add less batcat
-    abbr --add xremap   xremap ~/.config/xremap/xremap.conf --device 'Topre REALFORCE 87 US' 
+    abbr --add xremap   xremap $HOME/.config/xremap/xremap.conf --device 'Topre REALFORCE 87 US' 
   end
 
   fish_vi_key_bindings
@@ -69,5 +69,5 @@ end
 
 # ---- load ----
 
-source ~/.local/fish/init.fish
+source $HOME/.local/fish/init.fish
 

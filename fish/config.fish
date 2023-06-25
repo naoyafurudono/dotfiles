@@ -1,15 +1,17 @@
 # ---- environment ----
 
+set -x XDG_CONFIG_PATH $HOME/.config
+set -x XDG_CONFIG_HOME $HOME/.config
+set -x VOLTA_HOME $HOME/.volta
+
 set -x PATH \
   $HOME/go/bin \
   /usr/local/go/bin \
   $HOME/.local/bin \
   $HOME/.cargo/bin \
   $HOME/.embulk/bin \
+  $VOLTA_HOME/bin \
   $PATH
-
-set -x XDG_CONFIG_PATH $HOME/.config
-set -x XDG_CONFIG_HOME $HOME/.config
 
 if test (uname -s) = Darwin
     set -x PATH /opt/homebrew/bin $PATH
@@ -32,7 +34,6 @@ else
     source /home/furudono/.opam/opam-init/init.fish >/dev/null 2>/dev/null; or true
     set -x PATH $HOME/.local/swift-5.7.3-RELEASE-ubuntu22.04/usr/bin $PATH
 end
-
 
 # --- interactive ---
 

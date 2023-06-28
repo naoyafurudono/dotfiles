@@ -8,13 +8,11 @@
   s = status
   c = commit -m
 
-[include]
-  # set! user
-  path = ~/.local/git/config
+[user]
+	name = Naoya Furudono
+	email = naoyafurudono@gmail.com
 
-# cat << EOS
-# [user]
-# 	name = Naoya Furudono
-# 	email = naoyafurudono@gmail.com
-# EOS > ~/.local/git/config
+[include]
+  # override user
+  path = ~/.local/git/config
 

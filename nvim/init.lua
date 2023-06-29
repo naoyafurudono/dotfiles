@@ -1,11 +1,3 @@
--- カーソル位置記憶
-vim.cmd [[
-  autocmd BufReadPost *
-        \ if line("'\"") > 0 and line("'\"") <= line("$") |
-        \   execute "normal! g'\"" |
-        \ endif
-]]
-
 vim.o.autoindent = true
 vim.o.smartindent = true
 vim.o.expandtab = true

@@ -10,7 +10,6 @@ set -x PATH \
   $HOME/.local/bin \
   $HOME/.cargo/bin \
   $HOME/.embulk/bin \
-  $VOLTA_HOME/bin \
   $PATH
 
 if test (uname -s) = Darwin
@@ -21,16 +20,15 @@ if test (uname -s) = Darwin
       source '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc'
     end
 else
-    set -x -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/furudono/.ghcup/bin $PATH # ghcup-env
-
-    pyenv init - | source
 
     # The next line updates PATH for the Google Cloud SDK.
     if [ -f '/home/furudono/dev/google-cloud-sdk/path.fish.inc' ]
         source '/home/furudono/dev/google-cloud-sdk/path.fish.inc'
     end
 
-    # opam configuration
+    # TODO: use asdf
+    set -x -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/furudono/.ghcup/bin $PATH # ghcup-env
+    pyenv init - | source
     source /home/furudono/.opam/opam-init/init.fish >/dev/null 2>/dev/null; or true
     set -x PATH $HOME/.local/swift-5.7.3-RELEASE-ubuntu22.04/usr/bin $PATH
 end

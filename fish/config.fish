@@ -35,6 +35,8 @@ else
     set -x PATH $HOME/.local/swift-5.7.3-RELEASE-ubuntu22.04/usr/bin $PATH
 end
 
+source $HOME/.asdf/asdf.fish
+
 # --- interactive ---
 
 if status --is-interactive

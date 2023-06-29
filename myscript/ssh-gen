@@ -1,0 +1,8 @@
+#!/bin/bash
+
+DIR_NAME=$1
+SSH_HOME="$HOME/.ssh"
+DIR_PATH_NAME="$SSH_HOME/$DIR_NAME"
+mkdir -p $DIR_PATH_NAME
+ssh-keygen -t ed25519 -f "$DIR_PATH_NAME/id_ed25519" -C "$DIR_NAME" -N ""
+

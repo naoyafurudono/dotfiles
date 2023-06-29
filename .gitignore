@@ -11,4 +11,5 @@
 !systemd/user/xkeysnail.service
 !git/**
 !bat/**
+!myscript/**
 

@@ -52,7 +52,8 @@ if status --is-interactive
 
   if test (uname -s) = "Darwin"
     abbr --add less bat
-    # rvm default
+    abbr --add k kubectl
+    #rvm default
   else
     abbr --add less batcat
     abbr --add xremap   xremap $HOME/.config/xremap/xremap.conf --device 'Topre REALFORCE 87 US' 
@@ -72,5 +73,4 @@ end
 
 # ---- load ----
 
-source $HOME/.local/fish/init.fish
-
+source ~/.local/fish/init.fish.secret

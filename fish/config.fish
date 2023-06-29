@@ -1,15 +1,16 @@
 # ---- environment ----
 
-set -x PATH\
-  ~/go/bin\
-  /usr/local/go/bin\
-  ~/.local/bin\
-  ~/.cargo/bin\
-  ~/.embulk/bin\
-  $PATH
+set -x XDG_CONFIG_PATH $HOME/.config
+set -x XDG_CONFIG_HOME $HOME/.config
+set -x VOLTA_HOME $HOME/.volta
 
-set -x XDG_CONFIG_PATH ~/.config
-set -x XDG_CONFIG_HOME ~/.config
+set -x PATH \
+  $HOME/go/bin \
+  /usr/local/go/bin \
+  $HOME/.local/bin \
+  $HOME/.cargo/bin \
+  $HOME/.embulk/bin \
+  $PATH
 
 if test (uname -s) = Darwin
     set -x PATH /opt/homebrew/bin $PATH
@@ -19,20 +20,20 @@ if test (uname -s) = Darwin
       source '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc'
     end
 else
-    set -x -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/furudono/.ghcup/bin $PATH # ghcup-env
-
-    pyenv init - | source
 
     # The next line updates PATH for the Google Cloud SDK.
     if [ -f '/home/furudono/dev/google-cloud-sdk/path.fish.inc' ]
-        . '/home/furudono/dev/google-cloud-sdk/path.fish.inc'
+        source '/home/furudono/dev/google-cloud-sdk/path.fish.inc'
     end
 
-    # opam configuration
+    # TODO: use asdf
+    set -x -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/furudono/.ghcup/bin $PATH # ghcup-env
+    pyenv init - | source
     source /home/furudono/.opam/opam-init/init.fish >/dev/null 2>/dev/null; or true
-    set -x PATH ~/.local/swift-5.7.3-RELEASE-ubuntu22.04/usr/bin $PATH
+    set -x PATH $HOME/.local/swift-5.7.3-RELEASE-ubuntu22.04/usr/bin $PATH
 end
 
+source $HOME/.asdf/asdf.fish
 
 # --- interactive ---
 
@@ -49,10 +50,11 @@ if status --is-interactive
 
   if test (uname -s) = "Darwin"
     abbr --add less bat
-    # rvm default
+    abbr --add k kubectl
+    #rvm default
   else
     abbr --add less batcat
-    abbr --add xremap   xremap ~/.config/xremap/xremap.conf --device 'Topre REALFORCE 87 US' 
+    abbr --add xremap   xremap $HOME/.config/xremap/xremap.conf --device 'Topre REALFORCE 87 US' 
   end
 
   fish_vi_key_bindings
@@ -69,5 +71,4 @@ end
 
 # ---- load ----
 
-source ~/.local/fish/init.fish
-
+source ~/.local/fish/init.fish.secret

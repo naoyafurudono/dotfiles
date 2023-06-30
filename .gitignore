@@ -4,6 +4,7 @@
 !.gitignore
 !.gitmodules
 !readme.md
+!setup.sh
 
 !xkeysnail/**
 !fish/**

@@ -2,7 +2,7 @@
 */
 !*/
 !.gitignore
-!.gitsubmodules
+!.gitmodules
 !readme.md
 
 !xkeysnail/**

@@ -11,4 +11,6 @@ Run following to install nvim extentions.
 ```sh
 git submodule init
 git submodule update
+./setup.sh
 ```
+

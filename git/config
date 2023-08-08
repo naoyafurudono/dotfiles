@@ -23,4 +23,4 @@
 [ghq "https://git.pepabo.com/"]
 	vcs = git
 [pager]
-  diff = colordiff | nkf -w | LESS=-R less
+  diff = colordiff | nkf -w

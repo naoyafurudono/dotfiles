@@ -5,7 +5,6 @@
 [core]
   editor = nvim
 [alias]
-  u = commit -am update # 必要悪:-D
   s = status
   c = commit -m
   cl = clean -fd

@@ -43,6 +43,7 @@ if status --is-interactive
     abbr --add ls exa
     abbr --add v  nvim
     abbr --add gg git grep -n -1
+    abbr --add gu 'git commit -am update && git push' # 必要悪 :(
 
     set -x EDITOR nvim
     set -x VISUAL nvim

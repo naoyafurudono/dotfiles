@@ -22,8 +22,9 @@ git submodule update
 - [ ] テストの実施・自動テストの整備
   - [x] コンテナ環境で手動テストを実施 (ubuntu)
   - [ ] コンテナ環境で手動テストを実施 (mac os)
-  - [ ] 自動テストを実施 (ubuntu)
+  - [x] 自動テストを実施 (ubuntu)
   - [ ] 自動テストを実施 (mac os)
+  - [ ] CIを設定する
 
 ## 設定の追加
 
@@ -34,7 +35,10 @@ git submodule update
 
 ## test
 
+setup.shのテスト。
 今はarmのubuntuだけ。
+実際に動かして正常終了するかをみる。
+それぞれのコマンドが動くかは見ていない。
 
 ```sh
 cd test

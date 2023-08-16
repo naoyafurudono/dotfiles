@@ -1,6 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR --export PYENV_ROOT:/home/furudono/\x2elocal/pyenv
+SETUVAR --export PYENV_ROOT:/Users/naoya\x2dfurudono/\x2epyenv
 SETUVAR __fish_initialized:3400
 SETUVAR _fish_abbr_add:git\x20add
 SETUVAR _fish_abbr_commit:git\x20commit
@@ -41,6 +41,6 @@ SETUVAR fish_pager_color_description:B3A06D\x1eyellow\x1e\x2di
 SETUVAR fish_pager_color_prefix:cyan\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SETUVAR fish_pager_color_selected_background:\x2dr
-SETUVAR fish_user_paths:/home/furudono/\x2elocal/pyenv/bin\x1e/opt/homebrew/opt/fzf/bin
+SETUVAR fish_user_paths:/Users/naoya\x2dfurudono/\x2epyenv/bin\x1e/Users/naoya\x2dfurudono/\x2easdf/shims\x1e/Users/naoya\x2dfurudono/\x2easdf/bin\x1e/home/furudono/\x2elocal/pyenv/bin\x1e/opt/homebrew/opt/fzf/bin
 SETUVAR nvm_data:/home/furudono/\x2elocal/share/nvm
 SETUVAR nvm_mirror:https\x3a//nodejs\x2eorg/dist

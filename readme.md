@@ -2,22 +2,15 @@
 
 ## インストール
 
+gitをあらかじめインストールしてください。
+
 ```sh
 git clone https://github.com/naoyafurudono/dotfiles.git
 bash dotfiles/setup.sh
 ```
 
-nvimの拡張機能の管理に `git submodule`　を使っています。
-有効化するためには以下を実行します。
-
-```sh
-git submodule init
-git submodule update
-```
-
 ## TODO
 
-- [ ] perform above in setup.sh
 - [ ] gitのインストールを自動化
 - [ ] テストの実施・自動テストの整備
   - [x] コンテナ環境で手動テストを実施 (ubuntu)

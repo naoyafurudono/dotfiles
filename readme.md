@@ -1,4 +1,9 @@
-# .config
+# dotfiles
+
+```
+git clone git@github.com:naoyafurudono/dotfiles.git
+bash dotfiles/setup.sh
+```
 
 `.gitignore`をおしゃれに記述することで、ブラックリストではなくホワイトリストとして運用している。
 リポジトリに追加したければ`.gitignore`を雰囲気で編集すること。
@@ -11,6 +16,6 @@ Run following to install nvim extentions.
 ```sh
 git submodule init
 git submodule update
-./setup.sh
 ```
 
+- TODO perform above in setup.sh

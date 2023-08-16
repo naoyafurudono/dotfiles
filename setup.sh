@@ -1,8 +1,9 @@
 #!/bin/bash
 
 set -eu -o pipefail
+which git
 
-cp -rf dotfiles/.config "$HOME/.config"
+cp -rf dotfiles "$HOME/.config"
 
 # branch by the os
 case "$(uname)" in
@@ -15,9 +16,9 @@ Darwin)
   ;;
 Linux)
   set +e
-  apt-get update -y && apt-get install -y sudo
+  apt-get update && apt-get install -y sudo
   set -e
-  sudo apt-get update -y
+  sudo apt-get update
   sudo apt-get install -y fish neovim fzf curl
   ;;
 *)

@@ -1,7 +1,7 @@
 # dotfiles
 
 ```
-git clone git@github.com:naoyafurudono/dotfiles.git
+git clone https://github.com/naoyafurudono/dotfiles.git
 bash dotfiles/setup.sh
 ```
 

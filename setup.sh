@@ -19,7 +19,7 @@ Linux)
   apt-get update && apt-get install -y sudo
   set -e
   sudo apt-get update
-  sudo apt-get install -y fish neovim fzf curl
+  sudo apt-get install -y build-essential fish neovim fzf curl
   ;;
 *)
   echo "Unknown OS" >&2

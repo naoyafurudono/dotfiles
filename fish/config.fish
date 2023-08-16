@@ -47,7 +47,7 @@ if status --is-interactive
 
     set -x EDITOR nvim
     set -x VISUAL nvim
-
+    zoxide init fish | source
 
   if test (uname -s) = "Darwin"
     abbr --add less bat

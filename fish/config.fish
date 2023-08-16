@@ -2,22 +2,23 @@
 
 set -x XDG_CONFIG_PATH $HOME/.config
 set -x XDG_CONFIG_HOME $HOME/.config
+set -x XDG_DATA_HOME $HOME/.local
 set -x VOLTA_HOME $HOME/.volta
 
 set -x PATH \
-  $HOME/go/bin \
-  /usr/local/go/bin \
-  $HOME/.local/bin \
-  $HOME/.cargo/bin \
-  $HOME/.embulk/bin \
-  $PATH
+    $HOME/go/bin \
+    /usr/local/go/bin \
+    $HOME/.local/bin \
+    $HOME/.cargo/bin \
+    $HOME/.embulk/bin \
+    $PATH
 
 if test (uname -s) = Darwin
     set -x PATH /opt/homebrew/bin $PATH
 
     # The next line updates PATH for the Google Cloud SDK.
     if [ -f '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc' ]
-      source '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc'
+        source '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc'
     end
 else
 
@@ -27,7 +28,8 @@ else
     end
 
     # TODO: use asdf
-    set -x -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/furudono/.ghcup/bin $PATH # ghcup-env
+    set -x -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
+    set -gx PATH $HOME/.cabal/bin /home/furudono/.ghcup/bin $PATH # ghcup-env
     pyenv init - | source
     source /home/furudono/.opam/opam-init/init.fish >/dev/null 2>/dev/null; or true
     set -x PATH $HOME/.local/swift-5.7.3-RELEASE-ubuntu22.04/usr/bin $PATH
@@ -41,33 +43,38 @@ if status --is-interactive
     set -x -g fish_user_abbreviations
 
     abbr --add ls exa
-    abbr --add v  nvim
+    abbr --add v nvim
     abbr --add gg git grep -n -1
     abbr --add gu 'git commit -am update && git push' # 必要悪 :(
 
     set -x EDITOR nvim
     set -x VISUAL nvim
-    zoxide init fish | source
+    set -x _ZO_DATA_DIR $XDG_DATA_HOME/zoxide
+    zoxide init fish --cmd j | source
 
-  if test (uname -s) = "Darwin"
-    abbr --add less bat
-    abbr --add k kubectl
-    #rvm default
-  else
-    abbr --add less batcat
-    abbr --add xremap   xremap $HOME/.config/xremap/xremap.conf --device 'Topre REALFORCE 87 US' 
-  end
+    switch (uname -s)
+        case Darwin
+            abbr --add less bat
+            abbr --add k kubectl
+            #rvm default
+        case Linux
+            abbr --add less batcat
+            abbr --add xremap xremap $XDG_CONFIG_HOME/xremap/xremap.conf --device 'Topre REALFORCE 87 US'
+        case '*'
+            echo "unknown uname"
+            exit 1
+    end
 
-  fish_vi_key_bindings
+    fish_vi_key_bindings
 
-# Do after `fish_vi_key_bindings`, which overwrites follows
-  set -x fish_cursor_default block blink
-  set -x fish_cursor_insert line # blink
-  set -x fish_cursor_replace_one underscore # blink
-  set -x fish_cursor_visual block
+    # Do after `fish_vi_key_bindings`, which overwrites follows
+    set -x fish_cursor_default block blink
+    set -x fish_cursor_insert line # blink
+    set -x fish_cursor_replace_one underscore # blink
+    set -x fish_cursor_visual block
 
-# no greeting
-  set -x fish_greeting
+    # no greeting
+    set -x fish_greeting
 end
 
 # ---- load ----

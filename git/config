@@ -22,4 +22,5 @@
 [ghq "https://git.pepabo.com/"]
 	vcs = git
 [pager]
-  diff = colordiff | nkf -w
+  # diff = colordiff | nkf -w
+

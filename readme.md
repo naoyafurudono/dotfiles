@@ -10,8 +10,8 @@ bash dotfiles/setup.sh
 
 参考: <https://qiita.com/sventouz/items/574bd67c7e43fff10546>
 
-We manage nvim extentions throug git submodule.
-Run following to install nvim extentions.
+nvimの拡張機能の管理に `git submodule`　を使っています。
+有効化するためには以下を実行します。
 
 ```sh
 git submodule init
@@ -19,3 +19,4 @@ git submodule update
 ```
 
 - TODO perform above in setup.sh
+- TODO gitのインストールを自動化

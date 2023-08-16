@@ -9,6 +9,7 @@
 !xkeysnail/**
 !fish/**
 fish/completions/asdf.fish
+fish/fish_variables
 !nvim/**
 nvim/pack/*/start/*
 !mozc/ibus_config.textproto

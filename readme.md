@@ -1,6 +1,6 @@
 # dotfiles
 
-```
+```sh
 git clone https://github.com/naoyafurudono/dotfiles.git
 bash dotfiles/setup.sh
 ```
@@ -18,5 +18,10 @@ git submodule init
 git submodule update
 ```
 
-- TODO perform above in setup.sh
-- TODO gitのインストールを自動化
+- [ ] perform above in setup.sh
+- [ ] gitのインストールを自動化
+- [ ] テストの実施・自動テストの整備
+  - [x] コンテナ環境で手動テストを実施 (ubuntu)
+  - [ ] コンテナ環境で手動テストを実施 (mac os)
+  - [ ] 自動テストを実施 (ubuntu)
+  - [ ] 自動テストを実施 (mac os)

@@ -5,6 +5,7 @@
 !.gitmodules
 !readme.md
 !setup.sh
+!test/*
 
 !xkeysnail/**
 !fish/**

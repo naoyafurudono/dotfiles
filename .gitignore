@@ -2,11 +2,17 @@
 */
 !*/
 !.gitignore
-#!readme.md
+!.gitmodules
+!readme.md
+!setup.sh
+!test/*
 
 !xkeysnail/**
 !fish/**
+fish/completions/asdf.fish
+fish/fish_variables
 !nvim/**
+nvim/pack/*/start/*
 !mozc/ibus_config.textproto
 !systemd/user/xkeysnail.service
 !git/**

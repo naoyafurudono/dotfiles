@@ -7,6 +7,7 @@
 [alias]
   s = status
   c = commit -m
+  cl = clean -fd
 
 [user]
 	name = Naoya Furudono
@@ -15,4 +16,11 @@
 [include]
   # override user
   path = ~/.local/git/config
+
+[ghq]
+	root = ~/src
+[ghq "https://git.pepabo.com/"]
+	vcs = git
+[pager]
+  # diff = colordiff | nkf -w
 

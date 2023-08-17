@@ -1,1 +1,0 @@
-/home/furudono/.asdf/completions/asdf.fish

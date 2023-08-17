@@ -1,1 +1,1 @@
-/Users/furudono/.asdf/completions/asdf.fish
+/home/furudono/.asdf/completions/asdf.fish

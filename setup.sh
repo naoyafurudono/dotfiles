@@ -7,7 +7,7 @@ set -eu -o pipefail
   cd "$(dirname "$0")"
   git submodule update --init --recursive
 )
-cp -rf dotfiles "$HOME/.config"
+cp -rf "$HOME/dotfiles" "$HOME/.config"
 
 # branch by the os
 case "$(uname)" in

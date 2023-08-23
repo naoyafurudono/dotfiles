@@ -33,5 +33,5 @@ function fish_prompt
     # Shorten pwd if prompt is too long
     set -l pwd (pwd)
 
-    echo -e -n -s $prompt_host $cwd $pwd $normal $prompt_status '\n' $delim
+    echo -e -n -s $prompt_host $cwd $pwd $normal $prompt_status (__kube_prompt) '\n' $delim
 end

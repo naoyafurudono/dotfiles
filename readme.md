@@ -39,3 +39,6 @@ docker build . -t test && \
 docker run --rm test
 ```
 
+## memo
+
+- [fish-kube-prompt](https://github.com/aluxian/fish-kube-prompt)

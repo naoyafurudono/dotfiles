@@ -34,5 +34,9 @@ function fish_prompt
     # Shorten pwd if prompt is too long
     set -l pwd (pwd)
 
-    echo -e -n -s $prompt_host $cwd $pwd $normal $prompt_status (__kube_prompt) '\n' $delim
+    if command -v kube_ps1 >/dev/null
+        echo -e -n -s $prompt_host $cwd $pwd $normal $prompt_status (__kube_prompt) '\n' $delim
+    else
+        echo -e -n -s $prompt_host $cwd $pwd $normal $prompt_status '\n' $delim
+    end
 end

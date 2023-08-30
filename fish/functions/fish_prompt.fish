@@ -8,7 +8,8 @@ function fish_prompt
     # If we don't have unicode use a simpler delimiter
     # string match -qi "*.utf-8" -- $LANG $LC_CTYPE $LC_ALL; or set delim ">"
 
-    fish_is_root_user; and set delim "#"
+    # fish_is_root_user; and set delim "#"
+    test (id -u) = 0; and set delim "#"
 
     set -l cwd (set_color $fish_color_cwd)
 
@@ -33,5 +34,5 @@ function fish_prompt
     # Shorten pwd if prompt is too long
     set -l pwd (pwd)
 
-    echo -e -n -s $prompt_host $cwd $pwd $normal $prompt_status '\n' $delim
+    echo -e -n -s $prompt_host $cwd $pwd $normal $prompt_status (__kube_prompt) '\n' $delim
 end

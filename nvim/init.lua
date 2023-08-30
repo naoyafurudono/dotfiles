@@ -6,6 +6,7 @@ vim.o.shiftwidth = 2
 vim.o.clipboard = vim.o.clipboard .. 'unnamedplus'
 vim.api.nvim_set_keymap('i', 'jj', '<ESC>', { silent = true })
 vim.o.nowrap = true
+vim.o.number = true
 
 if vim.fn.has('mac') == 1 then
   vim.cmd [[

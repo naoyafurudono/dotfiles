@@ -44,7 +44,9 @@ if status --is-interactive
 
     abbr --add ls exa
     abbr --add v nvim
-    abbr --add gg git grep -n -1
+    abbr --add g git
+    abbr --add d diff
+    abbr --add gs 'git status'
     abbr --add gu 'git add -A && git commit -am update && git push' # 必要悪 :(
 
     set -x EDITOR nvim

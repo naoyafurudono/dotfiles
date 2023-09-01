@@ -5,9 +5,10 @@
 [core]
   editor = nvim
 [alias]
-  s = status
   c = commit -m
   cl = clean -fd
+  s = status
+  d = diff
 
 [user]
 	name = Naoya Furudono
@@ -21,6 +22,4 @@
 	root = ~/src
 [ghq "https://git.pepabo.com/"]
 	vcs = git
-[pager]
-  # diff = colordiff | nkf -w
 

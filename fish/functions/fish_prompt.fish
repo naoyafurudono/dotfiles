@@ -4,7 +4,7 @@ function fish_prompt
     set -l normal (set_color normal)
     set -l usercolor (set_color $fish_color_user)
 
-    set -l delim "🐧  "
+    set -l delim "🐧"
     # If we don't have unicode use a simpler delimiter
     # string match -qi "*.utf-8" -- $LANG $LC_CTYPE $LC_ALL; or set delim ">"
 
@@ -37,5 +37,5 @@ function fish_prompt
     if type __kube_prompt >/dev/null
         set kube_prompt (__kube_prompt)
     end
-    echo -e -n -s $prompt_host $cwd $pwd $normal $prompt_status $kube_prompt '\n' $delim
+    echo -e -n -s $prompt_host $cwd $pwd $normal $prompt_status $kube_prompt '\n' "$delim "
 end

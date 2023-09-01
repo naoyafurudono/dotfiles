@@ -30,7 +30,9 @@ else
     # TODO: use asdf
     set -x -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
     set -gx PATH $HOME/.cabal/bin /home/furudono/.ghcup/bin $PATH # ghcup-env
-    pyenv init - | source
+    if type -q pyenv
+      pyenv init - | source
+    end
     source /home/furudono/.opam/opam-init/init.fish >/dev/null 2>/dev/null; or true
     set -x PATH $HOME/.local/swift-5.7.3-RELEASE-ubuntu22.04/usr/bin $PATH
 end

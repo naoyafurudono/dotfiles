@@ -16,14 +16,24 @@ Darwin)
   # https://brew.sh/
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
-  brew install fish nvim fzf
+  brew install \
+    fish \
+    nvim \
+    fzf \
+    git \
   ;;
 Linux)
   set +e
   apt-get update && apt-get install -y sudo
   set -e
   sudo apt-get update
-  sudo apt-get install -y build-essential fish neovim fzf curl
+  sudo apt-get install -y \
+    build-essential \
+    fish \
+    neovim \
+    fzf \
+    curl \
+    git \
   ;;
 *)
   echo "Unknown OS" >&2
@@ -43,3 +53,4 @@ git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.12.0
 ln -s ~/.asdf/completions/asdf.fish ~/.config/fish/completions
 touch tool-versions
 ln tool-versions "${HOME}/.tool-versions"
+

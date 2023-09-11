@@ -44,7 +44,7 @@ esac
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 # shellcheck disable=SC1091
 source "$HOME/.cargo/env"
-cargo install exa bat fd-find ripgrep zoxide
+cargo install --locked exa bat fd-find ripgrep zoxide
 
 # Install asdf
 # https://asdf-vm.com/guide/getting-started.html

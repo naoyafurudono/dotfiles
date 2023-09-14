@@ -1,3 +1,4 @@
+node_modules/
 .tool-versions
 # zoxideが生み出している気がする
 z!

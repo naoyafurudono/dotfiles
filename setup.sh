@@ -2,12 +2,12 @@
 
 which git > /dev/null || (echo "git is not installed" >&2 && exit 1)
 set -eu -o pipefail
-
 (
   cd "$(dirname "$0")"
   git submodule update --init --recursive
 )
-cp -rf "$HOME/dotfiles" "$HOME/.config"
+cp -rf "dotfiles" "$HOME/.config"
+cd "$HOME/.config"
 
 # branch by the os
 case "$(uname)" in
@@ -44,13 +44,20 @@ esac
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 # shellcheck disable=SC1091
 source "$HOME/.cargo/env"
-cargo install --locked exa bat fd-find ripgrep zoxide
+cargo install --locked \
+  exa \
+  bat \
+  fd-find \
+  ripgrep \
+  zoxide \
+  htop \
 
 # Install asdf
 # https://asdf-vm.com/guide/getting-started.html
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.12.0
 
-ln -s ~/.asdf/completions/asdf.fish ~/.config/fish/completions
-touch tool-versions
-ln tool-versions "${HOME}/.tool-versions"
-
+(
+  ln -s ~/.asdf/completions/asdf.fish fish/completions
+  touch tool-versions
+  ln tool-versions "${HOME}/.tool-versions"
+)

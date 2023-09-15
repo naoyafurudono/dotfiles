@@ -67,9 +67,9 @@ function get_asdf() {
   ln tool-versions "${HOME}/.tool-versions"
 }
 
-init();
-get_common() &
-get_rust() &
-get_asdf() &
+init;
+get_common &
+get_rust &
+get_asdf &
 
 wait

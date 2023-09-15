@@ -4,11 +4,10 @@ which git > /dev/null || (echo "git is not installed" >&2 && exit 1)
 set -eu -o pipefail
 
 function init() {
-  cd "$(dirname "$0")"
-  git submodule update --init --recursive
-
   cp -rf "dotfiles" "$HOME/.config"
   cd "$HOME/.config"
+  git submodule update --init --recursive
+
 }
 
 function get_common () {

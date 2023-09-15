@@ -67,8 +67,8 @@ function get_asdf() {
 }
 
 init;
-get_common &
+#get_common &
 get_rust &
-get_asdf &
+#get_asdf &
 
 wait

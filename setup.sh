@@ -10,6 +10,28 @@ function init() {
 
 }
 
+function get_essentials () {
+  # branch by the os
+  case "$(uname)" in
+  Darwin)
+    ;;
+  Linux)
+    set +e
+    apt-get update && apt-get install -y sudo
+    set -e
+    sudo apt-get update
+    sudo apt-get install -y \
+      build-essential \
+      curl \
+    ;;
+  *)
+    echo "Unknown OS" >&2
+    exit 1
+    ;;
+  esac \
+
+}
+
 function get_common () {
   # branch by the os
   case "$(uname)" in

@@ -11,6 +11,7 @@ set -x PATH \
     $HOME/.local/bin \
     $HOME/.cargo/bin \
     $HOME/.embulk/bin \
+    $(npm prefix --location=global)/bin \
     $PATH
 
 if test (uname -s) = Darwin

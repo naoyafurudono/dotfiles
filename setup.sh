@@ -48,10 +48,10 @@ function get_common () {
     ;;
   Linux)
     set +e
-    apt-get update && apt-get install -y sudo
+    apt-get -qq update && apt-get -qq install -y sudo
     set -e
-    sudo apt-get update
-    sudo apt-get install -y \
+    sudo apt-get -qq update
+    sudo apt-get -qq install -y \
       build-essential \
       fish \
       neovim \

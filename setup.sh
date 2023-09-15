@@ -9,6 +9,7 @@ set -eu -o pipefail
 cp -rf "dotfiles" "$HOME/.config"
 cd "$HOME/.config"
 
+(
 # branch by the os
 case "$(uname)" in
 Darwin)
@@ -20,7 +21,6 @@ Darwin)
     fish \
     nvim \
     fzf \
-    git \
     htop \
   ;;
 Linux)
@@ -34,16 +34,16 @@ Linux)
     neovim \
     fzf \
     curl \
-    git \
     htop \
   ;;
 *)
   echo "Unknown OS" >&2
   exit 1
   ;;
-esac
+esac \
+) &
 
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+(curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 # shellcheck disable=SC1091
 source "$HOME/.cargo/env"
 cargo install --locked \
@@ -51,7 +51,8 @@ cargo install --locked \
   bat \
   fd-find \
   ripgrep \
-  zoxide \
+  zoxide \ 
+)&
 
 # Install asdf
 # https://asdf-vm.com/guide/getting-started.html

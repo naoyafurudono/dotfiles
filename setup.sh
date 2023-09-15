@@ -45,7 +45,8 @@ function get_common () {
   esac \
 }
 
-function get_rust() {curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+function get_rust() {
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
   # shellcheck disable=SC1091
   source "$HOME/.cargo/env"
   cargo install --locked \

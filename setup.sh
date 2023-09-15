@@ -21,6 +21,7 @@ Darwin)
     nvim \
     fzf \
     git \
+    htop \
   ;;
 Linux)
   set +e
@@ -34,6 +35,7 @@ Linux)
     fzf \
     curl \
     git \
+    htop \
   ;;
 *)
   echo "Unknown OS" >&2
@@ -50,7 +52,6 @@ cargo install --locked \
   fd-find \
   ripgrep \
   zoxide \
-  htop \
 
 # Install asdf
 # https://asdf-vm.com/guide/getting-started.html

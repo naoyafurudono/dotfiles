@@ -11,8 +11,12 @@ set -x PATH \
     $HOME/.local/bin \
     $HOME/.cargo/bin \
     $HOME/.embulk/bin \
-    $(npm prefix --location=global)/bin \
     $PATH
+
+# if npm installed
+if type -q npm
+    set -x PATH $(npm prefix --location=global)/bin $PATH
+end
 
 if test (uname -s) = Darwin
     set -x PATH /opt/homebrew/bin $PATH

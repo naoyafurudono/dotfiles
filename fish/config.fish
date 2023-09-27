@@ -63,7 +63,7 @@ if status --is-interactive
             #rvm default
         case Linux
             abbr --add less batcat
-            abbr --add xremap xremap $XDG_CONFIG_HOME/xremap/xremap.conf --device 'Topre REALFORCE 87 US'
+            abbr --add xremap xremap $XDG_CONFIG_HOME/xremap/xremap.conf --device \'Topre REALFORCE 87 US\'
         case '*'
             echo "unknown uname"
             exit 1

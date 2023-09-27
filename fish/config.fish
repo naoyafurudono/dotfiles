@@ -13,6 +13,11 @@ set -x PATH \
     $HOME/.embulk/bin \
     $PATH
 
+# if npm installed
+if type -q npm
+    set -x PATH $(npm prefix --location=global)/bin $PATH
+end
+
 if test (uname -s) = Darwin
     set -x PATH /opt/homebrew/bin $PATH
 
@@ -21,7 +26,6 @@ if test (uname -s) = Darwin
         source '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc'
     end
 else
-
     # The next line updates PATH for the Google Cloud SDK.
     if [ -f '/home/furudono/dev/google-cloud-sdk/path.fish.inc' ]
         source '/home/furudono/dev/google-cloud-sdk/path.fish.inc'
@@ -72,9 +76,9 @@ if status --is-interactive
     fish_vi_key_bindings
 
     # Do after `fish_vi_key_bindings`, which overwrites follows
-    set -x fish_cursor_default block blink
-    set -x fish_cursor_insert line # blink
-    set -x fish_cursor_replace_one underscore # blink
+    set -x fish_cursor_default block
+    set -x fish_cursor_insert line
+    set -x fish_cursor_replace_one underscore
     set -x fish_cursor_visual block
 
     # no greeting
@@ -84,3 +88,4 @@ end
 # ---- load ----
 
 source ~/.local/fish/init.fish.secret
+

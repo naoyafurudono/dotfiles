@@ -54,6 +54,7 @@ if status --is-interactive
     abbr --add d diff
     abbr --add gs 'git status'
     abbr --add gu 'git add -A && git commit -am update && git push' # 必要悪 :(
+    abbr --add k kubectl
 
     set -x EDITOR nvim
     set -x VISUAL nvim
@@ -63,7 +64,6 @@ if status --is-interactive
     switch (uname -s)
         case Darwin
             abbr --add less bat
-            abbr --add k kubectl
             #rvm default
         case Linux
             abbr --add less batcat

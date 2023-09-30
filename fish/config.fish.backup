@@ -1,30 +1,47 @@
 # ---- environment ----
 
-set -x PATH ~/go/bin $PATH
-set -x PATH /usr/local/go/bin $PATH
-set -x PATH ~/.local/bin $PATH
-set -x PATH ~/.cargo/bin $PATH
-set -x PATH ~/.embulk/bin $PATH
+set -x XDG_CONFIG_PATH $HOME/.config
+set -x XDG_CONFIG_HOME $HOME/.config
+set -x XDG_DATA_HOME $HOME/.local
+set -x VOLTA_HOME $HOME/.volta
 
-set -x XDG_CONFIG_PATH ~/.config
+set -x PATH \
+    $HOME/go/bin \
+    /usr/local/go/bin \
+    $HOME/.local/bin \
+    $HOME/.cargo/bin \
+    $HOME/.embulk/bin \
+    $PATH
+
+# if npm installed
+if type -q npm
+    set -x PATH $(npm prefix --location=global)/bin $PATH
+end
 
 if test (uname -s) = Darwin
     set -x PATH /opt/homebrew/bin $PATH
-else
-    set -x -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/furudono/.ghcup/bin $PATH # ghcup-env
-
-    pyenv init - | source
 
     # The next line updates PATH for the Google Cloud SDK.
+    if [ -f '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc' ]
+        source '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc'
+    end
+else
+    # The next line updates PATH for the Google Cloud SDK.
     if [ -f '/home/furudono/dev/google-cloud-sdk/path.fish.inc' ]
-        . '/home/furudono/dev/google-cloud-sdk/path.fish.inc'
+        source '/home/furudono/dev/google-cloud-sdk/path.fish.inc'
     end
 
-    # opam configuration
+    # TODO: use asdf
+    set -x -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
+    set -gx PATH $HOME/.cabal/bin /home/furudono/.ghcup/bin $PATH # ghcup-env
+    if type -q pyenv
+      pyenv init - | source
+    end
     source /home/furudono/.opam/opam-init/init.fish >/dev/null 2>/dev/null; or true
-    set -x PATH ~/.local/swift-5.7.3-RELEASE-ubuntu22.04/usr/bin $PATH
+    set -x PATH $HOME/.local/swift-5.7.3-RELEASE-ubuntu22.04/usr/bin $PATH
 end
 
+source $HOME/.asdf/asdf.fish
 
 # --- interactive ---
 
@@ -32,32 +49,43 @@ if status --is-interactive
     set -x -g fish_user_abbreviations
 
     abbr --add ls exa
-    abbr --add v  nvim
-    abbr --add gg git grep -n -1
-    abbr --add cc 'fzf --print0 | xargs -0 -o code'
+    abbr --add v nvim
+    abbr --add g git
+    abbr --add d diff
+    abbr --add gs 'git status'
+    abbr --add gu 'git add -A && git commit -am update && git push' # 必要悪 :(
 
     set -x EDITOR nvim
     set -x VISUAL nvim
+    set -x _ZO_DATA_DIR $XDG_DATA_HOME/zoxide
+    zoxide init fish --cmd j | source
 
+    switch (uname -s)
+        case Darwin
+            abbr --add less bat
+            abbr --add k kubectl
+            #rvm default
+        case Linux
+            abbr --add less batcat
+            abbr --add xremap xremap $XDG_CONFIG_HOME/xremap/xremap.conf --device 'Topre REALFORCE 87 US'
+        case '*'
+            echo "unknown uname"
+            exit 1
+    end
 
-  if test (uname -s) = "Darwin"
-    abbr --add less bat
-  else
-    abbr --add less batcat
-    abbr --add xremap   xremap ~/.config/xremap/xremap.conf --device 'Topre REALFORCE 87 US' 
-    source ~/.local/fish/init.fish
-  end
+    fish_vi_key_bindings
 
-  fish_vi_key_bindings
+    # Do after `fish_vi_key_bindings`, which overwrites follows
+    set -x fish_cursor_default block
+    set -x fish_cursor_insert line
+    set -x fish_cursor_replace_one underscore
+    set -x fish_cursor_visual block
 
-# Do after `fish_vi_key_bindings`, which overwrites follows
-  set -x fish_cursor_default block blink
-  set -x fish_cursor_insert line # blink
-  set -x fish_cursor_replace_one underscore # blink
-  set -x fish_cursor_visual block
-
-# no greeting
-  set -x fish_greeting
+    # no greeting
+    set -x fish_greeting
 end
 
-# rvm default
+# ---- load ----
+
+source ~/.local/fish/init.fish.secret
+

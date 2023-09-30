@@ -13,7 +13,9 @@ set -x PATH \
     $HOME/.embulk/bin \
     $PATH
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/furudono/.local/google-cloud-sdk/path.fish.inc' ]; . '/Users/furudono/.local/google-cloud-sdk/path.fish.inc'; end
+if [ -f '/Users/furudono/.local/google-cloud-sdk/path.fish.inc' ]; 
+  source '/Users/furudono/.local/google-cloud-sdk/path.fish.inc'
+end
 
 # if npm installed
 if type -q npm
@@ -57,6 +59,7 @@ if status --is-interactive
     abbr --add gs 'git status'
     abbr --add gu 'git add -A && git commit -am update && git push' # 必要悪 :(
     abbr --add te 'textql -header -output-header -sql'
+    abbr --add k kubectl
 
     set -x EDITOR nvim
     set -x _ZO_DATA_DIR $XDG_DATA_HOME/zoxide
@@ -65,13 +68,12 @@ if status --is-interactive
     switch (uname -s)
         case Darwin
             abbr --add less bat
-            abbr --add k kubectl
             #rvm default
             set -x VISUAL bat
         case Linux
             abbr --add less batcat
-            abbr --add xremap xremap $XDG_CONFIG_HOME/xremap/xremap.conf --device 'Topre REALFORCE 87 US'
             set -x VISUAL batcat
+            abbr --add xremap xremap $XDG_CONFIG_HOME/xremap/xremap.conf --device \'Topre REALFORCE 87 US\'
         case '*'
             echo "unknown uname"
             exit 1

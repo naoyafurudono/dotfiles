@@ -7,13 +7,13 @@ vim.o.clipboard = vim.o.clipboard .. 'unnamedplus'
 vim.api.nvim_set_keymap('i', 'jj', '<ESC>', { silent = true })
 vim.o.number = true
 
-if vim.fn.has('mac') == 1 then
-  vim.cmd [[
-    autocmd InsertLeavePre * :call system('im-select com.apple.inputmethod.Kotoeri.RomajiTyping.Roman')
-    " TODO  settup for copilot
-    " use :Copilot help for document
-  ]]
-end
+-- if vim.fn.has('mac') == 1 then
+--   vim.cmd [[
+--     autocmd InsertLeavePre * :call system('im-select com.apple.inputmethod.Kotoeri.RomajiTyping.Roman')
+--     " TODO  settup for copilot
+--     " use :Copilot help for document
+--   ]]
+-- end
 
 if vim.fn.has('unix') == 1 then
   vim.cmd [[

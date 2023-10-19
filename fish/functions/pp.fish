@@ -1,4 +1,4 @@
 function pp
-    set pathname (fzf --print0)
+    set pathname (find . -type f | fzf --print0)
     and code $pathname
 end

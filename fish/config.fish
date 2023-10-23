@@ -29,6 +29,7 @@ if test (uname -s) = Darwin
     if [ -f '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc' ]
         source '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc'
     end
+     source /Users/furudono/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 else
     # The next line updates PATH for the Google Cloud SDK.
     if [ -f '/home/furudono/dev/google-cloud-sdk/path.fish.inc' ]

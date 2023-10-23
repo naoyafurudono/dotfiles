@@ -1,5 +1,6 @@
 node_modules/
 .tool-versions
+*.pem
 # zoxideが生み出している気がする
 z!
 tmp

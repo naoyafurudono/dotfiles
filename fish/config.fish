@@ -56,11 +56,14 @@ if status --is-interactive
     abbr --add ls exa
     abbr --add v nvim
     abbr --add g git
-    abbr --add d diff
-    abbr --add gs 'git status'
+    abbr --add d 'git diff'
+    abbr --add s 'git status'
+    abbr --add a 'git add'
+    abbr --add c 'git add'
     abbr --add gu 'git add -A && git commit -am update && git push' # 必要悪 :(
     abbr --add te 'textql -header -output-header -sql'
     abbr --add k kubectl
+    abbr --add rg 'rg --ignore-case'
 
     set -x EDITOR nvim
     set -x _ZO_DATA_DIR $XDG_DATA_HOME/zoxide

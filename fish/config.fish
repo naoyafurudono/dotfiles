@@ -29,6 +29,7 @@ if test (uname -s) = Darwin
     if [ -f '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc' ]
         source '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc'
     end
+     source /Users/furudono/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 else
     # The next line updates PATH for the Google Cloud SDK.
     if [ -f '/home/furudono/dev/google-cloud-sdk/path.fish.inc' ]
@@ -58,7 +59,7 @@ if status --is-interactive
     abbr --add d 'git diff'
     abbr --add s 'git status'
     abbr --add a 'git add'
-    abbr --add c 'git add'
+    abbr --add c 'git c'
     abbr --add gu 'git add -A && git commit -am update && git push' # 必要悪 :(
     abbr --add te 'textql -header -output-header -sql'
     abbr --add k kubectl

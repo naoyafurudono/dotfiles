@@ -75,7 +75,8 @@ function get_rust() {
     bat \
     fd-find \
     ripgrep \
-    zoxide \ 
+    zoxide \
+
 }
 
 # Install asdf

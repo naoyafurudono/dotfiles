@@ -32,10 +32,5 @@ function fish_prompt
     end
 
     set -l pwd (pwd)
-
-    set kube_prompt ""
-    if type -q __kube_prompt >/dev/null
-        set kube_prompt (__kube_prompt)
-    end
-    echo -e -n -s $prompt_host $cwd $pwd $normal $prompt_status $kube_prompt '\n' "$delim "
+    echo -e -n -s $prompt_host $cwd $pwd $normal $prompt_status '\n' "$delim "
 end

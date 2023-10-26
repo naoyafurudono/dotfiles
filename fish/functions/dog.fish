@@ -1,3 +1,3 @@
 function dog
-  cat $arv[1] > pbcopy
+  cat $argv[1] | pbcopy
 end

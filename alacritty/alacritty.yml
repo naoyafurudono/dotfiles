@@ -31,4 +31,12 @@ colors:
     magenta: '0xa00095'
     cyan:    '0x3e953a'
     white:   '0xffffff'
+font:
+  normal:
+    family: Noto Sans Mono
+    style: Regular
+  bold:
+    family: Noto Sans Mono
+    style: Medium
+  size: 11.0
 

@@ -76,6 +76,7 @@ function get_rust() {
     fd-find \
     ripgrep \
     zoxide \
+    easy-cp \
 
 }
 

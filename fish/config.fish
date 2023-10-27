@@ -65,6 +65,7 @@ if status --is-interactive
     abbr --add te 'textql -header -output-header -sql'
     abbr --add k kubectl
     abbr --add rg 'rg --ignore-case'
+    abbr --add rgc 'rg'
 
     set -x EDITOR nvim
     set -x _ZO_DATA_DIR $XDG_DATA_HOME/zoxide

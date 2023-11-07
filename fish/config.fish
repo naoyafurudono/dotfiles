@@ -66,6 +66,7 @@ if status --is-interactive
     abbr --add k kubectl
     abbr --add rg 'rg --ignore-case'
     abbr --add rgc 'rg'
+    abbr --add dr 'docker compose exec app budnle exec'
 
     set -x EDITOR nvim
     set -x _ZO_DATA_DIR $XDG_DATA_HOME/zoxide

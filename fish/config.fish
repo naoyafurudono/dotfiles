@@ -71,6 +71,7 @@ if status --is-interactive
     set -x EDITOR nvim
     set -x _ZO_DATA_DIR $XDG_DATA_HOME/zoxide
     zoxide init fish --cmd j | source
+    set -x FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 
     switch (uname -s)
         case Darwin
@@ -78,7 +79,11 @@ if status --is-interactive
             #rvm default
             set -x VISUAL bat
         case Linux
-            abbr --add less batcat
+            if test (uname -n) = *raspi*
+              abbr --add less bat
+            else
+              abbr --add less batcat
+            end
             set -x VISUAL batcat
             abbr --add xremap xremap $XDG_CONFIG_HOME/xremap/xremap.conf --device \'Topre REALFORCE 87 US\'
         case '*'

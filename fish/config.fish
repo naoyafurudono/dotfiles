@@ -53,7 +53,7 @@ source $HOME/.asdf/asdf.fish
 if status --is-interactive
     set -x -g fish_user_abbreviations
 
-    abbr --add ls exa
+    abbr --add l exa
     abbr --add v nvim
     abbr --add g git
     abbr --add d 'git diff'
@@ -62,7 +62,6 @@ if status --is-interactive
     abbr --add c 'git c'
     abbr --add p 'git push'
     abbr --add gu 'git add -A && git commit -am update && git push && git diff HEAD^' # 必要悪 :(
-    abbr --add te 'textql -header -output-header -sql'
     abbr --add k kubectl
     abbr --add rg 'rg --ignore-case'
     abbr --add rgc 'rg'

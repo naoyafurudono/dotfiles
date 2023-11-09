@@ -67,6 +67,7 @@ if status --is-interactive
     abbr --add rg 'rg --ignore-case'
     abbr --add rgc 'rg'
     abbr --add dr 'docker compose exec app bundle exec'
+    abbr --add xd 'git diff --name-only (git show-branch --merge-base master HEAD) | xargs '
 
     set -x EDITOR nvim
     set -x _ZO_DATA_DIR $XDG_DATA_HOME/zoxide

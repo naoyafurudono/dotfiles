@@ -79,9 +79,10 @@ if status --is-interactive
             #rvm default
             set -x VISUAL bat
         case Linux
-            if test (uname -n) = *raspi*
+            switch (uname -n)
+            case '*raspi*'
               abbr --add less bat
-            else
+            case '*'
               abbr --add less batcat
             end
             set -x VISUAL batcat

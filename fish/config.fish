@@ -53,7 +53,7 @@ source $HOME/.asdf/asdf.fish
 if status --is-interactive
     set -x -g fish_user_abbreviations
 
-    abbr --add ls exa
+    abbr --add l exa
     abbr --add v nvim
     abbr --add g git
     abbr --add d 'git diff'
@@ -67,6 +67,8 @@ if status --is-interactive
     abbr --add k kubectl
     abbr --add rg 'rg --ignore-case'
     abbr --add rgc 'rg'
+    abbr --add dr 'docker compose exec app bundle exec'
+    abbr --add xd 'git diff --name-only (git show-branch --merge-base master HEAD) | xargs '
 
     set -x EDITOR nvim
     set -x _ZO_DATA_DIR $XDG_DATA_HOME/zoxide
@@ -79,9 +81,10 @@ if status --is-interactive
             #rvm default
             set -x VISUAL bat
         case Linux
-            if test (uname -n) = *raspi*
+            switch (uname -n)
+            case '*raspi*'
               abbr --add less bat
-            else
+            case '*'
               abbr --add less batcat
             end
             set -x VISUAL batcat

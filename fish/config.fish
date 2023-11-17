@@ -54,6 +54,7 @@ if status --is-interactive
     set -x -g fish_user_abbreviations
 
     abbr --add l exa
+    abbr --add ls exa
     abbr --add v nvim
     abbr --add g git
     abbr --add d 'git diff'

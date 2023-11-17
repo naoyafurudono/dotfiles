@@ -62,9 +62,11 @@ if status --is-interactive
     abbr --add a 'git add'
     abbr --add c 'git c'
     abbr --add p 'git push'
-    abbr --add gu 'git add -A && git commit -am update && git push && git diff HEAD^' # 必要悪 :(
+    abbr --add gu 'git add -A && git commit -m update && git push && git diff HEAD^' # 必要悪 :(
+    abbr --add gd 'git add -A && git commit -m deploy && git push && git diff HEAD^'
+    abbr --add te 'textql -header -output-header -sql'
     abbr --add k kubectl
-    abbr --add rg 'rg --ignore-case'
+    abbr --add rg 'rg --smart-case'
     abbr --add rgc 'rg'
     abbr --add dr 'docker compose exec app bundle exec'
     abbr --add xd 'git diff --name-only (git show-branch --merge-base master HEAD) | xargs '

@@ -68,7 +68,7 @@ if status --is-interactive
     abbr --add k kubectl
     abbr --add rg 'rg --smart-case'
     abbr --add rgc 'rg'
-    abbr --add dr 'docker compose exec app bundle exec'
+    abbr --add dr 'docker compose exec worker bundle exec'
     abbr --add xd 'git diff --name-only (git show-branch --merge-base master HEAD) | xargs '
 
     set -x EDITOR nvim

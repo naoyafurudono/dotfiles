@@ -36,7 +36,7 @@ else
         source '/home/furudono/dev/google-cloud-sdk/path.fish.inc'
     end
 
-    # TODO: use asdf
+    # TODO: use mise
     set -x -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
     set -gx PATH $HOME/.cabal/bin /home/furudono/.ghcup/bin $PATH # ghcup-env
     if type -q pyenv
@@ -45,8 +45,6 @@ else
     source /home/furudono/.opam/opam-init/init.fish >/dev/null 2>/dev/null; or true
     set -x PATH $HOME/.local/swift-5.7.3-RELEASE-ubuntu22.04/usr/bin $PATH
 end
-
-source $HOME/.asdf/asdf.fish
 
 # --- interactive ---
 
@@ -74,6 +72,7 @@ if status --is-interactive
     set -x EDITOR nvim
     set -x _ZO_DATA_DIR $XDG_DATA_HOME/zoxide
     zoxide init fish --cmd j | source
+    mise activate fish | source
     set -x FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 
     switch (uname -s)

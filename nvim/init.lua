@@ -1,8 +1,8 @@
 vim.o.autoindent = true
 vim.o.smartindent = true
 vim.o.expandtab = true
-vim.o.tabstop = 2
-vim.o.shiftwidth = 2
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
 vim.o.clipboard = vim.o.clipboard .. 'unnamedplus'
 vim.api.nvim_set_keymap('i', 'jj', '<ESC>', { silent = true })
 vim.o.number = true

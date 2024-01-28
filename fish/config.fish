@@ -6,6 +6,8 @@ set -x XDG_DATA_HOME $HOME/.local
 set -x VOLTA_HOME $HOME/.volta
 
 set -x PATH \
+    # rubyをmiseでインストールできないので緊急避難
+    /opt/homebrew/opt/ruby/bin \
     $HOME/go/bin \
     /usr/local/go/bin \
     $HOME/.local/bin \

@@ -81,19 +81,9 @@ function get_rust() {
 
 }
 
-# Install asdf
-# https://asdf-vm.com/guide/getting-started.html
-
-function get_asdf() {
-  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.12.0
-  ln -s ~/.asdf/completions/asdf.fish fish/completions
-  touch tool-versions
-  ln tool-versions "${HOME}/.tool-versions"
-}
-
 init ;
 get_essentials ;
 get_common & \
 get_rust & \
-get_asdf & \
 wait
+

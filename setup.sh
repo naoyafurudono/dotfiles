@@ -77,6 +77,7 @@ function get_rust() {
     ripgrep \
     zoxide \
     easy-cp \
+    mise \
 
 }
 

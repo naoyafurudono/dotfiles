@@ -36,7 +36,7 @@ else
         source '/home/furudono/dev/google-cloud-sdk/path.fish.inc'
     end
 
-    # TODO: use asdf
+    # TODO: use mise
     set -x -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
     set -gx PATH $HOME/.cabal/bin /home/furudono/.ghcup/bin $PATH # ghcup-env
     if type -q pyenv
@@ -46,14 +46,13 @@ else
     set -x PATH $HOME/.local/swift-5.7.3-RELEASE-ubuntu22.04/usr/bin $PATH
 end
 
-source $HOME/.asdf/asdf.fish
-
 # --- interactive ---
 
 if status --is-interactive
     set -x -g fish_user_abbreviations
 
     abbr --add l exa
+    abbr --add ls exa
     abbr --add v nvim
     abbr --add g git
     abbr --add d 'git diff'
@@ -67,12 +66,13 @@ if status --is-interactive
     abbr --add k kubectl
     abbr --add rg 'rg --smart-case'
     abbr --add rgc 'rg'
-    abbr --add dr 'docker compose exec app bundle exec'
+    abbr --add dr 'docker compose exec worker bundle exec'
     abbr --add xd 'git diff --name-only (git show-branch --merge-base master HEAD) | xargs '
 
     set -x EDITOR nvim
     set -x _ZO_DATA_DIR $XDG_DATA_HOME/zoxide
     zoxide init fish --cmd j | source
+    mise activate fish | source
     set -x FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 
     switch (uname -s)

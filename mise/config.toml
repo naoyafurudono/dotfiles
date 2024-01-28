@@ -1,0 +1,8 @@
+[tools]
+python = ['latest']
+ruby = ['latest']
+go = ['latest']
+
+[settings]
+jobs = 4
+

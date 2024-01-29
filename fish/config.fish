@@ -1,13 +1,14 @@
 # ---- environment ----
 
-set -x XDG_CONFIG_PATH $HOME/.config
-set -x XDG_CONFIG_HOME $HOME/.config
-set -x XDG_DATA_HOME $HOME/.local
-set -x VOLTA_HOME $HOME/.volta
+set -gx XDG_CONFIG_PATH $HOME/.config
+set -gx XDG_CONFIG_HOME $HOME/.config
+set -gx XDG_DATA_HOME $HOME/.local
+set -gx VOLTA_HOME $HOME/.volta
 
-set -x PATH \
+set -gx PATH \
     # rubyをmiseでインストールできないので緊急避難
     /opt/homebrew/opt/ruby/bin \
+    $HOME/.krew/bin \
     $HOME/go/bin \
     /usr/local/go/bin \
     $HOME/.local/bin \
@@ -21,11 +22,11 @@ end
 
 # if npm installed
 if type -q npm
-    set -x PATH $(npm prefix --location=global)/bin $PATH
+    set -gx PATH $(npm prefix --location=global)/bin $PATH
 end
 
 if test (uname -s) = Darwin
-    set -x PATH /opt/homebrew/bin $PATH
+    set -gx PATH /opt/homebrew/bin $PATH
 
     # The next line updates PATH for the Google Cloud SDK.
     if [ -f '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc' ]
@@ -39,19 +40,19 @@ else
     end
 
     # TODO: use mise
-    set -x -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
+    set -gx -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
     set -gx PATH $HOME/.cabal/bin /home/furudono/.ghcup/bin $PATH # ghcup-env
     if type -q pyenv
       pyenv init - | source
     end
     source /home/furudono/.opam/opam-init/init.fish >/dev/null 2>/dev/null; or true
-    set -x PATH $HOME/.local/swift-5.7.3-RELEASE-ubuntu22.04/usr/bin $PATH
+    set -gx PATH $HOME/.local/swift-5.7.3-RELEASE-ubuntu22.04/usr/bin $PATH
 end
 
 # --- interactive ---
 
 if status --is-interactive
-    set -x -g fish_user_abbreviations
+    set -gx fish_user_abbreviations
 
     abbr --add l exa
     abbr --add ls exa
@@ -71,17 +72,17 @@ if status --is-interactive
     abbr --add dr 'docker compose exec worker bundle exec'
     abbr --add xd 'git diff --name-only (git show-branch --merge-base master HEAD) | xargs '
 
-    set -x EDITOR nvim
-    set -x _ZO_DATA_DIR $XDG_DATA_HOME/zoxide
+    set -gx EDITOR nvim
+    set -gx _ZO_DATA_DIR $XDG_DATA_HOME/zoxide
     zoxide init fish --cmd j | source
     mise activate fish | source
-    set -x FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
+    set -gx FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 
     switch (uname -s)
         case Darwin
             abbr --add less bat
             #rvm default
-            set -x VISUAL bat
+            set -gx VISUAL bat
         case Linux
             switch (uname -n)
             case '*raspi*'
@@ -89,7 +90,7 @@ if status --is-interactive
             case '*'
               abbr --add less batcat
             end
-            set -x VISUAL batcat
+            set -gx VISUAL batcat
             abbr --add xremap xremap $XDG_CONFIG_HOME/xremap/xremap.conf --device \'Topre REALFORCE 87 US\'
         case '*'
             echo "unknown uname"
@@ -99,13 +100,13 @@ if status --is-interactive
     fish_vi_key_bindings
 
     # Do after `fish_vi_key_bindings`, which overwrites follows
-    set -x fish_cursor_default block
-    set -x fish_cursor_insert line
-    set -x fish_cursor_replace_one underscore
-    set -x fish_cursor_visual block
+    set -gx fish_cursor_default block
+    set -gx fish_cursor_insert line
+    set -gx fish_cursor_replace_one underscore
+    set -gx fish_cursor_visual block
 
     # no greeting
-    set -x fish_greeting
+    set -gx fish_greeting
 end
 
 # ---- load ----

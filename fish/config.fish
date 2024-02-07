@@ -55,14 +55,13 @@ if status --is-interactive
     set -gx fish_user_abbreviations
 
     abbr --add l exa
-    abbr --add ls exa
     abbr --add v nvim
     abbr --add g git
     abbr --add d 'git diff'
     abbr --add s 'git status'
     abbr --add a 'git add'
     abbr --add c 'git c'
-    abbr --add p 'git push'
+    abbr --add p 'git pull'
     abbr --add gu 'git add -A && git commit -m update && git push && git diff HEAD^' # 必要悪 :(
     abbr --add gd 'git add -A && git commit -m deploy && git push && git diff HEAD^'
     abbr --add te 'textql -header -output-header -sql'

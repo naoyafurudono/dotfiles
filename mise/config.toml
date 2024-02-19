@@ -1,7 +1,9 @@
 [tools]
 go = ['latest']
 node = ['latest']
+deno = ['latest']
 
 [settings]
 jobs = 4
+experimental = true
 

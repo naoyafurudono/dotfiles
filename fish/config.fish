@@ -6,8 +6,8 @@ set -gx XDG_DATA_HOME $HOME/.local
 set -gx VOLTA_HOME $HOME/.volta
 
 set -gx PATH \
-    # rubyをmiseでインストールできないので緊急避難
     /opt/homebrew/opt/ruby/bin \
+    /opt/homebrew/opt/postgresql@15/bin \
     $HOME/.krew/bin \
     $HOME/go/bin \
     /usr/local/go/bin \
@@ -15,6 +15,7 @@ set -gx PATH \
     $HOME/.cargo/bin \
     $HOME/.embulk/bin \
     $PATH
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/furudono/.local/google-cloud-sdk/path.fish.inc' ]; 
   source '/Users/furudono/.local/google-cloud-sdk/path.fish.inc'
@@ -70,6 +71,8 @@ if status --is-interactive
     abbr --add rgc 'rg'
     abbr --add dr 'docker compose exec worker bundle exec'
     abbr --add xd 'git diff --name-only (git show-branch --merge-base master HEAD) | xargs '
+    abbr --add ru 'git ls-files --others --exclude-standard | xargs rm'
+
 
     set -gx EDITOR nvim
     set -gx _ZO_DATA_DIR $XDG_DATA_HOME/zoxide

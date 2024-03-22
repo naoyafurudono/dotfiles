@@ -71,13 +71,13 @@ function get_rust() {
   # shellcheck disable=SC1091
   source "$HOME/.cargo/env"
   cargo install --locked \
-    eza \
     bat \
+    easy-cp \
+    eza \
     fd-find \
+    mise \
     ripgrep \
     zoxide \
-    easy-cp \
-    mise \
 
 }
 

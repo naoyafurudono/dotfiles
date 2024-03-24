@@ -21,11 +21,6 @@ if [ -f '/Users/furudono/.local/google-cloud-sdk/path.fish.inc' ];
   source '/Users/furudono/.local/google-cloud-sdk/path.fish.inc'
 end
 
-# if npm installed
-if type -q npm
-    set -gx PATH $(npm prefix --location=global)/bin $PATH
-end
-
 if test (uname -s) = Darwin
     set -gx PATH /opt/homebrew/bin $PATH
 
@@ -55,7 +50,7 @@ end
 if status --is-interactive
     set -gx fish_user_abbreviations
 
-    abbr --add l exa
+    abbr --add l eza
     abbr --add v nvim
     abbr --add g git
     abbr --add d 'git diff'

@@ -81,9 +81,12 @@ if status --is-interactive
             #rvm default
             set -gx VISUAL bat
         case Linux
-            switch (uname -n)
+            switch (uname --all)
             case '*raspi*'
               abbr --add less bat
+            case '*WSL*'
+              abbr --add less batcat
+              abbr --add open 'powershell.exe /c start'
             case '*'
               abbr --add less batcat
             end

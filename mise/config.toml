@@ -2,6 +2,7 @@
 go = ['latest']
 node = ['latest']
 deno = ['latest']
+ruby = ['3.1']
 
 [settings]
 jobs = 4

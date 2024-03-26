@@ -67,7 +67,8 @@ if status --is-interactive
     abbr --add dr 'docker compose exec worker bundle exec'
     abbr --add xd 'git diff --name-only (git show-branch --merge-base master HEAD) | xargs '
     abbr --add ru 'git ls-files --others --exclude-standard | xargs rm'
-
+    abbr --add cs 'gh copilot suggest'
+    abbr --add ce 'gh copilot explain'
 
     set -gx EDITOR nvim
     set -gx _ZO_DATA_DIR $XDG_DATA_HOME/zoxide

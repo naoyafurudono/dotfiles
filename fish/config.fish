@@ -51,7 +51,7 @@ if status --is-interactive
     abbr --add c 'git c'
     abbr --add p 'git pull'
     abbr --add gu 'git add -A && git commit -m update && git push && git diff HEAD^' # 必要悪 :(
-    abbr --add gd 'git add -A && git commit -m deploy && git push && git diff HEAD^'
+    abbr --add gd 'git commit --allow-empty -m deploy && git push'
     abbr --add te 'textql -header -output-header -sql'
     abbr --add k kubectl
     abbr --add rg 'rg --smart-case'

@@ -34,15 +34,6 @@ else
     if [ -f '/home/furudono/dev/google-cloud-sdk/path.fish.inc' ]
         source '/home/furudono/dev/google-cloud-sdk/path.fish.inc'
     end
-
-    # TODO: use mise
-    set -gx -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
-    set -gx PATH $HOME/.cabal/bin /home/furudono/.ghcup/bin $PATH # ghcup-env
-    if type -q pyenv
-      pyenv init - | source
-    end
-    source /home/furudono/.opam/opam-init/init.fish >/dev/null 2>/dev/null; or true
-    set -gx PATH $HOME/.local/swift-5.7.3-RELEASE-ubuntu22.04/usr/bin $PATH
 end
 
 # --- interactive ---
@@ -55,11 +46,12 @@ if status --is-interactive
     abbr --add g git
     abbr --add d 'git diff'
     abbr --add s 'git status'
+    abbr --add w 'git switch'
     abbr --add a 'git add'
     abbr --add c 'git c'
     abbr --add p 'git pull'
     abbr --add gu 'git add -A && git commit -m update && git push && git diff HEAD^' # 必要悪 :(
-    abbr --add gd 'git add -A && git commit -m deploy && git push && git diff HEAD^'
+    abbr --add gd 'git commit --allow-empty -m deploy && git push'
     abbr --add te 'textql -header -output-header -sql'
     abbr --add k kubectl
     abbr --add rg 'rg --smart-case'
@@ -67,7 +59,8 @@ if status --is-interactive
     abbr --add dr 'docker compose exec worker bundle exec'
     abbr --add xd 'git diff --name-only (git show-branch --merge-base master HEAD) | xargs '
     abbr --add ru 'git ls-files --others --exclude-standard | xargs rm'
-
+    abbr --add cs 'gh copilot suggest'
+    abbr --add ce 'gh copilot explain'
 
     set -gx EDITOR nvim
     set -gx _ZO_DATA_DIR $XDG_DATA_HOME/zoxide

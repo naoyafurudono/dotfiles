@@ -2,6 +2,8 @@
 go = ['latest']
 node = ['latest']
 deno = ['latest']
+ruby = ['3.1']
+flutter = "3.19"
 
 [settings]
 jobs = 4

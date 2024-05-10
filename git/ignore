@@ -2,10 +2,15 @@
 node_modules/
 .tool-versions
 *.pem
+
 # zoxideが生み出している気がする
 z!
+
 tmp
 .vscode/
+
+# direnv
+.envrc
 
 # Created by https://www.toptal.com/developers/gitignore/api/macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos

@@ -45,6 +45,7 @@ function get_common () {
       nvim \
       fzf \
       htop \
+      direnv \
     ;;
   Linux)
     set +e
@@ -52,7 +53,6 @@ function get_common () {
     set -e
     sudo apt-get -qq update
     sudo apt-get -qq install -y \
-      build-essential \
       fish \
       neovim \
       fzf \

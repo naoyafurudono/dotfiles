@@ -73,6 +73,7 @@ if status --is-interactive
             abbr --add less bat
             #rvm default
             set -gx VISUAL bat
+            direnv hook fish | source
         case Linux
             switch (uname --all)
             case '*raspi*'

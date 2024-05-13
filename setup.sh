@@ -77,13 +77,17 @@ function get_rust() {
     fd-find \
     mise \
     ripgrep \
-    zoxide \
+    zoxide
+}
 
+function get_go() {
+    mise install go
+    go install hugo
 }
 
 init ;
 get_essentials ;
 get_common & \
-get_rust & \
+get_rust; get_go & \
 wait
 

@@ -1,9 +1,9 @@
 [tools]
-go = ['latest']
+go = ['latest', '1.22.0']
 node = ['latest']
 deno = ['latest']
 ruby = ['3.1']
-flutter = "3.19"
+python = "latest"
 
 [settings]
 jobs = 4

@@ -78,7 +78,7 @@ function get_rust() {
     mise \
     ripgrep \
     zoxide
-  cargo install --git https://github.com/astral-sh/rye rye
+  cargo install --locked --git https://github.com/astral-sh/rye rye
 
 }
 

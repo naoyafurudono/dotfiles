@@ -5,7 +5,9 @@ set -gx XDG_CONFIG_HOME $HOME/.config
 set -gx XDG_DATA_HOME $HOME/.local
 set -gx VOLTA_HOME $HOME/.volta
 
+
 set -gx PATH \
+    "$HOME/.rye/shims" \
     /opt/homebrew/opt/ruby/bin \
     /opt/homebrew/opt/postgresql@15/bin \
     $HOME/.krew/bin \
@@ -13,7 +15,6 @@ set -gx PATH \
     /usr/local/go/bin \
     $HOME/.local/bin \
     $HOME/.cargo/bin \
-    $HOME/.embulk/bin \
     $PATH
 
 # The next line updates PATH for the Google Cloud SDK.
@@ -74,6 +75,7 @@ if status --is-interactive
             #rvm default
             set -gx VISUAL bat
             direnv hook fish | source
+            rye self completion -s fish > ~/.config/fish/completions/rye.fish
         case Linux
             switch (uname --all)
             case '*raspi*'

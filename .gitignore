@@ -16,4 +16,4 @@ nvim/pack/*/start/*
 !bat/**/*
 !mise/*
 !gh/*
-
+!autohotkey.ahk

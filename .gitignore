@@ -17,3 +17,4 @@ nvim/pack/*/start/*
 !mise/*
 !gh/*
 !autohotkey.ahk
+!deploy-ahk.sh

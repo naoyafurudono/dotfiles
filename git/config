@@ -3,8 +3,8 @@
 [pull]
 	rebase = false
 [core]
-  editor = nvim
-	symlinks = false
+    editor = nvim
+    symlinks = false
 [alias]
   c = commit -m
   cl = clean -fd

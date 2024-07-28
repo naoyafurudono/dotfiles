@@ -2,6 +2,7 @@ tools:
   go:
     - latest
     - 1.22.0
+    - 1.23rc1
   node:
     - latest
   deno:
@@ -12,3 +13,4 @@ tools:
 settings:
   jobs: 4
   experimental: true
+

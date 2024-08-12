@@ -16,6 +16,8 @@
   {
     "context": "Editor",
     "bindings": {
+      "cmd-l": "editor::CopyPermalinkToLine",
+      "cmd-shift-l": "editor::OpenPermalinkToLine"
     }
   }
 ]

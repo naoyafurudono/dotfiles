@@ -18,3 +18,4 @@ nvim/pack/*/start/*
 !gh/*
 !autohotkey.ahk
 !deploy-ahk.sh
+!zed/**/*

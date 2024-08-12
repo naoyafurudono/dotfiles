@@ -65,7 +65,7 @@ if status --is-interactive
     abbr --add cs 'gh copilot suggest'
     abbr --add ce 'gh copilot explain'
 
-    set -gx EDITOR nvim
+    set -gx EDITOR zed
     set -gx _ZO_DATA_DIR $XDG_DATA_HOME/zoxide
     zoxide init fish --cmd j | source
     mise activate fish | source

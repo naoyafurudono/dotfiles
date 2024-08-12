@@ -44,26 +44,23 @@ if status --is-interactive
     gh completion -s fish > ~/.config/fish/completions/gh.fish
     set -gx fish_user_abbreviations
 
-    abbr --add l eza
-    abbr --add v nvim
-    abbr --add g git
-    abbr --add d 'git diff'
-    abbr --add s 'git status'
-    abbr --add w 'git switch'
     abbr --add a 'git add'
     abbr --add c 'git c'
-    abbr --add p 'git pull'
-    abbr --add gu 'git add -A && git commit -m update && git push && git diff HEAD^' # 必要悪 :(
+    abbr --add d 'git diff'
+    abbr --add g git
     abbr --add gd 'git commit --allow-empty -m deploy && git push'
-    abbr --add te 'textql -header -output-header -sql'
+    abbr --add gu 'git add -A && git commit -m update && git push && git diff HEAD^' # 必要悪 :(
     abbr --add k kubectl
+    abbr --add l eza
+    abbr --add m zed
+    abbr --add p 'git pull'
     abbr --add rg 'rg --smart-case'
     abbr --add rgc 'rg'
-    abbr --add dr 'docker compose exec worker bundle exec'
-    abbr --add xd 'git diff --name-only (git show-branch --merge-base master HEAD) | xargs '
     abbr --add ru 'git ls-files --others --exclude-standard | xargs rm'
-    abbr --add cs 'gh copilot suggest'
-    abbr --add ce 'gh copilot explain'
+    abbr --add s 'git status'
+    abbr --add v nvim
+    abbr --add w 'git switch'
+    abbr --add xd 'git diff --name-only (git show-branch --merge-base master HEAD) | xargs '
 
     set -gx EDITOR zed
     set -gx _ZO_DATA_DIR $XDG_DATA_HOME/zoxide

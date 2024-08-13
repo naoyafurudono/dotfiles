@@ -9,7 +9,10 @@ tools:
     - latest
   ruby:
     - "3.1"
-  python: latest
+  python: 
+    - latest
+  rye: 
+    - latest
 settings:
   jobs: 4
   experimental: true

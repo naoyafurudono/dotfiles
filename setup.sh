@@ -75,10 +75,10 @@ function get_rust() {
     easy-cp \
     eza \
     fd-find \
+    install-update \
     mise \
     ripgrep \
     zoxide
-  cargo install --locked --git https://github.com/astral-sh/rye rye
 
 }
 
@@ -87,9 +87,14 @@ function get_go() {
     go install hugo
 }
 
+function setup() {
+    ln -s ~/.config/tmux/tmux.conf ~.tmux.conf
+}
+
 init ;
 get_essentials ;
 get_common & \
 get_rust; get_go & \
+setup \
 wait
 

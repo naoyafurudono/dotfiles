@@ -8,8 +8,6 @@ set -gx VOLTA_HOME $HOME/.volta
 
 set -gx PATH \
     "$HOME/.rye/shims" \
-    /opt/homebrew/opt/ruby/bin \
-    /opt/homebrew/opt/postgresql@15/bin \
     $HOME/.krew/bin \
     $HOME/go/bin \
     /usr/local/go/bin \
@@ -17,21 +15,17 @@ set -gx PATH \
     $HOME/.cargo/bin \
     $PATH
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/furudono/.local/google-cloud-sdk/path.fish.inc' ]; 
-  source '/Users/furudono/.local/google-cloud-sdk/path.fish.inc'
-end
 
 if test (uname -s) = Darwin
     set -gx PATH /opt/homebrew/bin $PATH
-
     # The next line updates PATH for the Google Cloud SDK.
     if [ -f '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc' ]
         source '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc'
     end
-     source /Users/furudono/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
+    if [ -f '/Users/furudono/.local/google-cloud-sdk/path.fish.inc' ]; 
+      source '/Users/furudono/.local/google-cloud-sdk/path.fish.inc'
+    end
 else
-    # The next line updates PATH for the Google Cloud SDK.
     if [ -f '/home/furudono/dev/google-cloud-sdk/path.fish.inc' ]
         source '/home/furudono/dev/google-cloud-sdk/path.fish.inc'
     end
@@ -68,10 +62,11 @@ if status --is-interactive
     mise activate fish | source
     set -gx FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 
+    set -gx fish_tmux_config $HOME/.config/tmux/tmux.conf
+
     switch (uname -s)
         case Darwin
             abbr --add less bat
-            #rvm default
             set -gx VISUAL bat
             direnv hook fish | source
             rye self completion -s fish > ~/.config/fish/completions/rye.fish

@@ -1,3 +1,4 @@
+-- 一般的な設定
 vim.o.autoindent = true
 vim.o.smartindent = true
 vim.o.expandtab = true
@@ -7,23 +8,11 @@ vim.o.clipboard = vim.o.clipboard .. 'unnamedplus'
 vim.api.nvim_set_keymap('i', 'jj', '<ESC>', { silent = true })
 vim.o.number = true
 
--- if vim.fn.has('mac') == 1 then
---   vim.cmd [[
---     autocmd InsertLeavePre * :call system('im-select com.apple.inputmethod.Kotoeri.RomajiTyping.Roman')
---     " TODO  settup for copilot
---     " use :Copilot help for document
---   ]]
--- end
-
 if vim.fn.has('unix') == 1 then
   vim.cmd [[
     autocmd InsertLeavePre * :call system('ibus engine xkb:us::eng')
   ]]
 end
-
--- g:copilot_filetypes = {
---       'secret' = false
---       }
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -51,7 +40,6 @@ vim.g.maplocalleader = "\\"
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
-    -- add your plugins here
     {
       "vhyrro/luarocks.nvim",
       priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
@@ -66,6 +54,7 @@ require("lazy").setup({
   checker = { enabled = true },
 })
 
+-- カラーテーマはatom one light
 vim.cmd [[ colorscheme one-nvim ]]
 vim.o.background = "light"
 

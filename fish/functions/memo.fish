@@ -3,6 +3,6 @@ function memo
   if [ ! -e "$filename" ]
     echo -e "---\ndate: $(date -I)\n---" > "$filename"
   end
-  nvim "$filename"
+  zed "$filename"
 end
 

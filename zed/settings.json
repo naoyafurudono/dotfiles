@@ -7,6 +7,8 @@
 // custom settings, run the `zed: Open Default Settings` command
 // from the command palette
 {
+  "soft_wrap": "preferred_line_length",
+  "preferred_line_length": 80,
   "telemetry": {
     "diagnostics": false,
     "metrics": false

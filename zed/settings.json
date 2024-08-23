@@ -8,7 +8,7 @@
 // from the command palette
 {
   "soft_wrap": "preferred_line_length",
-  "preferred_line_length": 80,
+  "preferred_line_length": 120,
   "telemetry": {
     "diagnostics": false,
     "metrics": false

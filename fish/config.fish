@@ -41,6 +41,7 @@ if status --is-interactive
     abbr --add a 'git add'
     abbr --add c 'git c'
     abbr --add d 'git diff'
+    abbr --add eip 'curl http://checkip.amazonaws.com'
     abbr --add g git
     abbr --add gd 'git commit --allow-empty -m deploy && git push'
     abbr --add gu 'git add -A && git commit -m update && git push && git diff HEAD^' # 必要悪 :(

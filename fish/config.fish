@@ -46,7 +46,7 @@ if status --is-interactive
     abbr --add gd 'git commit --allow-empty -m deploy && git push'
     abbr --add gu 'git add -A && git commit -m update && git push && git diff HEAD^' # 必要悪 :(
     abbr --add k kubectl
-    abbr --add kagiana 'kagiana client -e https://kagiana.pepalab.com --token $GHE_TOKEN --user donokun'
+    abbr --add kagiana 'kagiana client -e https://kagiana.pepalab.com --token $GHE_TOKEN --user donokun -p $GHE_SSH_ID'
     abbr --add l eza
     abbr --add m zed
     abbr --add p 'git pull'

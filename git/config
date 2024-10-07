@@ -9,10 +9,11 @@
     symlinks = false
 
 [alias]
+  bc = !git branch --merged | grep -Ev '\\*|main|master|development' | xargs git branch -d
   c = commit -m
   cl = clean -fd
-  s = status
   d = diff
+  s = status
 
 [user]
 	name = Naoya Furudono

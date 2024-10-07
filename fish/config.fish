@@ -5,7 +5,6 @@ set -gx XDG_CONFIG_HOME $HOME/.config
 set -gx XDG_DATA_HOME $HOME/.local
 set -gx VOLTA_HOME $HOME/.volta
 
-
 set -gx PATH \
     "$HOME/.rye/shims" \
     $HOME/.krew/bin \

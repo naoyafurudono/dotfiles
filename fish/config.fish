@@ -43,6 +43,7 @@ if status --is-interactive
     abbr --add eip 'curl http://checkip.amazonaws.com'
     abbr --add g git
     abbr --add gd 'git commit --allow-empty -m deploy && git push'
+    abbr --add ghqp 'ghq list | ghq get --update --parallel'
     abbr --add gu 'git add -A && git commit -m update && git push && git diff HEAD^' # 必要悪 :(
     abbr --add k kubectl
     abbr --add kagiana 'kagiana client -e https://kagiana.pepalab.com --token $GHE_TOKEN --user donokun -p $GHE_SSH_ID'

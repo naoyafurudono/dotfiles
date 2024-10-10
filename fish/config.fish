@@ -39,7 +39,9 @@ if status --is-interactive
 
     abbr --add a 'git add'
     abbr --add c 'git c'
+    abbr --add code cursor # ごめんねVSCode
     abbr --add d 'git diff'
+    abbr --add dc 'docker compose'
     abbr --add eip 'curl http://checkip.amazonaws.com'
     abbr --add g git
     abbr --add gd 'git commit --allow-empty -m deploy && git push'

@@ -16,12 +16,14 @@ set -gx PATH \
 
 
 if test (uname -s) = Darwin
-    set -gx PATH /opt/homebrew/bin $PATH
+    set -gx PATH /opt/homebrew/bin \
+        /opt/homebrew/opt/mysql-client@8.0/bin \
+        $PATH
     # The next line updates PATH for the Google Cloud SDK.
     if [ -f '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc' ]
         source '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc'
     end
-    if [ -f '/Users/furudono/.local/google-cloud-sdk/path.fish.inc' ]; 
+    if [ -f '/Users/furudono/.local/google-cloud-sdk/path.fish.inc' ];
       source '/Users/furudono/.local/google-cloud-sdk/path.fish.inc'
     end
 else

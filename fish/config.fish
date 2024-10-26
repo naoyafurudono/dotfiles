@@ -5,7 +5,6 @@ set -gx XDG_CONFIG_HOME $HOME/.config
 set -gx XDG_DATA_HOME $HOME/.local
 set -gx VOLTA_HOME $HOME/.volta
 
-
 set -gx PATH \
     "$HOME/.rye/shims" \
     $HOME/.krew/bin \
@@ -17,12 +16,14 @@ set -gx PATH \
 
 
 if test (uname -s) = Darwin
-    set -gx PATH /opt/homebrew/bin $PATH
+    set -gx PATH /opt/homebrew/bin \
+        /opt/homebrew/opt/mysql-client@8.0/bin \
+        $PATH
     # The next line updates PATH for the Google Cloud SDK.
     if [ -f '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc' ]
         source '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc'
     end
-    if [ -f '/Users/furudono/.local/google-cloud-sdk/path.fish.inc' ]; 
+    if [ -f '/Users/furudono/.local/google-cloud-sdk/path.fish.inc' ];
       source '/Users/furudono/.local/google-cloud-sdk/path.fish.inc'
     end
 else
@@ -40,11 +41,16 @@ if status --is-interactive
 
     abbr --add a 'git add'
     abbr --add c 'git c'
+    abbr --add code cursor # ごめんねVSCode
     abbr --add d 'git diff'
+    abbr --add dc 'docker compose'
+    abbr --add eip 'curl http://checkip.amazonaws.com'
     abbr --add g git
     abbr --add gd 'git commit --allow-empty -m deploy && git push'
+    abbr --add ghqp 'ghq list | ghq get --update --parallel'
     abbr --add gu 'git add -A && git commit -m update && git push && git diff HEAD^' # 必要悪 :(
     abbr --add k kubectl
+    abbr --add kagiana 'kagiana client -e https://kagiana.pepalab.com --token $GHE_TOKEN --user donokun -p $GHE_SSH_ID'
     abbr --add l eza
     abbr --add m zed
     abbr --add p 'git pull'
@@ -56,7 +62,7 @@ if status --is-interactive
     abbr --add w 'git switch'
     abbr --add xd 'git diff --name-only (git show-branch --merge-base master HEAD) | xargs '
 
-    set -gx EDITOR zed
+    set -gx EDITOR cursor
     set -gx _ZO_DATA_DIR $XDG_DATA_HOME/zoxide
     zoxide init fish --cmd j | source
     mise activate fish | source

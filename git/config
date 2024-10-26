@@ -1,28 +1,31 @@
 [init]
 	defaultBranch = main
+
 [pull]
 	rebase = false
+
 [core]
     editor = nvim
     symlinks = false
+
 [alias]
+  bc = !git branch --merged | grep -Ev '\\*|main|master|development' | xargs git branch -d
   c = commit -m
   cl = clean -fd
-  s = status
   d = diff
+  s = status
 
 [user]
 	name = Naoya Furudono
 	email = naoyafurudono@gmail.com
 
-[include]
-  # override user
-  path = ~/.local/git/config
-
 [ghq]
 	root = ~/src
+    user = naoyafurudono
+
 [ghq "https://git.pepabo.com/"]
 	vcs = git
+
 [include]
-    path = "~/.local/git/config"
+  path = ~/.local/git/config
 

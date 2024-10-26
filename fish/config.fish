@@ -97,6 +97,8 @@ if status --is-interactive
 
     # no greeting
     set -gx fish_greeting
+else
+    mise activate --shims
 end
 
 # ---- load ----

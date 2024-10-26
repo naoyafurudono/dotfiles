@@ -7,8 +7,15 @@
 // custom settings, run the `zed: Open Default Settings` command
 // from the command palette
 {
+  "assistant": {
+    "default_model": {
+      "provider": "google",
+      "model": "gemini-1.5-flash"
+    },
+    "version": "2"
+  },
   "soft_wrap": "preferred_line_length",
-  "preferred_line_length": 120,
+  "preferred_line_length": 180,
   "telemetry": {
     "diagnostics": false,
     "metrics": false

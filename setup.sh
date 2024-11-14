@@ -46,6 +46,8 @@ function get_common () {
       fzf \
       htop \
       direnv \
+      jq \
+      yq \
     ;;
   Linux)
     set +e

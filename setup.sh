@@ -48,6 +48,7 @@ function get_common () {
       direnv \
       jq \
       yq \
+      ghostty \
     ;;
   Linux)
     set +e

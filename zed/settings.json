@@ -26,6 +26,12 @@
       "milliseconds": 1000
     }
   },
+  // ファイル開いてもインストールを提案してくれない拡張を指定する。
+  "auto_install_extensions": {
+    // typos-cliと同等の機能を提供するLSP
+    // typos-cliのバイナリを別途インストールする必要がある
+    "typos": true
+  },
   "cursor_blink": false,
   "git_status": true
 }

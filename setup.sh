@@ -81,6 +81,7 @@ function get_rust() {
     install-update \
     mise \
     ripgrep \
+    typos-cli \
     zoxide
 
 }

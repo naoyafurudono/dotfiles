@@ -49,6 +49,7 @@ function get_common () {
       jq \
       yq \
       ghostty \
+      typos-cli \
     ;;
   Linux)
     set +e
@@ -81,7 +82,6 @@ function get_rust() {
     install-update \
     mise \
     ripgrep \
-    typos-cli \
     zoxide
 
 }

@@ -93,6 +93,11 @@ function get_go() {
 
 function setup() {
     ln -s ~/.config/tmux/tmux.conf ~.tmux.conf
+    case "$(uname)" in
+    Darwin)
+      defaults delete com.apple.dock persistent-apps
+    ;;
+    esac
 }
 
 init ;

@@ -7,13 +7,6 @@
 // custom settings, run the `zed: Open Default Settings` command
 // from the command palette
 {
-  "assistant": {
-    "default_model": {
-      "provider": "google",
-      "model": "gemini-1.5-flash"
-    },
-    "version": "2"
-  },
   "soft_wrap": "preferred_line_length",
   "preferred_line_length": 180,
   "telemetry": {
@@ -32,6 +25,12 @@
     "after_delay": {
       "milliseconds": 1000
     }
+  },
+  // ファイル開いてもインストールを提案してくれない拡張を指定する。
+  "auto_install_extensions": {
+    // typos-cliと同等の機能を提供するLSP
+    // typos-cliのバイナリを別途インストールする必要がある
+    "typos": true
   },
   "cursor_blink": false,
   "git_status": true,

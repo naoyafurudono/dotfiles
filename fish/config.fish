@@ -41,7 +41,6 @@ if status --is-interactive
 
     abbr --add a 'git add'
     abbr --add c 'git c'
-    abbr --add code cursor # ごめんねVSCode
     abbr --add d 'git diff'
     abbr --add dc 'docker compose'
     abbr --add eip 'curl http://checkip.amazonaws.com'
@@ -62,7 +61,7 @@ if status --is-interactive
     abbr --add w 'git switch'
     abbr --add xd 'git diff --name-only (git show-branch --merge-base master HEAD) | xargs '
 
-    set -gx EDITOR cursor
+    set -gx EDITOR zed
     set -gx _ZO_DATA_DIR $XDG_DATA_HOME/zoxide
     zoxide init fish --cmd j | source
     mise activate fish | source

@@ -7,6 +7,13 @@
 // custom settings, run the `zed: Open Default Settings` command
 // from the command palette
 {
+  "assistant": {
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-4o"
+    },
+    "version": "2"
+  },
   "soft_wrap": "preferred_line_length",
   "preferred_line_length": 180,
   "telemetry": {
@@ -34,5 +41,25 @@
   },
   "cursor_blink": false,
   "git_status": true,
-  "load_direnv": "shell_hook"
+  "load_direnv": "shell_hook",
+  "language_models": {
+    "copilot_chat": {
+      "enabled": true
+    }
+  },
+  "lsp": {
+    "gopls": {
+      "initialization_options": {
+        "hints": {
+            "assignVariableTypes": true,
+            "compositeLiteralFields": true,
+            "compositeLiteralTypes": true,
+            "constantValues": true,
+            "functionTypeParameters": true,
+            "parameterNames": true,
+            "rangeVariableTypes": true
+        }
+      }
+    }
+  }
 }

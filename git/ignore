@@ -8,6 +8,7 @@ z!
 
 tmp
 .vscode/
+.zed/
 .mise.toml
 
 # direnv
@@ -23,7 +24,8 @@ tmp
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*

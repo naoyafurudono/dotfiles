@@ -52,6 +52,7 @@ if status --is-interactive
     abbr --add kagiana 'kagiana client -e https://kagiana.pepalab.com --token $GHE_TOKEN --user donokun -p $GHE_SSH_ID'
     abbr --add l eza
     abbr --add m zed
+    abbr --add n 'zed .'
     abbr --add p 'git pull'
     abbr --add rg 'rg --smart-case'
     abbr --add rgc 'rg'
@@ -109,4 +110,3 @@ end
 # ---- load ----
 
 source ~/.local/fish/init.fish.secret
-

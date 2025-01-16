@@ -46,6 +46,13 @@
       "enabled": true
     }
   },
+  "assistant": {
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-4o"
+    },
+    "version": "2"
+  },
 
   // # エディタの管理
   // ファイル開いてもインストールを提案してくれない拡張を指定する。

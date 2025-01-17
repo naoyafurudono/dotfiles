@@ -64,5 +64,12 @@
   "telemetry": {
     "diagnostics": false,
     "metrics": false
+  },
+
+  // lang
+  "languages": {
+    "Markdown": {
+      "format_on_save": "on"
+    }
   }
 }

@@ -3,6 +3,9 @@
 *.secret
 *.ignore
 
+# 本当はこんなことはしたくない
+_typos.toml
+
 # zoxideが生み出している気がする
 z!
 

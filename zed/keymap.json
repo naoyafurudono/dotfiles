@@ -14,10 +14,18 @@
     }
   },
   {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-o": "workspace::ToggleRightDock"
+    }
+  },
+  {
     "context": "Editor",
     "bindings": {
       "cmd-l": "editor::CopyPermalinkToLine",
-      "cmd-shift-l": "editor::OpenPermalinkToLine"
+      "cmd-shift-l": "editor::OpenPermalinkToLine",
+      "cmd-o": "workspace::ToggleRightDock",
+      "cmd-r": "editor::Rename"
     }
   }
 ]

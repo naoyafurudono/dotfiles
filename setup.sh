@@ -6,7 +6,6 @@ set -eu -o pipefail
 function init() {
   cp -rf "dotfiles" "$HOME/.config"
   cd "$HOME/.config"
-  git submodule update --init --recursive
 
 }
 

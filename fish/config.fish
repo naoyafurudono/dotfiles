@@ -56,6 +56,7 @@ if status --is-interactive
     abbr --add m zed
     abbr --add n 'zed .'
     abbr --add p 'git pull'
+    abbr --add r 'cd $(git rev-parse --show-toplevel)'
     abbr --add rg 'rg --smart-case'
     abbr --add rgc 'rg'
     abbr --add ru 'git ls-files --others --exclude-standard | xargs rm'

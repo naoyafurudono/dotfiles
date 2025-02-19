@@ -50,6 +50,7 @@ if status --is-interactive
     abbr --add gu 'git add -A && git commit -m update && git push && git diff HEAD^' # 必要悪 :(
     abbr --add jj 'ji && zed .'
     abbr --add k kubectl
+    abbr --add ka 'kubectl get (kubectl api-resources --namespaced=true --verbs=list -o name | tr "\n" "," | sed -e "s/,\$//")'
     abbr --add kagiana 'kagiana client -e https://kagiana.pepalab.com --token $GHE_TOKEN --user donokun -p $GHE_SSH_ID'
     abbr --add l eza
     abbr --add m zed

@@ -11,7 +11,7 @@
   "soft_wrap": "preferred_line_length",
   "preferred_line_length": 180,
   "ui_font_size": 10,
-  "buffer_font_size": 10,
+  "buffer_font_size": 9.0,
   "theme": {
     "mode": "system",
     "light": "One Light",
@@ -45,6 +45,13 @@
     "copilot_chat": {
       "enabled": true
     }
+  },
+  "assistant": {
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "o1"
+    },
+    "version": "2"
   },
 
   // # エディタの管理

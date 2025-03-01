@@ -7,6 +7,7 @@
 [core]
     editor = nvim
     symlinks = false
+    hooksPath = ~/.config/git/hooks
 
 [alias]
   bc = !git branch --merged | grep -Ev '\\*|main|master|development' | xargs git branch -d

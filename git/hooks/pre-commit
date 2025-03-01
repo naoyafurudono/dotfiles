@@ -19,4 +19,5 @@ if git diff --cached --exit-code > /dev/null; then
     exit 1  # コミットを中断
 fi
 
+source `dirname ${0}`/ensure-newline
 source `dirname ${0}`/_local-hook-exec

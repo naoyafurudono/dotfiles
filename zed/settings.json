@@ -49,7 +49,7 @@
   "assistant": {
     "default_model": {
       "provider": "copilot_chat",
-      "model": "o1"
+      "model": "gpt-4o"
     },
     "version": "2"
   },

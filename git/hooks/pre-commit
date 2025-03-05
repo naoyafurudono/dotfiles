@@ -1,4 +1,5 @@
 #!/bin/bash
 
+
 source `dirname ${0}`/ensure-newline
 source `dirname ${0}`/_local-hook-exec

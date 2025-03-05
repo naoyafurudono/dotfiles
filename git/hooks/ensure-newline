@@ -5,7 +5,9 @@ files=$(git diff --cached --name-only --diff-filter=AM)
 
 # 末尾改行を補完する処理
 for f in $files; do
+    echo "... $f"
     if [ -f "$f" ] && git grep -Iq . -- "$f"; then  # テキストファイルのみ対象
+        echo "text: $f"
         if [ "$(tail -c1 "$f")" != "" ] && [ "$(tail -c1 "$f")" != $'\n' ]; then
             echo >> "$f"      # 末尾に改行を追加
             git add "$f"      # 修正をステージに追加

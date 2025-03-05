@@ -13,11 +13,5 @@ for f in $files; do
     fi
 done
 
-# 変更がない場合、コミットを中止
-if git diff --cached --exit-code > /dev/null; then
-    echo "No changes left to commit after fixing newline issues."
-    exit 1  # コミットを中断
-fi
-
 exit 0  # 通常のコミット続行
 

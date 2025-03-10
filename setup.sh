@@ -6,7 +6,6 @@ set -eu -o pipefail
 function init() {
   cp -rf "dotfiles" "$HOME/.config"
   cd "$HOME/.config"
-
 }
 
 function get_essentials () {
@@ -78,20 +77,13 @@ function get_rust() {
     easy-cp \
     eza \
     fd-find \
-    install-update \
     mise \
     ripgrep \
     zoxide
 
 }
 
-function get_go() {
-    mise install go
-    go install hugo
-}
-
 function setup() {
-    ln -s ~/.config/tmux/tmux.conf ~.tmux.conf
     case "$(uname)" in
     Darwin)
       defaults delete com.apple.dock persistent-apps
@@ -99,10 +91,9 @@ function setup() {
     esac
 }
 
-init ;
-get_essentials ;
-get_common & \
-get_rust; get_go & \
-setup \
+get_essentials
+get_common
+get_rust
+setup 
 wait
 

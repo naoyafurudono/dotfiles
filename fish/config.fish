@@ -6,7 +6,6 @@ set -gx XDG_DATA_HOME $HOME/.local
 set -gx VOLTA_HOME $HOME/.volta
 
 set -gx PATH \
-    "$HOME/.rye/shims" \
     $HOME/.krew/bin \
     $HOME/go/bin \
     /usr/local/go/bin \
@@ -78,7 +77,6 @@ if status --is-interactive
             abbr --add less bat
             set -gx VISUAL bat
             direnv hook fish | source
-            rye self completion -s fish > ~/.config/fish/completions/rye.fish
         case Linux
             switch (uname --all)
             case '*raspi*'

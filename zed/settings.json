@@ -38,8 +38,11 @@
     "show_background": false,
     "edit_debounce_ms": 700,
     "scroll_debounce_ms": 50,
+    "enabled": false,
     // not default
-    "enabled": true
+    "toggle_on_modifiers_press": {
+      "shift": true
+    }
   },
   "language_models": {
     "copilot_chat": {

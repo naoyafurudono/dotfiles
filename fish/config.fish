@@ -43,6 +43,7 @@ if status --is-interactive
     abbr --add d 'git diff'
     abbr --add dc 'docker compose'
     abbr --add eip 'curl http://checkip.amazonaws.com'
+    abbr --add en 'envchain'
     abbr --add g git
     abbr --add gd 'git commit --allow-empty -m deploy && git push'
     abbr --add ghqp 'ghq list | ghq get --update --parallel'

@@ -4,6 +4,7 @@ set -gx XDG_CONFIG_PATH $HOME/.config
 set -gx XDG_CONFIG_HOME $HOME/.config
 set -gx XDG_DATA_HOME $HOME/.local
 set -gx VOLTA_HOME $HOME/.volta
+set -gx GHE_USER donokun
 
 set -gx PATH \
     $HOME/.krew/bin \

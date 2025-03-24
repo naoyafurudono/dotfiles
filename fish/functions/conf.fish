@@ -1,4 +1,4 @@
-function conf  --description 'この関数にハードコードした設定ファイル一覧からをfzfで選択してEDITORで開く'
+function conf  --description '設定ファイルをこの関数にハードコードした覧からfzfで選択してEDITORで開く'
     set -q EDITOR; or set EDITOR vim
 
     # パスはfishの組み込みによって解釈される

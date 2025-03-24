@@ -31,7 +31,7 @@ function conf  --description '設定ファイルをこの関数にハードコ�
     if test -f "$selected_path"
         $EDITOR "$selected_path"
     else
-        echo "Config file not found: $selected_path" >&2
+        echo "config file not found: $selected_path" >&2
         return 1
     end
 end

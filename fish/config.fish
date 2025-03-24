@@ -113,3 +113,4 @@ end
 # ---- load ----
 
 source ~/.local/fish/init.fish.secret
+

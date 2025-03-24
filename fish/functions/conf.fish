@@ -6,6 +6,7 @@ function conf  --description 'この関数にハードコードした設定フ�
     # 相対パスに解釈される場合はXDG_CONFIG_HOMEを常に基点として扱う
     set -l configs \
         'fish:fish/config.fish' \
+        'fish-func-conf:fish/functions/conf.fish' \
         'fish-local:~/.local/fish/init.fish.secret' \
         'ghostty:ghostty/config' \
         'git:git/config' \
@@ -41,42 +42,4 @@ function conf  --description 'この関数にハードコードした設定フ�
         echo "Config file not found: $selected_path"
         return 1
     end
-end
-
-function _ssh-keygen
-  set name $argv[1]
-  mkdir -p "$HOME/.ssh/$name"
-  ssh-keygen -t ed25519 -f "$HOME/.ssh/$name/id_ed25519"
-  chmod 600 "$HOME/.ssh/$name/id_ed25519"
-end
-
-function gi
-  curl -sL https://www.toptal.com/developers/gitignore/api/$argv
-end
-
-function pp
-    set pathname (fzf --print0)
-    and $EDITOR $pathname
-end
-# ghqで管理するリポジトリをfzfで選択してcdする
-function jg
-    set root (ghq root)
-    set selected (ghq list | fzf)
-
-    if test -n "$selected"
-        cd "$root/$selected"
-    end
-end
-function memo
-  set -l filename (date -I).md
-  if [ ! -e "$filename" ]
-    echo -e "---\ndate: $(date -I)\n---" > "$filename"
-  end
-  $EDITOR "$filename"
-end
-
-function cl
-    set pathname (fzf --print0)
-    and set newname $argv[1]
-    and easy-cp $pathname $newname
 end

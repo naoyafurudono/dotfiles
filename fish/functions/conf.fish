@@ -1,34 +1,26 @@
-function conf  --description 'この関数にハードコードした設定ファイルをfzfで一覧してEDITORで開く'
+function conf  --description 'この関数にハードコードした設定ファイル一覧からをfzfで選択してEDITORで開く'
     set -q EDITOR; or set EDITOR vim
 
-    # 設定ファイルを「名前:パス」で一元定義
     # パスはfishの組み込みによって解釈される
     # 相対パスに解釈される場合はXDG_CONFIG_HOMEを常に基点として扱う
     set -l configs \
-        'fish:fish/config.fish' \
-        'fish-func-conf:fish/functions/conf.fish' \
-        'fish-local:~/.local/fish/init.fish.secret' \
-        'ghostty:ghostty/config' \
-        'git:git/config' \
-        'nvim:nvim/init.lua'
+        'fish/config.fish' \
+        'fish/functions/conf.fish' \
+        '~/.local/fish/init.fish.secret' \
+        'ghostty/config' \
+        'git/config' \
+        'nvim/init.lua'
 
     # 名前一覧をfzfで表示
-    set -l selected_name (
-        printf '%s\n' $configs | string replace -r ':.*' '' | fzf --prompt="Edit config> "
-    )
-
-    test -n "$selected_name"; or return
-
-    # 名前からパス取得
     set -l selected_path (
-        printf '%s\n' $configs | string match "$selected_name:*" | string replace -r '^[^:]+:' ''
+        printf '%s\n' $configs | fzf --prompt="Edit config> "
     )
+
+    test -n "$selected_path"; or return
 
     # パス展開（~など対応）
     # https://fishshell.com/docs/current/cmds/path.html#normalize-subcommand
     set selected_path (path normalize "$selected_path")
-
-    echo "selected: $selected_path"
 
     # 絶対パスでないならXDG_CONFIG_HOMEを前置
     if not string match -q --regex '^/' $selected_path
@@ -43,3 +35,4 @@ function conf  --description 'この関数にハードコードした設定フ�
         return 1
     end
 end
+

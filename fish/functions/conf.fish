@@ -13,7 +13,7 @@ function conf  --description '設定ファイルをこの関数にハードコ�
 
     # 名前一覧をfzfで表示
     set -l selected_path (
-        printf '%s\n' $configs | fzf --prompt="Edit config> "
+        printf '%s\n' $configs | fzf
     )
 
     test -n "$selected_path"; or return
@@ -31,8 +31,7 @@ function conf  --description '設定ファイルをこの関数にハードコ�
     if test -f "$selected_path"
         $EDITOR "$selected_path"
     else
-        echo "Config file not found: $selected_path"
+        echo "Config file not found: $selected_path" >&2
         return 1
     end
 end
-

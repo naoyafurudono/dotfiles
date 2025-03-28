@@ -66,7 +66,7 @@ if status --is-interactive
     abbr --add w 'git switch'
     abbr --add xd 'git diff --name-only (git show-branch --merge-base master HEAD) | xargs '
 
-    set -gx EDITOR nvim
+    set -gx EDITOR zed
     set -gx _ZO_DATA_DIR $XDG_DATA_HOME/zoxide
     zoxide init fish --cmd j | source
     mise activate fish | source
@@ -112,5 +112,5 @@ end
 
 # ---- load ----
 
-source ~/.local/fish/init.fish.secret
+source ~/.local/fish/config.fish
 

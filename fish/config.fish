@@ -69,6 +69,8 @@ if status --is-interactive
     abbr --add w 'git switch'
     abbr --add xd 'git diff --name-only (git show-branch --merge-base master HEAD) | xargs '
 
+    set -gx LS_COLORS 1 # for fd 
+
     set -gx _ZO_DATA_DIR $XDG_DATA_HOME/zoxide
     zoxide init fish --cmd j | source
     mise activate fish | source

@@ -1,8 +1,4 @@
 tools:
-  go:
-    - latest
-    - 1.22.0
-    - 1.23rc1
   node:
     - latest
   deno:
@@ -10,8 +6,6 @@ tools:
   ruby:
     - "3.1"
   python: 
-    - latest
-  rye: 
     - latest
 settings:
   jobs: 4

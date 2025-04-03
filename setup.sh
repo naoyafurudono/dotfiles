@@ -39,15 +39,16 @@ function get_common () {
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
     brew install \
-      fish \
-      nvim \
-      fzf \
-      htop \
       direnv \
-      jq \
-      yq \
+      fish \
+      fzf \
       ghostty \
+      htop \
+      jq \
+      kubectx \
+      nvim \
       typos-cli \
+      yq \
     ;;
   Linux)
     set +e

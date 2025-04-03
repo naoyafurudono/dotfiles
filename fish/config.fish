@@ -39,6 +39,9 @@ if status --is-interactive
     gh completion -s fish > ~/.config/fish/completions/gh.fish
     set -gx fish_user_abbreviations
 
+    set -gx EDITOR nvim
+    set -gx IDE cursor
+
     abbr --add a 'git add'
     abbr --add c 'git c'
     abbr --add d 'git diff'
@@ -49,13 +52,13 @@ if status --is-interactive
     abbr --add gd 'git commit --allow-empty -m deploy && git push'
     abbr --add ghqp 'ghq list | ghq get --update --parallel'
     abbr --add gu 'git add -A && git commit -m update && git push && git diff HEAD^' # 必要悪 :(
-    abbr --add jj 'ji && zed .'
+    abbr --add jj "ji && $IDE ."
     abbr --add k kubectl
     abbr --add ka 'kubectl get (kubectl api-resources --namespaced=true --verbs=list -o name | tr "\n" "," | sed -e "s/,\$//")'
     abbr --add kagiana 'kagiana client -e https://kagiana.pepalab.com --token $GHE_TOKEN --user donokun -p $GHE_SSH_ID'
     abbr --add l eza
-    abbr --add m zed
-    abbr --add n 'zed .'
+    abbr --add m $IDE
+    abbr --add n "$IDE ."
     abbr --add p 'git pull'
     abbr --add r 'cd $(git rev-parse --show-toplevel)'
     abbr --add rg 'rg --smart-case'
@@ -66,7 +69,6 @@ if status --is-interactive
     abbr --add w 'git switch'
     abbr --add xd 'git diff --name-only (git show-branch --merge-base master HEAD) | xargs '
 
-    set -gx EDITOR zed
     set -gx _ZO_DATA_DIR $XDG_DATA_HOME/zoxide
     zoxide init fish --cmd j | source
     mise activate fish | source

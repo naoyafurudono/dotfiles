@@ -1,4 +1,4 @@
 function pp -d 'fzfでファイルを選択してエディタで開く'
     set pathname (fzf --print0)
-    and $EDITOR $pathname
+    and $IDE $pathname
 end

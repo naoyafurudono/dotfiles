@@ -3,5 +3,6 @@ function memo -d 'Create a new memo file with today date'
   if [ ! -e "$filename" ]
     echo -e "---\ndate: $(date -I)\n---" > "$filename"
   end
-  $EDITOR "$filename"
+  $IDE "$filename"
 end
+

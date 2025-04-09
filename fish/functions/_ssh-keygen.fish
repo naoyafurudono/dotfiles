@@ -4,3 +4,4 @@ function _ssh-keygen -d '新しいssh鍵を適切に生成する。第一引数�
   ssh-keygen -t ed25519 -f "$HOME/.ssh/$name/id_ed25519"
   chmod 600 "$HOME/.ssh/$name/id_ed25519"
 end
+

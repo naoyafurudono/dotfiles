@@ -42,6 +42,8 @@ if status --is-interactive
     set -gx EDITOR nvim
     set -gx IDE cursor
 
+    abbr --add mod-zed 'abbr --add m zed; abbr --add n "zed ."; set -x IDE zed; set -x EDITOR zed'
+
     abbr --add a 'git add'
     abbr --add c 'git c'
     abbr --add d 'git diff'

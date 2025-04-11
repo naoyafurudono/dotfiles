@@ -3,5 +3,6 @@ font-size = 10
 font-feature = -calt
 font-feature = -dlig
 shell-integration = fish
-quick-terminal-position = "top"
-keybind = "global:shift+space=toggle_quick_terminal"
+quick-terminal-position = "right"
+keybind = "global:alt+space=toggle_quick_terminal"
+

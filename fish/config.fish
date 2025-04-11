@@ -42,6 +42,8 @@ if status --is-interactive
     set -gx EDITOR nvim
     set -gx IDE cursor
 
+    abbr --add mod-zed 'abbr --add m zed; abbr --add n "zed ."; set -x IDE zed; set -x EDITOR zed'
+
     abbr --add a 'git add'
     abbr --add c 'git c'
     abbr --add d 'git diff'
@@ -68,6 +70,8 @@ if status --is-interactive
     abbr --add v nvim
     abbr --add w 'git switch'
     abbr --add xd 'git diff --name-only (git show-branch --merge-base master HEAD) | xargs '
+
+    set -gx LS_COLORS 1 # for fd 
 
     set -gx _ZO_DATA_DIR $XDG_DATA_HOME/zoxide
     zoxide init fish --cmd j | source

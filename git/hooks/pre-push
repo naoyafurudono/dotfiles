@@ -22,7 +22,8 @@ function restrict_master_push() {
 
 case "$(git config remote.origin.url)" in
   # 自分しか使わないリポジトリなど、master/mainにpushしてよいものはskipするようにする
-  "git@github.com:yammer/dotfiles.git" )
+  "https://github.com/naoyafurudono/dotfiles.git" \
+)
     echo 'skip restrict_master_push()' 1>&2
     ;;
   * )

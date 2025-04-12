@@ -28,7 +28,6 @@ REMOTE_URL="$(git config remote.origin.url)"
 
 # ホワイトリストにリモートURLが含まれているかチェック
 if grep -Fxq "$REMOTE_URL" "$WHITELIST_FILE"; then
-  echo 'skip restrict_master_push()' 1>&2
 else
   restrict_master_push
 fi

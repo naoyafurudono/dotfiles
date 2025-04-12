@@ -10,13 +10,7 @@
     "context": "Workspace",
     "bindings": {
       "ctrl-tab": "pane::ActivateNextItem",
-      "ctrl-shift-tab": "pane::ActivatePrevItem"
-    }
-  },
-  {
-    "context": "Workspace",
-    "bindings": {
-      "cmd-o": "workspace::ToggleRightDock"
+      "ctrl-shift-tab": "pane::ActivatePreviousItem"
     }
   },
   {
@@ -24,8 +18,13 @@
     "bindings": {
       "cmd-l": "editor::CopyPermalinkToLine",
       "cmd-shift-l": "editor::OpenPermalinkToLine",
-      "cmd-o": "workspace::ToggleRightDock",
       "cmd-r": "editor::Rename"
+    }
+  },
+  {
+    "bindings": {
+      "cmd-o": "workspace::ToggleRightDock",
+      "cmd-g": "git_panel::ToggleFocus"
     }
   }
 ]

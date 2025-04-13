@@ -7,6 +7,7 @@ function conf  --description '設定ファイルをこの関数にハードコ�
         '~/.local/fish/init.fish.secret' \
         'ghostty/config' \
         'git/config' \
+        'git/hooks/whitelist.txt' \
         'nvim/init.lua'
 
     # 名前一覧をfzfで表示

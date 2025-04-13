@@ -1,0 +1,3 @@
+https://github.com/naoyafurudono/dotfiles.git
+git@github.com:naoyafurudono/naoyafurudono.github.io.git
+

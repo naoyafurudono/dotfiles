@@ -8,8 +8,7 @@ set -gx GHE_USER donokun
 
 set -gx PATH \
     $HOME/.krew/bin \
-    $HOME/go/bin \
-    /usr/local/go/bin \
+    $GOBIN \
     $HOME/.local/bin \
     $HOME/.cargo/bin \
     $PATH
@@ -119,4 +118,3 @@ end
 # ---- load ----
 
 source ~/.local/fish/config.fish
-

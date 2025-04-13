@@ -8,13 +8,15 @@ lines="$(cat)"
 function restrict_master_push() {
   echo "$lines" | while read local_ref local_sha1 remote_ref remote_sha1
   do
-    if [[ "$remote_ref" = "refs/heads/master" ]]; then
+    if [[ "${remote_ref}" = "refs/heads/master" ]]; then
       echo "Do not push to master branch!!!" 1>&2
+      echo "Remote URL: $REMOTE_URL" 1>&2
       exit 1
     fi
 
     if [[ "${remote_ref}" = "refs/heads/main" ]]; then
       echo "Do not push to main branch!!!" 1>&2
+      echo "Remote URL: $REMOTE_URL" 1>&2
       exit 1
     fi
   done
@@ -34,3 +36,4 @@ else
 fi
 
 source `dirname ${0}`/_local-hook-exec
+

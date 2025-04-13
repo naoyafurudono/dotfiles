@@ -14,4 +14,3 @@ function __envchain_env_vars
 end
 
 complete -c envchain -n "__fish_seen_subcommand_from (__envchain_list_namespaces)" -xa "(__envchain_env_vars)" -d "Environment variable"
-

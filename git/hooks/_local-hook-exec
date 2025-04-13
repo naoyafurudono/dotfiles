@@ -7,4 +7,3 @@ LOCAL_HOOK="${GIT_ROOT}/.git/hooks/${HOOK_NAME}"
 if [ -e $LOCAL_HOOK ]; then
   source $LOCAL_HOOK
 fi
-

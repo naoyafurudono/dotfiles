@@ -1,3 +1,4 @@
 https://github.com/naoyafurudono/dotfiles.git
-git@github.com:naoyafurudono/naoyafurudono.github.io.git
 https://github.com/naoyafurudono/textfmt.git
+git@github.com:naoyafurudono/naoyafurudono.github.io.git
+https://git.pepabo.com/donokun/memo.git

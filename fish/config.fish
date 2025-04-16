@@ -5,12 +5,14 @@ set -gx XDG_CONFIG_HOME $HOME/.config
 set -gx XDG_DATA_HOME $HOME/.local
 set -gx VOLTA_HOME $HOME/.volta
 set -gx GHE_USER donokun
+set -gx GOBIN $HOME/go/bin
 
 set -gx PATH \
     $HOME/.krew/bin \
     $GOBIN \
     $HOME/.local/bin \
     $HOME/.cargo/bin \
+    $GOBIN \
     $PATH
 
 
@@ -70,7 +72,7 @@ if status --is-interactive
     abbr --add w 'git switch'
     abbr --add xd 'git diff --name-only (git show-branch --merge-base master HEAD) | xargs '
 
-    set -gx LS_COLORS 1 # for fd 
+    set -gx LS_COLORS 1 # for fd
 
     set -gx _ZO_DATA_DIR $XDG_DATA_HOME/zoxide
     zoxide init fish --cmd j | source

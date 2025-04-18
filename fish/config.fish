@@ -41,9 +41,7 @@ if status --is-interactive
     set -gx fish_user_abbreviations
 
     set -gx EDITOR nvim
-    set -gx IDE cursor
-
-    abbr --add mod-zed 'abbr --add m zed; abbr --add n "zed ."; set -x IDE zed; set -x EDITOR zed'
+    set -gx IDE zed
 
     abbr --add a 'git add'
     abbr --add c 'git c'
@@ -61,6 +59,8 @@ if status --is-interactive
     abbr --add kagiana 'kagiana client -e https://kagiana.pepalab.com --token $GHE_TOKEN --user donokun -p $GHE_SSH_ID'
     abbr --add l eza
     abbr --add m $IDE
+    abbr --add mod-cursor 'abbr --add m cursor; abbr --add n "cursor ."; set -x IDE cursor; set -x EDITOR cursor'
+    abbr --add mod-zed 'abbr --add m zed; abbr --add n "zed ."; set -x IDE zed; set -x EDITOR zed'
     abbr --add n "$IDE ."
     abbr --add p 'git pull'
     abbr --add r 'cd $(git rev-parse --show-toplevel)'

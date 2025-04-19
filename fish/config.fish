@@ -9,7 +9,6 @@ set -gx GOBIN $HOME/go/bin
 
 set -gx PATH \
     $HOME/.krew/bin \
-    $GOBIN \
     $HOME/.local/bin \
     $HOME/.cargo/bin \
     $GOBIN \

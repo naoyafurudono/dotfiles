@@ -50,6 +50,37 @@
     }
   },
   "assistant": {
+    "profiles": {
+      "write": {
+        "name": "Write",
+        "tools": {
+          "batch_tool": false,
+          "code_actions": true,
+          "code_symbols": true,
+          "contents": true,
+          "copy_path": true,
+          "create_file": true,
+          "delete_path": false,
+          "diagnostics": true,
+          "edit_file": true,
+          "fetch": true,
+          "list_directory": true,
+          "move_path": false,
+          "now": false,
+          "find_path": true,
+          "read_file": true,
+          "grep": true,
+          "rename": false,
+          "symbol_info": false,
+          "terminal": true,
+          "thinking": true,
+          "web_search": true,
+          "create_directory": true
+        },
+        "enable_all_context_servers": true,
+        "context_servers": {}
+      }
+    },
     "default_model": {
       "provider": "zed.dev",
       "model": "claude-3-7-sonnet-latest"

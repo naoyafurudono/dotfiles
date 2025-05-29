@@ -50,6 +50,7 @@
     }
   },
   "assistant": {
+    "default_profile": "write",
     "profiles": {
       "write": {
         "name": "Write",

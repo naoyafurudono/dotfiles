@@ -42,6 +42,7 @@
     cl = clean -fd
     d = diff
     s = status
+    w = worktree
 [user]
     name = Naoya Furudono
     email = naoyafurudono@gmail.com

@@ -42,40 +42,32 @@ if status --is-interactive
     set -gx EDITOR nvim
     set -gx IDE zed
 
+    abbr --add v nvim
+    abbr --add m $IDE
+    abbr --add n "$IDE ."
+    abbr --add mod-cursor 'abbr --add m cursor; abbr --add n "cursor ."; set -x IDE cursor; set -x EDITOR cursor'
+    abbr --add mod-zed 'abbr --add m zed; abbr --add n "zed ."; set -x IDE zed; set -x EDITOR zed'
+
+    abbr --add rg 'rg --smart-case'
+    abbr --add l eza
+    abbr --add k kubectl
+    abbr --add ka 'kubectl get (kubectl api-resources --namespaced=true --verbs=list -o name | tr "\n" "," | sed -e "s/,\$//")'
+
     abbr --add a 'git add'
     abbr --add c 'git c'
     abbr --add d 'git diff'
-    abbr --add dc 'docker compose'
-    abbr --add eip 'curl http://checkip.amazonaws.com'
-    abbr --add en 'envchain'
-    abbr --add g git
-    abbr --add gd 'git commit --allow-empty -m deploy && git push'
-    abbr --add ghqp 'ghq list | ghq get --update --parallel'
-    abbr --add gu 'git add -A && git commit -m update && git push && git diff HEAD^' # 必要悪 :(
-    abbr --add jj "ji && $IDE ."
-    abbr --add k kubectl
-    abbr --add ka 'kubectl get (kubectl api-resources --namespaced=true --verbs=list -o name | tr "\n" "," | sed -e "s/,\$//")'
-    abbr --add kagiana 'kagiana client -e https://kagiana.pepalab.com --token $GHE_TOKEN --user donokun -p $GHE_SSH_ID'
-    abbr --add l eza
-    abbr --add m $IDE
-    abbr --add mod-cursor 'abbr --add m cursor; abbr --add n "cursor ."; set -x IDE cursor; set -x EDITOR cursor'
-    abbr --add mod-zed 'abbr --add m zed; abbr --add n "zed ."; set -x IDE zed; set -x EDITOR zed'
-    abbr --add n "$IDE ."
-    abbr --add p 'git pull'
-    abbr --add r 'cd $(git rev-parse --show-toplevel)'
-    abbr --add rg 'rg --smart-case'
-    abbr --add rgc 'rg'
-    abbr --add ru 'git ls-files --others --exclude-standard | xargs rm'
     abbr --add s 'git status'
-    abbr --add v nvim
-    abbr --add w 'git switch'
-    abbr --add xd 'git diff --name-only (git show-branch --merge-base master HEAD) | xargs '
+    abbr --add w 'git worktree'
+    abbr --add gu 'git add -A && git commit -m update && git push && git diff HEAD^' # 必要悪 :(
+    abbr --add p 'git pull'
+
+    abbr --add eip 'curl http://checkip.amazonaws.com'
+
 
     set -gx LS_COLORS 1 # for fd
 
     set -gx _ZO_DATA_DIR $XDG_DATA_HOME/zoxide
     zoxide init fish --cmd j | source
-    mise activate fish | source
     set -gx FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 
     set -gx fish_tmux_config $HOME/.config/tmux/tmux.conf
@@ -112,8 +104,6 @@ if status --is-interactive
 
     # no greeting
     set -gx fish_greeting
-else
-    mise activate --shims
 end
 
 # ---- load ----

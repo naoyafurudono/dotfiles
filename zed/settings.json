@@ -11,6 +11,7 @@
   "soft_wrap": "preferred_line_length",
   "preferred_line_length": 180,
   "ui_font_size": 10,
+  "agent_font_size": 10,
   "buffer_font_size": 9.0,
   "theme": {
     "mode": "system",
@@ -44,12 +45,12 @@
       "shift": true
     }
   },
-  "language_models": {
-    "copilot_chat": {
-      "enabled": true
-    }
+  "jsx_tag_auto_close": {
+    "enabled": true
   },
-  "assistant": {
+  "agent": {
+    "always_allow_tool_actions": true,
+    "play_sound_when_agent_done": true,
     "default_profile": "write",
     "profiles": {
       "write": {
@@ -71,8 +72,8 @@
           "find_path": true,
           "read_file": true,
           "grep": true,
-          "rename": false,
-          "symbol_info": false,
+          "rename": true,
+          "symbol_info": true,
           "terminal": true,
           "thinking": true,
           "web_search": true,
@@ -84,7 +85,7 @@
     },
     "default_model": {
       "provider": "zed.dev",
-      "model": "claude-3-7-sonnet-latest"
+      "model": "claude-sonnet-4"
     },
     "version": "2"
   },

@@ -3,6 +3,9 @@
 *.secret
 *.ignore
 
+# git worktreeは全てここに生やす
+worktree/
+
 # 本当はこんなことはしたくない
 _typos.toml
 

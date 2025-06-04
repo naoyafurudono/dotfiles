@@ -57,7 +57,7 @@ if status --is-interactive
     abbr --add c 'git c'
     abbr --add d 'git diff'
     abbr --add s 'git status'
-    abbr --add w 'git worktree add'
+    abbr --add w 'git worktree add worktree/'
     abbr --add gu 'git add -A && git commit -m update && git push && git diff HEAD^' # 必要悪 :(
     abbr --add p 'git pull'
 

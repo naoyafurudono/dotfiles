@@ -6,3 +6,4 @@ shell-integration = fish
 quick-terminal-position = "right"
 keybind = "global:alt+space=toggle_quick_terminal"
 
+keybind = shift+enter=text:\n

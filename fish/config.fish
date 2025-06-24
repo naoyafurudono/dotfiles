@@ -8,6 +8,8 @@ set -gx GHE_USER donokun
 set -gx GOBIN $HOME/go/bin
 
 set -gx PATH \
+    /opt/homebrew/opt/ruby/bin \
+    /opt/homebrew/lib/ruby/gems/3.4.0/bin \
     $HOME/.krew/bin \
     $HOME/.local/bin \
     $HOME/.cargo/bin \

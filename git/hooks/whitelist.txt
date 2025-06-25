@@ -9,3 +9,4 @@ https://git.pepabo.com/donokun/ts.git
 https://github.com/naoyafurudono/slide
 https://github.com/naoyafurudono/zenn.git
 https://git.pepabo.com/donokun/kinsta-mu-plugins.git
+https://git.pepabo.com/donokun/http-test.git

@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(*)",
+      "Read(*)",
+      "Write(*)",
+      "Edit(*)",
+      "MultiEdit(*)",
+      "Grep(*)",
+      "Glob(*)",
+      "LS(*)",
+      "WebFetch(*)",
+      "WebSearch(*)",
+      "TodoRead(*)",
+      "TodoWrite(*)",
+      "NotebookRead(*)",
+      "NotebookEdit(*)",
+      "Task(*)"
+    ],
+    "deny": [
+      "Bash(kubectl:*)",
+      "Bash(kubectl *)",
+      "Bash(*kubectl*)"
+    ]
+  }
+}

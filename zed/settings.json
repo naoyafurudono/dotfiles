@@ -9,7 +9,7 @@
 {
   // # 表示
   "soft_wrap": "preferred_line_length",
-  "preferred_line_length": 120,
+  "preferred_line_length": 180,
   "ui_font_size": 10,
   "agent_font_size": 10,
   "buffer_font_size": 9.0,

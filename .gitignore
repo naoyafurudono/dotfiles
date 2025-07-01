@@ -19,6 +19,7 @@
 !systemd/user/xkeysnail.service
 !tmux/tmux.conf
 !zed/{config,keymap}.json
+!zellij/**/*
 fish/completions/asdf.fish
 fish/fish_variables
 nvim/pack/*/start/*

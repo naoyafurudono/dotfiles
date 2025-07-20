@@ -2,20 +2,21 @@
   "permissions": {
     "allow": [
       "Bash(*)",
-      "Read(*)",
-      "Write(*)",
       "Edit(*)",
-      "MultiEdit(*)",
-      "Grep(*)",
+      "Fetch(*)",
       "Glob(*)",
+      "Grep(*)",
       "LS(*)",
-      "WebFetch(*)",
-      "WebSearch(*)",
+      "MultiEdit(*)",
+      "NotebookEdit(*)",
+      "NotebookRead(*)",
+      "Read(*)",
+      "Task(*)",
       "TodoRead(*)",
       "TodoWrite(*)",
-      "NotebookRead(*)",
-      "NotebookEdit(*)",
-      "Task(*)"
+      "WebFetch(*)",
+      "WebSearch(*)",
+      "Write(*)"
     ],
     "deny": [
       "Bash(kubectl:*)",
@@ -35,7 +36,7 @@
           },
           {
             "type": "command",
-            "command": "terminal-notifier -title 'Claude Code' -subtitle '確認待ち' -message 'Claude Codeが許可を求めています'"
+            "command": "terminal-notifier -title 'Claude Code' -subtitle '確認待ち' -message 'Claude Codeからのお知らせ'"
           }
         ]
       }
@@ -55,5 +56,6 @@
         ]
       }
     ]
-  }
+  },
+  "model": "opus"
 }

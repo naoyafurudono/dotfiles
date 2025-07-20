@@ -11,3 +11,6 @@ https://github.com/naoyafurudono/zenn.git
 https://git.pepabo.com/donokun/kinsta-mu-plugins.git
 https://git.pepabo.com/donokun/http-test.git
 https://git.pepabo.com/donokun/nginx-sandbox.git
+https://github.com/naoyafurudono/sqlc-use-analysis.git
+https://github.com/naoyafurudono/sqlc-use.git
+https://github.com/naoyafurudono/dirty.git

@@ -18,11 +18,7 @@
       "WebSearch(*)",
       "Write(*)"
     ],
-    "deny": [
-      "Bash(kubectl:*)",
-      "Bash(kubectl *)",
-      "Bash(*kubectl*)"
-    ],
+    "deny": ["Bash(kubectl:*)", "Bash(kubectl *)", "Bash(*kubectl*)"],
     "defaultMode": "acceptEdits"
   },
   "hooks": {
@@ -52,6 +48,17 @@
           {
             "type": "command",
             "command": "terminal-notifier -title 'Claude Code' -subtitle '処理終了' -message 'タスクが完了しました'"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path | select(endswith(\".go\"))' | xargs -r -I {} sh -c 'gofmt -w \"$1\" && goimports -w \"$1\"' _ {}"
           }
         ]
       }

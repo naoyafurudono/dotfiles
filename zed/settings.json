@@ -31,7 +31,6 @@
   },
 
   // # 便利機能
-  "git_status": true,
   "inlay_hints": {
     "show_type_hints": true,
     "show_parameter_hints": true,
@@ -86,8 +85,7 @@
     "default_model": {
       "provider": "zed.dev",
       "model": "claude-sonnet-4"
-    },
-    "version": "2"
+    }
   },
 
   // # エディタの管理
@@ -106,6 +104,13 @@
   "languages": {
     "Markdown": {
       "format_on_save": "on"
+    },
+    "SQL": {
+      "formatter": {
+        "external": {
+          "command": "sleek"
+        }
+      }
     }
   }
 }

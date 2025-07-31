@@ -1,10 +1,10 @@
-function test_stats --description "Run test command multiple times and report statistics"
+function tt --description "Run test command multiple times and report statistics"
     set -l iterations 10
     set -l test_command ""
     
     # Parse arguments
     if test (count $argv) -eq 0
-        echo "Usage: test_stats <test_command> [iterations]"
+        echo "Usage: tt <test_command> [iterations]"
         echo "  test_command: Command to run for testing"
         echo "  iterations: Number of times to run (default: 10)"
         return 1

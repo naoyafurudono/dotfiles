@@ -69,10 +69,10 @@ function tt --description "Run test command multiple times and report statistics
         set -l max_time $run_times[1]
         
         for time in $run_times
-            if test (math $time'<'$min_time) -eq 1
+            if test $time -lt $min_time
                 set min_time $time
             end
-            if test (math $time'>'$max_time) -eq 1
+            if test $time -gt $max_time
                 set max_time $time
             end
         end

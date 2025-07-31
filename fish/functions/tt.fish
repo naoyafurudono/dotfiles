@@ -43,10 +43,10 @@ function tt --description "Run test command multiple times and report statistics
         
         if test $exit_status -eq 0
             set success_count (math $success_count + 1)
-            echo "PASS ({$run_time}s)"
+            echo "PASS ($run_time s)"
         else
             set failure_count (math $failure_count + 1)
-            echo "FAIL ({$run_time}s) - exit code: $exit_status"
+            echo "FAIL ($run_time s) - exit code: $exit_status"
             echo "Test failed on run $i"
             break
         end
@@ -61,8 +61,8 @@ function tt --description "Run test command multiple times and report statistics
     
     if test $success_count -gt 0
         set -l avg_time (math $total_time / $success_count)
-        echo "Average time: {$avg_time}s"
-        echo "Total time: {$total_time}s"
+        echo "Average time: $avg_time s"
+        echo "Total time: $total_time s"
         
         # Calculate min and max times
         set -l min_time $run_times[1]
@@ -77,15 +77,15 @@ function tt --description "Run test command multiple times and report statistics
             end
         end
         
-        echo "Fastest run: {$min_time}s"
-        echo "Slowest run: {$max_time}s"
+        echo "Fastest run: $min_time s"
+        echo "Slowest run: $max_time s"
         
         # Show individual run times
         echo ""
         echo "Individual run times:"
         set -l counter 1
         for time in $run_times
-            echo "  Run $counter: {$time}s"
+            echo "  Run $counter: $time s"
             set counter (math $counter + 1)
         end
     end

@@ -16,8 +16,8 @@
   {
     "context": "Editor",
     "bindings": {
-      "cmd-l": "editor::CopyPermalinkToLine",
-      "cmd-shift-l": "editor::OpenPermalinkToLine",
+      // "cmd-l": "editor::CopyPermalinkToLine",
+      // "cmd-shift-l": "editor::OpenPermalinkToLine",
       "cmd-r": "editor::Rename"
     }
   },
@@ -25,6 +25,16 @@
     "bindings": {
       "cmd-o": "workspace::ToggleRightDock",
       "cmd-g": "git_panel::ToggleFocus"
+    }
+  },
+  {
+    "bindings": {
+      "cmd-l": [
+        "task::Spawn",
+        {
+          "task_name": "gitlink"
+        }
+      ]
     }
   }
 ]

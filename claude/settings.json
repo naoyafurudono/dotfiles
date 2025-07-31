@@ -22,9 +22,14 @@
       "WebSearch(*)",
       "Write(*)"
     ],
-    "deny": ["Bash(kubectl:*)", "Bash(kubectl *)", "Bash(*kubectl*)"],
+    "deny": [
+      "Bash(kubectl:*)",
+      "Bash(kubectl *)",
+      "Bash(*kubectl*)"
+    ],
     "defaultMode": "acceptEdits"
   },
+  "model": "sonnet",
   "hooks": {
     "Notification": [
       {
@@ -68,5 +73,7 @@
       }
     ]
   },
-  "model": "opus"
+  "feedbackSurveyState": {
+    "lastShownTime": 1753937242564
+  }
 }

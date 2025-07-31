@@ -14,3 +14,6 @@ https://git.pepabo.com/donokun/nginx-sandbox.git
 https://github.com/naoyafurudono/sqlc-use-analysis.git
 https://github.com/naoyafurudono/sqlc-use.git
 https://github.com/naoyafurudono/dirty.git
+https://github.com/naoyafurudono/gitlink.git
+https://github.com/naoyafurudono/sjq.git
+https://git.pepabo.com/donokun/ci-repo.git

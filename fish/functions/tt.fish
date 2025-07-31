@@ -30,22 +30,22 @@ function tt --description "Run test command multiple times and report statistics
     for i in (seq 1 $iterations)
         echo -n "Run $i: "
         
-        set -l start_time (date +%s.%3N)
+        set -l start_time (date +%s)
         
         # Run the command and capture exit status
         eval $test_command >/dev/null 2>&1
         set -l exit_status $status
         
-        set -l end_time (date +%s.%3N)
-        set -l run_time (math "$end_time - $start_time")
+        set -l end_time (date +%s)
+        set -l run_time (math $end_time - $start_time)
         set run_times $run_times $run_time
-        set total_time (math "$total_time + $run_time")
+        set total_time (math $total_time + $run_time)
         
         if test $exit_status -eq 0
-            set success_count (math "$success_count + 1")
+            set success_count (math $success_count + 1)
             echo "PASS ({$run_time}s)"
         else
-            set failure_count (math "$failure_count + 1")
+            set failure_count (math $failure_count + 1)
             echo "FAIL ({$run_time}s) - exit code: $exit_status"
             echo "Test failed on run $i"
             break
@@ -55,12 +55,12 @@ function tt --description "Run test command multiple times and report statistics
     echo "=================="
     echo "STATISTICS REPORT"
     echo "=================="
-    echo "Total runs: "(math "$success_count + $failure_count")
+    echo "Total runs: "(math $success_count + $failure_count)
     echo "Successful: $success_count"
     echo "Failed: $failure_count"
     
     if test $success_count -gt 0
-        set -l avg_time (math "$total_time / $success_count")
+        set -l avg_time (math $total_time / $success_count)
         echo "Average time: {$avg_time}s"
         echo "Total time: {$total_time}s"
         
@@ -69,10 +69,10 @@ function tt --description "Run test command multiple times and report statistics
         set -l max_time $run_times[1]
         
         for time in $run_times
-            if test (math "$time < $min_time") -eq 1
+            if test (math $time'<'$min_time) -eq 1
                 set min_time $time
             end
-            if test (math "$time > $max_time") -eq 1
+            if test (math $time'>'$max_time) -eq 1
                 set max_time $time
             end
         end
@@ -83,8 +83,10 @@ function tt --description "Run test command multiple times and report statistics
         # Show individual run times
         echo ""
         echo "Individual run times:"
-        for i in (seq 1 (count $run_times))
-            echo "  Run $i: {$run_times[$i]}s"
+        set -l counter 1
+        for time in $run_times
+            echo "  Run $counter: {$time}s"
+            set counter (math $counter + 1)
         end
     end
     

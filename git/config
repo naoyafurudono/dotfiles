@@ -20,7 +20,7 @@
     pruneTags = true
     all = true
 [help]
-    autocorrect = prompt
+    autocorrect = 10
 [commit]
     verbose = true
 [rerere]

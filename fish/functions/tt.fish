@@ -2,15 +2,16 @@ function tt --description "Run test command multiple times and report statistics
     set -l iterations 10
     set -l test_command ""
     
-    # Create log directory in current working directory
-    set -l log_dir (pwd)/log
+    # Create log directory structure in current working directory
     set -l timestamp (date +"%Y%m%d_%H%M%S")
-    set -l log_file "$log_dir/tt_$timestamp.log"
+    set -l log_base_dir (pwd)/log
+    set -l session_dir "$log_base_dir/tt_$timestamp"
     
-    # Create log directory if it doesn't exist
-    if not test -d $log_dir
-        mkdir -p $log_dir
-    end
+    # Create session directory
+    mkdir -p $session_dir
+    
+    # Create summary file for this session
+    set -l summary_file "$session_dir/summary.log"
     
     # Parse arguments
     if test (count $argv) -eq 0
@@ -30,14 +31,14 @@ function tt --description "Run test command multiple times and report statistics
     
     echo "Running test command: $test_command"
     echo "Iterations: $iterations"
-    echo "Log file: $log_file"
+    echo "Log directory: $session_dir"
     echo "=================="
     
-    # Also write header to log file
-    echo "Test run at: "(date) >> $log_file
-    echo "Running test command: $test_command" >> $log_file
-    echo "Iterations: $iterations" >> $log_file
-    echo "==================" >> $log_file
+    # Also write header to summary file
+    echo "Test run at: "(date) >> $summary_file
+    echo "Running test command: $test_command" >> $summary_file
+    echo "Iterations: $iterations" >> $summary_file
+    echo "==================" >> $summary_file
     
     set -l run_times
     set -l success_count 0
@@ -49,32 +50,36 @@ function tt --description "Run test command multiple times and report statistics
         
         set -l start_time (date +%s)
         
-        # Run the command and capture output and exit status
-        set -l output_file (mktemp)
-        eval $test_command >$output_file 2>&1
-        set -l exit_status $status
+        # Create individual log file for this iteration
+        set -l iteration_file "$session_dir/run_"(printf "%03d" $i)".log"
         
-        # Save output to log file
-        echo "" >> $log_file
-        echo "=== Run $i Output ===" >> $log_file
-        cat $output_file >> $log_file
-        rm -f $output_file
+        # Run the command and capture output and exit status
+        eval $test_command >$iteration_file 2>&1
+        set -l exit_status $status
         
         set -l end_time (date +%s)
         set -l run_time (math $end_time - $start_time)
         set run_times $run_times $run_time
         set total_time (math $total_time + $run_time)
         
+        # Add metadata to iteration file
+        echo "" >> $iteration_file
+        echo "---" >> $iteration_file
+        echo "Run: $i" >> $iteration_file
+        echo "Exit status: $exit_status" >> $iteration_file
+        echo "Duration: $run_time s" >> $iteration_file
+        echo "Timestamp: "(date) >> $iteration_file
+        
         if test $exit_status -eq 0
             set success_count (math $success_count + 1)
             echo "PASS ($run_time s)"
-            echo "Run $i: PASS ($run_time s)" >> $log_file
+            echo "Run $i: PASS ($run_time s) - Output saved to: run_"(printf "%03d" $i)".log" >> $summary_file
         else
             set failure_count (math $failure_count + 1)
             echo "FAIL ($run_time s) - exit code: $exit_status"
             echo "Test failed on run $i"
-            echo "Run $i: FAIL ($run_time s) - exit code: $exit_status" >> $log_file
-            echo "Test failed on run $i" >> $log_file
+            echo "Run $i: FAIL ($run_time s) - exit code: $exit_status - Output saved to: run_"(printf "%03d" $i)".log" >> $summary_file
+            echo "Test failed on run $i" >> $summary_file
             break
         end
     end
@@ -86,21 +91,21 @@ function tt --description "Run test command multiple times and report statistics
     echo "Successful: $success_count"
     echo "Failed: $failure_count"
     
-    # Also write statistics to log file
-    echo "" >> $log_file
-    echo "==================" >> $log_file
-    echo "STATISTICS REPORT" >> $log_file
-    echo "==================" >> $log_file
-    echo "Total runs: "(math $success_count + $failure_count) >> $log_file
-    echo "Successful: $success_count" >> $log_file
-    echo "Failed: $failure_count" >> $log_file
+    # Also write statistics to summary file
+    echo "" >> $summary_file
+    echo "==================" >> $summary_file
+    echo "STATISTICS REPORT" >> $summary_file
+    echo "==================" >> $summary_file
+    echo "Total runs: "(math $success_count + $failure_count) >> $summary_file
+    echo "Successful: $success_count" >> $summary_file
+    echo "Failed: $failure_count" >> $summary_file
     
     if test $success_count -gt 0
         set -l avg_time (math $total_time / $success_count)
         echo "Average time: $avg_time s"
         echo "Total time: $total_time s"
-        echo "Average time: $avg_time s" >> $log_file
-        echo "Total time: $total_time s" >> $log_file
+        echo "Average time: $avg_time s" >> $summary_file
+        echo "Total time: $total_time s" >> $summary_file
         
         # Calculate min and max times
         set -l min_time $run_times[1]
@@ -117,19 +122,26 @@ function tt --description "Run test command multiple times and report statistics
         
         echo "Fastest run: $min_time s"
         echo "Slowest run: $max_time s"
-        echo "Fastest run: $min_time s" >> $log_file
-        echo "Slowest run: $max_time s" >> $log_file
+        echo "Fastest run: $min_time s" >> $summary_file
+        echo "Slowest run: $max_time s" >> $summary_file
         
         # Show individual run times
         echo ""
         echo "Individual run times:"
-        echo "" >> $log_file
-        echo "Individual run times:" >> $log_file
+        echo "" >> $summary_file
+        echo "Individual run times:" >> $summary_file
         set -l counter 1
         for time in $run_times
             echo "  Run $counter: $time s"
-            echo "  Run $counter: $time s" >> $log_file
+            echo "  Run $counter: $time s" >> $summary_file
             set counter (math $counter + 1)
+        end
+        
+        # List all iteration files
+        echo "" >> $summary_file
+        echo "Log files:" >> $summary_file
+        for file in $session_dir/run_*.log
+            echo "  - "(basename $file) >> $summary_file
         end
     end
     

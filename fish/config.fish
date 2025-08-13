@@ -50,7 +50,7 @@ if status --is-interactive
     abbr --add mod-cursor 'abbr --add m cursor; abbr --add n "cursor ."; set -x IDE cursor; set -x EDITOR cursor'
     abbr --add mod-zed 'abbr --add m zed; abbr --add n "zed ."; set -x IDE zed; set -x EDITOR zed'
 
-    abbr --add rg 'rg --smart-case'
+    abbr --add rg 'rg --no-heading --smart-case'
     abbr --add l eza
     abbr --add k kubectl
     abbr --add ka 'kubectl get (kubectl api-resources --namespaced=true --verbs=list -o name | tr "\n" "," | sed -e "s/,\$//")'

@@ -8,6 +8,9 @@
 // from the command palette
 {
   // # 表示
+  "auto_update_extensions": {
+    "biome": false
+  },
   "soft_wrap": "preferred_line_length",
   "preferred_line_length": 180,
   "ui_font_size": 10,
@@ -110,6 +113,13 @@
         "external": {
           "command": "sleek"
         }
+      }
+    }
+  },
+  "lsp": {
+    "biome": {
+      "settings": {
+        "require_config_file": true
       }
     }
   }

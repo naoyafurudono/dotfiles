@@ -37,6 +37,12 @@ end
 # --- interactive ---
 
 if status --is-interactive
+    # Zellij auto-launch
+    if not set -q ZELLIJ
+        and command -v zellij >/dev/null
+        exec zellij
+    end
+
     # 遅め。耐えられなくなったらキャッシュしよう
     gh completion -s fish > ~/.config/fish/completions/gh.fish
     set -gx fish_user_abbreviations

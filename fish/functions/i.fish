@@ -3,6 +3,7 @@ function i --description "Create a new article template (daily or post)"
     set -l date (date +%Y-%m-%d)
     set -l datetime (date +%Y-%m-%dT%H:%M:%S%z)
     set -l title ""
+    set -l template_dir (dirname (status -f))/../sample
     
     # Parse arguments
     if test (count $argv) -gt 0
@@ -27,26 +28,47 @@ function i --description "Create a new article template (daily or post)"
     
     # Generate template based on type
     if test "$type" = "daily"
-        echo "---
+        # Read the daily template
+        if test -f "$template_dir/daily.md"
+            set -l template (cat "$template_dir/daily.md")
+            # Replace placeholders
+            set template (string replace -a "{{ .Name | title }}" "$date" -- $template)
+            set template (string replace -a "{{ .Date }}" "$datetime" -- $template)
+            echo $template
+        else
+            # Fallback to default if template not found
+            echo "---
 title: \"$date\"
 date: $datetime
 author: \"Naoya Furudono\"
-draft: false
+draft: true
 tags:
     - daily
 ---
 
 "
+        end
         echo "Daily template for $date generated"
     else
-        set -l slug (echo $title | string lower | string replace -a " " "-" | string replace -a "[^a-z0-9-]" "")
-        echo "---
+        # Read the default template for posts
+        if test -f "$template_dir/default.md"
+            set -l template (cat "$template_dir/default.md")
+            # Replace placeholders
+            set template (string replace -a "TODO" "$title" -- $template)
+            set template (string replace -a "{{ .Date }}" "$datetime" -- $template)
+            echo $template
+        else
+            # Fallback to default if template not found
+            echo "---
 title: \"$title\"
 date: $datetime
-draft: false
+author: \"Naoya Furudono\"
+draft: true
 ---
 
 "
+        end
+        set -l slug (echo $title | string lower | string replace -a " " "-" | string replace -a "[^a-z0-9-]" "")
         echo "Post template '$slug.md' generated with title: $title"
     end
 end

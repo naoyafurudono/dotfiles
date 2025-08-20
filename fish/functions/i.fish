@@ -1,4 +1,4 @@
-function new_article --description "Create a new article template (daily or post)"
+function i --description "Create a new article template (daily or post)"
     set -l type "daily"
     set -l date (date +%Y-%m-%d)
     set -l datetime (date +%Y-%m-%dT%H:%M:%S%z)
@@ -9,7 +9,7 @@ function new_article --description "Create a new article template (daily or post
         if test "$argv[1]" = "post"
             set type "post"
             if test (count $argv) -lt 2
-                echo "Usage: new_article post <title>"
+                echo "Usage: i post <title>"
                 return 1
             end
             set title (string join " " $argv[2..-1])
@@ -19,7 +19,7 @@ function new_article --description "Create a new article template (daily or post
             set datetime (date -j -f "%Y-%m-%d" "$date" +%Y-%m-%dT%H:%M:%S%z 2>/dev/null)
             if test $status -ne 0
                 echo "Error: Invalid date format. Use YYYY-MM-DD"
-                echo "Usage: new_article [date] or new_article post <title>"
+                echo "Usage: i [date] or i post <title>"
                 return 1
             end
         end

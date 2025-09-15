@@ -49,12 +49,16 @@ if status --is-interactive
 
     set -gx EDITOR nvim
     set -gx IDE zed
+    abbr --add mod-cursor 'abbr --add m cursor; abbr --add n "cursor ."; set -x IDE cursor; set -x EDITOR cursor'
+    abbr --add mod-zed 'abbr --add m zed; abbr --add n "zed ."; set -x IDE zed; set -x EDITOR zed'
 
     abbr --add v nvim
     abbr --add m $IDE
     abbr --add n "$IDE ."
-    abbr --add mod-cursor 'abbr --add m cursor; abbr --add n "cursor ."; set -x IDE cursor; set -x EDITOR cursor'
-    abbr --add mod-zed 'abbr --add m zed; abbr --add n "zed ."; set -x IDE zed; set -x EDITOR zed'
+    abbr --add ... '../../'
+    abbr --add .... '../../../'
+    abbr --add ..... '../../../../'
+    abbr --add - 'cd -'
 
     abbr --add rg 'rg --no-heading --smart-case'
     abbr --add l eza

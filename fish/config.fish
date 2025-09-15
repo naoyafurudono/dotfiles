@@ -55,11 +55,12 @@ if status --is-interactive
     abbr --add v nvim
     abbr --add m $IDE
     abbr --add n "$IDE ."
-    abbr --add ... '../../'
-    abbr --add .... '../../../'
-    abbr --add ..... '../../../../'
-    abbr --add - 'cd -'
 
+    abbr --add .. 'cd ../'
+    abbr --add ... 'cd ../../'
+    abbr --add .... 'cd ../../../'
+    abbr --add ..... 'cd ../../../../'
+    abbr --add - 'cd -'
     abbr --add rg 'rg --no-heading --smart-case'
     abbr --add l eza
     abbr --add k kubectl

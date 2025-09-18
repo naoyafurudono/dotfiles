@@ -19,6 +19,7 @@
       "Task(*)",
       "TodoRead(*)",
       "TodoWrite(*)",
+      "Update(*)",
       "WebFetch(*)",
       "WebSearch(*)",
       "Write(*)"

@@ -34,5 +34,15 @@
         }
       ]
     }
+  },
+  {
+    "bindings": {
+      "cmd-u": [
+        "task::Spawn",
+        {
+          "task_name": "copylocation"
+        }
+      ]
+    }
   }
 ]

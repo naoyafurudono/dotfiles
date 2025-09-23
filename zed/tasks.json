@@ -18,7 +18,7 @@
     // * `never` — Do nothing when the command finishes (default)
     // * `always` — always hide the terminal tab, hide the pane also if it was the last tab in it
     // * `on_success` — hide the terminal tab on task success only, otherwise behaves similar to `always`
-    "hide": "never",
+    "hide": "always",
     // Which shell to use when running a task inside the terminal.
     // May take 3 values:
     // 1. (default) Use the system's default terminal configuration in /etc/passwd
@@ -36,8 +36,16 @@
     //     }
     "shell": "system",
     // Whether to show the task line in the output of the spawned task, defaults to `true`.
-    "show_summary": true,
+    "show_summary": false,
     // Represents the tags for inline runnable indicators, or spawning multiple tasks at once.
     "tags": ["gitlink-tag"]
+  },
+  {
+    "label": "copylocation",
+    "command": "copy_args",
+    "args": ["$ZED_FILE:$ZED_ROW"],
+    "reveal": "never",
+    "hide": "always",
+    "tags": ["copylocation-tag"]
   }
 ]

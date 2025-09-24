@@ -6,7 +6,7 @@
   },
   "permissions": {
     "allow": [
-      "Bash(*)",
+      "Bash",
       "Edit(*)",
       "Fetch(*)",
       "Glob(*)",
@@ -20,18 +20,15 @@
       "TodoRead(*)",
       "TodoWrite(*)",
       "Update(*)",
-      "WebFetch(*)",
-      "WebSearch(*)",
       "Write(*)"
     ],
     "deny": [
       "Bash(kubectl:*)",
-      "Bash(kubectl *)",
-      "Bash(*kubectl*)"
+      "Bash(:*kubectl:*)"
     ],
     "defaultMode": "acceptEdits"
   },
-  "model": "opus",
+  "model": "sonnet",
   "hooks": {
     "Notification": [
       {

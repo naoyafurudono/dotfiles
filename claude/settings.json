@@ -28,7 +28,6 @@
     ],
     "defaultMode": "acceptEdits"
   },
-  "model": "opus",
   "hooks": {
     "Notification": [
       {
@@ -72,6 +71,7 @@
       }
     ]
   },
+  "alwaysThinkingEnabled": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754031818984
   }

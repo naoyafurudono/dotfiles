@@ -20,6 +20,12 @@
     }
   },
   {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "g i": "editor::GoToImplementation"
+    }
+  },
+  {
     "bindings": {
       "cmd-o": "workspace::ToggleRightDock",
       "cmd-g": "git_panel::ToggleFocus"

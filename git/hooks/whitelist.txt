@@ -20,3 +20,4 @@ https://git.pepabo.com/donokun/ci-repo.git
 https://github.com/naoyafurudono/osan.git
 https://github.com/naoyafurudono/nginx-sandbox.git
 https://github.com/naoyafurudono/keycloak-sandbox.git
+https://github.com/naoyafurudono/tenant.git

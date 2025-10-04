@@ -50,15 +50,16 @@ if status --is-interactive
     abbr --add m $IDE
     abbr --add n "$IDE ."
 
+    abbr --add - 'cd -'
     abbr --add .. 'cd ../'
     abbr --add ... 'cd ../../'
     abbr --add .... 'cd ../../../'
     abbr --add ..... 'cd ../../../../'
-    abbr --add - 'cd -'
-    abbr --add rg 'rg --no-heading --smart-case'
-    abbr --add l eza
     abbr --add k kubectl
     abbr --add ka 'kubectl get (kubectl api-resources --namespaced=true --verbs=list -o name | tr "\n" "," | sed -e "s/,\$//")'
+    abbr --add l eza
+    abbr --add rg 'rg --no-heading --smart-case'
+    abbr --add t 'tree --gitignore'
 
     abbr --add a 'git add'
     abbr --add c 'git c'

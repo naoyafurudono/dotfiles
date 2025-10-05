@@ -55,6 +55,7 @@ if status --is-interactive
     abbr --add ... 'cd ../../'
     abbr --add .... 'cd ../../../'
     abbr --add ..... 'cd ../../../../'
+    abbr --add di diary
     abbr --add k kubectl
     abbr --add ka 'kubectl get (kubectl api-resources --namespaced=true --verbs=list -o name | tr "\n" "," | sed -e "s/,\$//")'
     abbr --add l eza

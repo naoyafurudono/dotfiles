@@ -16,7 +16,6 @@ set -gx PATH \
     $GOBIN \
     $PATH
 
-
 if test (uname -s) = Darwin
     set -gx PATH $PATH \
         /opt/homebrew/bin \

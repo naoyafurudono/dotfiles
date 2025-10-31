@@ -71,8 +71,9 @@
       }
     ]
   },
-  "alwaysThinkingEnabled": true,
+  "alwaysThinkingEnabled": false,
   "feedbackSurveyState": {
     "lastShownTime": 1754031818984
+  }
   }
 }

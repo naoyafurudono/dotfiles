@@ -8,13 +8,21 @@
 // from the command palette
 {
   // # 表示
+  "agent_servers": {
+    "claude": {
+      "default_mode": "acceptEdits"
+    }
+  },
+  "tabs": {
+    "git_status": true
+  },
   "auto_update_extensions": {
     "biome": false
   },
   "soft_wrap": "preferred_line_length",
-  "preferred_line_length": 160,
+  "preferred_line_length": 300,
   "ui_font_size": 10,
-  "agent_font_size": 10,
+  "agent_ui_font_size": 10,
   "buffer_font_size": 9.0,
   "theme": {
     "mode": "system",
@@ -84,10 +92,6 @@
         "enable_all_context_servers": true,
         "context_servers": {}
       }
-    },
-    "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-sonnet-4"
     }
   },
 

@@ -47,5 +47,12 @@
     "reveal": "never",
     "hide": "always",
     "tags": ["copylocation-tag"]
+  },
+  {
+    "label": "memo",
+    "command": "memo",
+    "reveal": "never",
+    "hide": "always",
+    "tags": ["memo"]
   }
 ]

@@ -6,6 +6,7 @@ set -gx XDG_DATA_HOME $HOME/.local
 set -gx VOLTA_HOME $HOME/.volta
 set -gx GHE_USER donokun
 set -gx GOBIN $HOME/go/bin
+set -gx MEMO_DIR $HOME/src/git.pepabo.com/donokun/memo
 
 set -gx PATH \
     /opt/homebrew/opt/ruby/bin \
@@ -15,7 +16,6 @@ set -gx PATH \
     $HOME/.cargo/bin \
     $GOBIN \
     $PATH
-
 
 if test (uname -s) = Darwin
     set -gx PATH $PATH \
@@ -41,7 +41,7 @@ if status --is-interactive
     gh completion -s fish > ~/.config/fish/completions/gh.fish
     set -gx fish_user_abbreviations
 
-    set -gx EDITOR nvim
+    set -gx EDITOR zed 
     set -gx IDE zed
     abbr --add mod-cursor 'abbr --add m cursor; abbr --add n "cursor ."; set -x IDE cursor; set -x EDITOR cursor'
     abbr --add mod-zed 'abbr --add m zed; abbr --add n "zed ."; set -x IDE zed; set -x EDITOR zed'
@@ -55,6 +55,7 @@ if status --is-interactive
     abbr --add ... 'cd ../../'
     abbr --add .... 'cd ../../../'
     abbr --add ..... 'cd ../../../../'
+    abbr --add di diary
     abbr --add k kubectl
     abbr --add ka 'kubectl get (kubectl api-resources --namespaced=true --verbs=list -o name | tr "\n" "," | sed -e "s/,\$//")'
     abbr --add l eza

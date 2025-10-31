@@ -50,5 +50,15 @@
         }
       ]
     }
+  },
+  {
+    "bindings": {
+      "cmd-m": [
+        "task::Spawn",
+        {
+          "task_name": "memo"
+        }
+      ]
+    }
   }
 ]

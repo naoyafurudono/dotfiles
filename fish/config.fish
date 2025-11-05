@@ -39,6 +39,7 @@ end
 if status --is-interactive
     # 遅め。耐えられなくなったらキャッシュしよう
     gh completion -s fish > ~/.config/fish/completions/gh.fish
+    mask completion fish > ~/.config/fish/completions/mask.fish
     set -gx fish_user_abbreviations
 
     set -gx EDITOR zed 

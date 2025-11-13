@@ -37,12 +37,12 @@ end
 # --- interactive ---
 
 if status --is-interactive
-    # 遅め。耐えられなくなったらキャッシュしよう
     gh completion -s fish > ~/.config/fish/completions/gh.fish
     mask completion fish > ~/.config/fish/completions/mask.fish
+    diary completion fish > ~/.config/fish/completions/diary.fish
     set -gx fish_user_abbreviations
 
-    set -gx EDITOR zed 
+    set -gx EDITOR zed
     set -gx IDE zed
     abbr --add mod-cursor 'abbr --add m cursor; abbr --add n "cursor ."; set -x IDE cursor; set -x EDITOR cursor'
     abbr --add mod-zed 'abbr --add m zed; abbr --add n "zed ."; set -x IDE zed; set -x EDITOR zed'

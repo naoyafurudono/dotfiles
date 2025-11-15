@@ -1,4 +1,4 @@
-function conf  --description '設定ファイルをこの関数にハードコードした覧からfzfで選択してnvimで開く'
+function conf  --description '設定ファイルをこの関数にハードコードした覧からfzfで選択してnvimで開き、編集が完了したらリモートに同期する'
     # パスはfishの組み込みによって解釈される
     # 相対パスに解釈される場合はXDG_CONFIG_HOMEを常に基点として扱う
     set -l configs \
@@ -28,7 +28,7 @@ function conf  --description '設定ファイルをこの関数にハードコ�
 
     # ファイルの存在確認をしてエディターを起動
     if test -f "$selected_path"
-        nvim "$selected_path"
+        nvim "$selected_path" && sconf
     else
         echo "config file not found: $selected_path" >&2
         return 1

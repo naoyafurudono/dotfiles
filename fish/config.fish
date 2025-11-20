@@ -6,7 +6,6 @@ set -gx XDG_DATA_HOME $HOME/.local
 set -gx VOLTA_HOME $HOME/.volta
 set -gx GHE_USER donokun
 set -gx GOBIN $HOME/go/bin
-set -gx MEMO_DIR $HOME/src/git.pepabo.com/donokun/memo
 
 set -gx PATH \
     /opt/homebrew/opt/ruby/bin \

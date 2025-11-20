@@ -1,4 +1,18 @@
 function memo -d 'Create a new memo file with today date'
+  if not set -q MEMO_DIR
+    set -l memo_dir_candidates \
+        "$HOME/src/git.pepabo.com/donokun/memo" \
+        "$HOME/src/github.com/naoyafurudono/memo" \
+        "$HOME/Desktop" \
+
+    for dir in $memo_dir_candidates
+      if test -d "$dir"
+        set -gx MEMO_DIR "$dir"
+        break
+      end
+    end
+  end
+
   set -l filename $MEMO_DIR/(date -I).md
   if [ ! -e "$filename" ]
     # Find the latest memo file based on filename date (YYYY-MM-DD.md format)

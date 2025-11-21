@@ -39,7 +39,7 @@ if status --is-interactive
     gh completion -s fish > ~/.config/fish/completions/gh.fish
     mask completion fish > ~/.config/fish/completions/mask.fish
     diary completion fish > ~/.config/fish/completions/diary.fish
-    token completion fish > ~/.config/fish/completions/token.fish
+    generate-token completion fish > ~/.config/fish/completions/token.fish
     set -gx fish_user_abbreviations
 
     set -gx EDITOR zed

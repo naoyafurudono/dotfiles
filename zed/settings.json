@@ -7,138 +7,152 @@
 // custom settings, run the `zed: Open Default Settings` command
 // from the command palette
 {
-  // # 表示
-  "agent_servers": {
-    "claude": {
-      "default_mode": "acceptEdits"
-    }
-  },
-  "tabs": {
-    "git_status": true
-  },
-  "soft_wrap": "preferred_line_length",
-  "preferred_line_length": 300,
-  "ui_font_size": 10,
-  "agent_ui_font_size": 10,
-  "buffer_font_size": 9.0,
-  "theme": {
-    "mode": "system",
-    "light": "One Light",
-    "dark": "One Dark"
-  },
-  "cursor_blink": false,
-  "show_whitespaces": "boundary",
-  "ensure_final_newline_on_save": true,
+	// # 表示
+	"agent_servers": {
+		"claude": {
+			"default_mode": "acceptEdits"
+		}
+	},
+	"tabs": {
+		"git_status": true
+	},
+	"soft_wrap": "preferred_line_length",
+	"preferred_line_length": 300,
+	"ui_font_size": 10,
+	"agent_ui_font_size": 10,
+	"buffer_font_size": 9.0,
+	"theme": {
+		"mode": "system",
+		"light": "One Light",
+		"dark": "One Dark"
+	},
+	"cursor_blink": false,
+	"show_whitespaces": "boundary",
+	"ensure_final_newline_on_save": true,
 
-  // # 操作
-  "vim_mode": true,
-  "autosave": {
-    "after_delay": {
-      "milliseconds": 1000
-    }
-  },
+	// # 操作
+	"vim_mode": true,
+	"autosave": {
+		"after_delay": {
+			"milliseconds": 1000
+		}
+	},
 
-  // # 便利機能
-  "inlay_hints": {
-    "show_type_hints": true,
-    "show_parameter_hints": true,
-    "show_other_hints": true,
-    "show_background": false,
-    "edit_debounce_ms": 700,
-    "scroll_debounce_ms": 50,
-    "enabled": false,
-    // not default
-    "toggle_on_modifiers_press": {
-      "shift": true
-    }
-  },
-  "jsx_tag_auto_close": {
-    "enabled": true
-  },
-  "agent": {
-    "always_allow_tool_actions": true,
-    "play_sound_when_agent_done": true,
-    "default_profile": "write",
-    "profiles": {
-      "write": {
-        "name": "Write",
-        "tools": {
-          "batch_tool": false,
-          "code_actions": true,
-          "code_symbols": true,
-          "contents": true,
-          "copy_path": true,
-          "create_file": true,
-          "delete_path": false,
-          "diagnostics": true,
-          "edit_file": true,
-          "fetch": true,
-          "list_directory": true,
-          "move_path": false,
-          "now": false,
-          "find_path": true,
-          "read_file": true,
-          "grep": true,
-          "rename": true,
-          "symbol_info": true,
-          "terminal": true,
-          "thinking": true,
-          "web_search": true,
-          "create_directory": true
-        },
-        "enable_all_context_servers": true,
-        "context_servers": {}
-      }
-    }
-  },
+	// # 便利機能
+	"inlay_hints": {
+		"show_type_hints": true,
+		"show_parameter_hints": true,
+		"show_other_hints": true,
+		"show_background": false,
+		"edit_debounce_ms": 700,
+		"scroll_debounce_ms": 50,
+		"enabled": false,
+		// not default
+		"toggle_on_modifiers_press": {
+			"shift": true
+		}
+	},
+	"jsx_tag_auto_close": {
+		"enabled": true
+	},
+	"agent": {
+		"always_allow_tool_actions": true,
+		"play_sound_when_agent_done": true,
+		"default_profile": "write",
+		"profiles": {
+			"write": {
+				"name": "Write",
+				"tools": {
+					"batch_tool": false,
+					"code_actions": true,
+					"code_symbols": true,
+					"contents": true,
+					"copy_path": true,
+					"create_file": true,
+					"delete_path": false,
+					"diagnostics": true,
+					"edit_file": true,
+					"fetch": true,
+					"list_directory": true,
+					"move_path": false,
+					"now": false,
+					"find_path": true,
+					"read_file": true,
+					"grep": true,
+					"rename": true,
+					"symbol_info": true,
+					"terminal": true,
+					"thinking": true,
+					"web_search": true,
+					"create_directory": true
+				},
+				"enable_all_context_servers": true,
+				"context_servers": {}
+			}
+		}
+	},
 
-  // # エディタの管理
-  // ファイル開いてもインストールを提案してくれない拡張を指定する。
-  "auto_install_extensions": {
-    // typos-cliと同等の機能を提供するLSP
-    // typos-cliのバイナリを別途インストールする必要がある
-    "typos": true
-  },
-  "telemetry": {
-    "diagnostics": false,
-    "metrics": false
-  },
+	// # エディタの管理
+	// ファイル開いてもインストールを提案してくれない拡張を指定する。
+	"auto_install_extensions": {
+		// typos-cliと同等の機能を提供するLSP
+		// typos-cliのバイナリを別途インストールする必要がある
+		"typos": true
+	},
+	"telemetry": {
+		"diagnostics": false,
+		"metrics": false
+	},
 
-  // lang
-  "languages": {
-    "Markdown": {
-      "format_on_save": "on"
-    },
-    "SQL": {
-      "formatter": {
-        "external": {
-          "command": "sleek ./**/*.sql"
-        }
-      }
-    },
-    "JavaScript": {
-      "formatter": { "language_server": { "name": "biome" } },
-      "code_actions_on_format": {
-        "source.fixAll.biome": true,
-        "source.organizeImports.biome": true
-      }
-    },
-    "TypeScript": {
-      "formatter": { "language_server": { "name": "biome" } },
-      "code_actions_on_format": {
-        "source.fixAll.biome": true,
-        "source.organizeImports.biome": true
-      }
-    },
-    "TSX": {
-      "formatter": { "language_server": { "name": "biome" } },
-      "code_actions_on_format": {
-        "source.fixAll.biome": true,
-        "source.organizeImports.biome": true
-      }
-    },
-    "JSON": { "formatter": { "language_server": { "name": "biome" } } },
-    "JSONC": { "formatter": { "language_server": { "name": "biome" } } },
-    "CSS": { "formatter": { "language_server": { "name": "biome" } } }
-  }
+	// lang
+	"languages": {
+		"Markdown": {
+			"format_on_save": "on"
+		},
+		"YAML": {
+			"formatter": "language_server"
+		},
+		"SQL": {
+			"formatter": {
+				"external": {
+					"command": "sleek ./**/*.sql"
+				}
+			}
+		},
+		"JavaScript": {
+			"formatter": { "language_server": { "name": "biome" } },
+			"code_actions_on_format": {
+				"source.fixAll.biome": true,
+				"source.organizeImports.biome": true
+			}
+		},
+		"TypeScript": {
+			"formatter": { "language_server": { "name": "biome" } },
+			"code_actions_on_format": {
+				"source.fixAll.biome": true,
+				"source.organizeImports.biome": true
+			}
+		},
+		"TSX": {
+			"formatter": { "language_server": { "name": "biome" } },
+			"code_actions_on_format": {
+				"source.fixAll.biome": true,
+				"source.organizeImports.biome": true
+			}
+		},
+		"JSON": { "formatter": { "language_server": { "name": "biome" } } },
+		"JSONC": { "formatter": { "language_server": { "name": "biome" } } },
+		"CSS": { "formatter": { "language_server": { "name": "biome" } } }
+	},
+	"lsp": {
+		"yaml-language-server": {
+			"settings": {
+				"yaml": {
+					"format": {
+						"singleQuote": true
+					}
+				}
+			}
+		}
+	}
 }

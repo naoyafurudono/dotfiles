@@ -39,6 +39,7 @@ if status --is-interactive
     gh completion -s fish > ~/.config/fish/completions/gh.fish
     mask completion fish > ~/.config/fish/completions/mask.fish
     diary completion fish > ~/.config/fish/completions/diary.fish
+    generate-token completion fish > ~/.config/fish/completions/token.fish
     set -gx fish_user_abbreviations
 
     set -gx EDITOR zed
@@ -58,6 +59,7 @@ if status --is-interactive
     abbr --add di diary
     abbr --add k kubectl
     abbr --add ka 'kubectl get (kubectl api-resources --namespaced=true --verbs=list -o name | tr "\n" "," | sed -e "s/,\$//")'
+    abbr --add kp killport
     abbr --add l eza
     abbr --add rg 'rg --no-heading --smart-case'
     abbr --add t 'tree --gitignore'

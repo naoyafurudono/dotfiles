@@ -37,9 +37,7 @@ end
 
 if status --is-interactive
     gh completion -s fish > ~/.config/fish/completions/gh.fish
-    mask completion fish > ~/.config/fish/completions/mask.fish
     diary completion fish > ~/.config/fish/completions/diary.fish
-    generate-token completion fish > ~/.config/fish/completions/token.fish
     set -gx fish_user_abbreviations
 
     set -gx EDITOR zed
@@ -65,10 +63,9 @@ if status --is-interactive
     abbr --add t 'tree --gitignore'
 
     abbr --add a 'git add'
-    abbr --add c 'git c'
+    abbr --add c 'git commit -m'
     abbr --add d 'git diff'
     abbr --add s 'git status'
-    abbr --add w 'git worktree add worktree/'
     abbr --add gu 'git add -A && git commit -m update && git push' # 必要悪 :(
     abbr --add p 'git pull'
 

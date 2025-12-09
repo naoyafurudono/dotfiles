@@ -37,6 +37,39 @@
 			"milliseconds": 1000
 		}
 	},
+	"terminal": {
+		"path_hyperlink_regexes": [
+            // `rg --no-heading --smart-case` の出力形式に合わせる。
+			// daily/2024-05-28.md:31:2019/2/12に買ったみたい。amazonの履歴があった。
+			// |--------------------| この範囲（`|` を含む）がlinkとしてマッチすべき
+			"(?<link>(?<path>[^:]+)(:(?<line>\\d+))?):"
+			// Common path syntax with optional line, column, description, trailing punctuation, or
+			// surrounding symbols or quotes
+			// [
+			// 	"(?x)",
+			// 	"# optionally starts with 0-2 opening prefix symbols",
+			// 	"[({\\[<]{0,2}",
+			// 	"# which may be followed by an opening quote",
+			// 	"(?<quote>[\"'`])?",
+			// 	"# `path` is the shortest sequence of any non-space character",
+			// 	"(?<link>(?<path>[^ ]+?",
+			// 	"    # which may end with a line and optionally a column,",
+			// 	"    (?<line_column>:+[0-9]+(:[0-9]+)?|:?\\([0-9]+([,:][0-9]+)?\\))?",
+			// 	"))",
+			// 	"# which must be followed by a matching quote",
+			// 	"(?(<quote>)\\k<quote>)",
+			// 	"# and optionally a single closing symbol",
+			// 	"[)}\\]>]?",
+			// 	"# if line/column matched, may be followed by a description",
+			// 	"(?(<line_column>):[^ 0-9][^ ]*)?",
+			// 	"# which may be followed by trailing punctuation",
+			// 	"[.,:)}\\]>]*",
+			// 	"# and always includes trailing whitespace or end of line",
+			// 	"([ ]+|$)"
+			// ]
+		],
+		"path_hyperlink_timeout_ms": 1
+	},
 
 	// # 便利機能
 	"inlay_hints": {

@@ -42,7 +42,7 @@
             // `rg --no-heading --smart-case` の出力形式に合わせる。
 			// daily/2024-05-28.md:31:2019/2/12に買ったみたい。amazonの履歴があった。
 			// |--------------------| この範囲（`|` を含む）がlinkとしてマッチすべき
-			"(?<link>(?<path>[^:]+)(:(?<line>\\d+))?):"
+			"^(?<link>(?<path>[^:]+)(:(?<line>\\d+))?):"
 			// Common path syntax with optional line, column, description, trailing punctuation, or
 			// surrounding symbols or quotes
 			// [

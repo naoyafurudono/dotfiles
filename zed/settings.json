@@ -39,7 +39,7 @@
 	},
 	"terminal": {
 		"path_hyperlink_regexes": [
-            // `rg --no-heading --smart-case` の出力形式に合わせる。
+            // `rg --no-heading` の出力形式に合わせる。
 			// daily/2024-05-28.md:31:2019/2/12に買ったみたい。amazonの履歴があった。
 			// |--------------------| この範囲（`|` を含む）がlinkとしてマッチすべき
 			"^(?<link>(?<path>[^:]+)(:(?<line>\\d+))?):"

@@ -85,6 +85,7 @@
 			"shift": true
 		}
 	},
+	"colorize_brackets": true,
 	"jsx_tag_auto_close": {
 		"enabled": true
 	},

@@ -40,7 +40,7 @@ function hustle -d 'Claude Codeタスク管理'
 
 タスク: $task_description"
 
-            set suggested_branch (claude -p "$prompt" 2>/dev/null | string trim)
+            set suggested_branch (spinner "ブランチ名を考え中..." "claude -p '$prompt'" | string trim)
 
             # 確認・編集
             read -P "ブランチ名 [$suggested_branch]> " branch_name

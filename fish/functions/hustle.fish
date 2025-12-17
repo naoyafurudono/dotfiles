@@ -23,8 +23,11 @@ function hustle -d 'Claude Codeタスク管理'
             # origin/main と同期
             git fetch origin
 
-            # タスク内容を入力
-            read -P "タスク内容> " task_description
+            # タスク内容を入力（エディタで複数行）
+            set tmpfile (mktemp)
+            nvim "$tmpfile"
+            set task_description (cat "$tmpfile" | string collect)
+            rm "$tmpfile"
             test -n "$task_description"; or return 1
 
             # Claude にブランチ名を提案させる

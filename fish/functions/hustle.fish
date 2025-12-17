@@ -1,11 +1,12 @@
 function hustle -d 'Claude Codeタスク管理'
     if test (count $argv) -eq 0
+        echo "Claude Codeタスク管理"
         echo "Usage: hustle <command>"
         echo ""
         echo "Commands:"
-        echo "  new   タスクを開始"
-        echo "  list  作業を再開"
-        echo "  done  タスクを終了"
+        echo "  new    タスクを開始"
+        echo "  resume 作業を再開"
+        echo "  done   タスクを終了"
         return 0
     end
 
@@ -50,11 +51,11 @@ function hustle -d 'Claude Codeタスク管理'
             cd "$worktree_dir"
             claude "$task_description"
 
-        case list
+        case select
             set worktree (git worktree list --porcelain | grep '^worktree ' | sed 's/worktree //' | fzf --prompt="worktree> ")
             test -n "$worktree"; or return 1
             cd "$worktree"
-            claude
+            claude -c
 
         case done
             set current (pwd)

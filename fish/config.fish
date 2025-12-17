@@ -59,6 +59,7 @@ if status --is-interactive
     abbr --add l eza
     abbr --add rg 'rg --no-heading --smart-case'
     abbr --add t 'tree --gitignore'
+    abbr --add h hustle
 
     abbr --add a 'git add'
     abbr --add c 'git commit -m'

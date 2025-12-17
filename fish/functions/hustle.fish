@@ -48,7 +48,7 @@ function hustle -d 'Claude Codeタスク管理'
 
             # worktree に移動して Claude Code 起動
             cd "$worktree_dir"
-            claude
+            claude "$task_description"
 
         case list
             set worktree (git worktree list --porcelain | grep '^worktree ' | sed 's/worktree //' | fzf --prompt="worktree> ")
@@ -61,7 +61,8 @@ function hustle -d 'Claude Codeタスク管理'
             set main_worktree (git worktree list --porcelain | grep '^worktree ' | head -1 | sed 's/worktree //')
 
             cd "$main_worktree"
-            git worktree remove "$current"
+            rm -rf "$current"
+            git worktree prune
             echo "Removed: $current"
     end
 end

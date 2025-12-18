@@ -16,6 +16,9 @@
       "TodoWrite(*)",
       "WebFetch(domain:docs.stripe.com)",
       "WebFetch(domain:google.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:pkg.go.dev)",
       "Write(*)"
     ],
     "deny": [

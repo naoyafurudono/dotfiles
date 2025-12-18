@@ -54,7 +54,7 @@ function hustle -d 'Claude Codeタスク管理'
             cd "$worktree_dir"
             claude "$task_description"
 
-        case select
+        case resume
             set worktree (git worktree list --porcelain | grep '^worktree ' | sed 's/worktree //' | fzf --prompt="worktree> ")
             test -n "$worktree"; or return 1
             cd "$worktree"
@@ -68,5 +68,15 @@ function hustle -d 'Claude Codeタスク管理'
             rm -rf "$current"
             git worktree prune
             echo "Removed: $current"
+        case '*'
+            echo "Unknown command: $argv[1]" >&2
+            echo "" >&2
+            echo "Usage: hustle <command>" >&2
+            echo "" >&2
+            echo "Commands:" >&2
+            echo "  new    タスクを開始" >&2
+            echo "  resume 作業を再開" >&2
+            echo "  done   タスクを終了" >&2
+            return 1
     end
 end

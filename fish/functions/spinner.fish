@@ -6,11 +6,11 @@ function spinner -d 'コマンドをスピナー付きで実行' -a message comm
     set frames ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏
     set i 1
     while kill -0 $pid 2>/dev/null
-        printf "\r%s %s" $frames[$i] "$message"
+        printf "\r%s %s" $frames[$i] "$message" >&2
         set i (math $i % 10 + 1)
         sleep 0.1
     end
-    printf "\r\033[K"
+    printf "\r\033[K" >&2
 
     cat "$result_file"
     rm "$result_file"

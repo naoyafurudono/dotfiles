@@ -23,6 +23,5 @@ https://github.com/naoyafurudono/keycloak-sandbox.git
 https://github.com/naoyafurudono/tenant.git
 https://github.com/naoyafurudono/auth0-sandbox.git
 https://github.com/naoyafurudono/timer.git
-https://git.pepabo.com/hosting/rome.git
 https://github.com/naoyafurudono/onamae.git
 https://github.com/naoyafurudono/mask.git

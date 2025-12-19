@@ -41,7 +41,7 @@ function hustle -d 'Claude Codeタスク管理'
 
 タスク: $task_description"
 
-            set suggested_branch (spinner "ブランチ名を考え中..." "claude -p '$prompt'" | string trim)
+            set suggested_branch (spinner "ブランチ名を考え中..." "claude -p '$prompt' --model haiku" | string trim)
 
             # 確認・編集
             read -P "ブランチ名 [$suggested_branch]> " branch_name
@@ -53,7 +53,9 @@ function hustle -d 'Claude Codeタスク管理'
 
             # worktree に移動して Claude Code 起動
             cd "$worktree_dir"
-            claude "$task_description"
+            claude "$task_description
+
+ultrathink"
 
         case resume
             set worktree (git worktree list --porcelain | grep '^worktree ' | sed 's/worktree //' | fzf --prompt="worktree> ")

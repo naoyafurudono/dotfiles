@@ -41,11 +41,12 @@ function hustle -d 'Claude Codeタスク管理'
 
 タスク: $task_description"
 
-            set suggested_branch (spinner "ブランチ名を考え中..." "claude -p '$prompt' --model haiku" | string trim)
+            set suggested_branch (spinner "ブランチ名を考え中..." "claude -p '$prompt' --model haiku" | string trim | string lower | string replace -ra '[^0-9a-z-]' '')
 
             # 確認・編集
             read -P "ブランチ名 [$suggested_branch]> " branch_name
             test -z "$branch_name"; and set branch_name "$suggested_branch"
+            set branch_name (echo "$branch_name" | string lower | string replace -ra '[^0-9a-z-]' '')
 
             # worktree 作成
             set worktree_dir "../"(basename (pwd))"-$branch_name"

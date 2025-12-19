@@ -67,6 +67,11 @@ ultrathink"
             set current (pwd)
             set main_worktree (git worktree list --porcelain | grep '^worktree ' | head -1 | sed 's/worktree //')
 
+            if test "$current" = "$main_worktree"
+                echo "Cannot remove main worktree" >&2
+                return 1
+            end
+
             cd "$main_worktree"
             rm -rf "$current"
             git worktree prune

@@ -7,6 +7,7 @@ function hustle -d 'Claude Codeタスク管理'
         echo "  new    タスクを開始"
         echo "  resume 作業を再開"
         echo "  done   タスクを終了"
+        echo "  clean  マージ/クローズ済みPRのworktreeを削除"
         return 0
     end
 
@@ -68,6 +69,31 @@ function hustle -d 'Claude Codeタスク管理'
             rm -rf "$current"
             git worktree prune
             echo "Removed: $current"
+
+        case clean
+            set main_worktree (git worktree list --porcelain | grep '^worktree ' | head -1 | sed 's/worktree //')
+            set worktrees (git worktree list --porcelain | grep '^worktree ' | sed 's/worktree //')
+
+            for wt in $worktrees
+                # メインworktreeはスキップ
+                test "$wt" = "$main_worktree"; and continue
+
+                # worktreeのブランチ名を取得
+                set branch (git -C "$wt" rev-parse --abbrev-ref HEAD 2>/dev/null)
+                test -z "$branch"; and continue
+
+                # PRの状態を確認
+                set pr_state (gh pr view "$branch" --json state --jq '.state' 2>/dev/null)
+
+                if test "$pr_state" = "MERGED" -o "$pr_state" = "CLOSED"
+                    echo "Removing $wt (PR: $pr_state)"
+                    rm -rf "$wt"
+                end
+            end
+
+            git worktree prune
+            echo "Clean completed"
+
         case '*'
             echo "Unknown command: $argv[1]" >&2
             echo "" >&2
@@ -77,6 +103,7 @@ function hustle -d 'Claude Codeタスク管理'
             echo "  new    タスクを開始" >&2
             echo "  resume 作業を再開" >&2
             echo "  done   タスクを終了" >&2
+            echo "  clean  マージ/クローズ済みPRのworktreeを削除" >&2
             return 1
     end
 end

@@ -13,7 +13,6 @@ function hustle -d 'Claude Codeタスク管理'
 
     switch $argv[1]
         case new
-            # リポジトリを選択
             if not git rev-parse --is-inside-work-tree &>/dev/null
                 set root (ghq root)
                 set selected (ghq list | fzf --prompt="リポジトリ> ")
@@ -21,17 +20,14 @@ function hustle -d 'Claude Codeタスク管理'
                 cd "$root/$selected"
             end
 
-            # origin/main と同期
             git fetch origin
 
-            # タスク内容を入力（エディタで複数行）
             set tmpfile (mktemp)
             nvim "$tmpfile"
             set task_description (cat "$tmpfile" | string collect)
             rm "$tmpfile"
             test -n "$task_description"; or return 1
 
-            # Claude にブランチ名を提案させる
             set prompt "以下のタスク内容から、gitブランチ名を1つだけ提案してください。
 ルール:
 - 英語の小文字とハイフンのみ使用
@@ -43,17 +39,15 @@ function hustle -d 'Claude Codeタスク管理'
 
             set suggested_branch (spinner "ブランチ名を考え中..." "claude -p '$prompt' --model haiku" | string trim | string lower | string replace -ra '[^0-9a-z-]' '')
 
-            # 確認・編集
             read -P "ブランチ名 [$suggested_branch]> " branch_name
             test -z "$branch_name"; and set branch_name "$suggested_branch"
             set branch_name (echo "$branch_name" | string lower | string replace -ra '[^0-9a-z-]' '')
 
-            # worktree 作成
             set worktree_dir "../"(basename (pwd))"-$branch_name"
             git worktree add -b "$branch_name" "$worktree_dir" origin/main
 
-            # worktree に移動して Claude Code 起動
             cd "$worktree_dir"
+            git submodule update --init --recursive
             claude "$task_description
 
 ultrathink"
@@ -83,14 +77,11 @@ ultrathink"
             set worktrees (git worktree list --porcelain | grep '^worktree ' | sed 's/worktree //')
 
             for wt in $worktrees
-                # メインworktreeはスキップ
                 test "$wt" = "$main_worktree"; and continue
 
-                # worktreeのブランチ名を取得
                 set branch (git -C "$wt" rev-parse --abbrev-ref HEAD 2>/dev/null)
                 test -z "$branch"; and continue
 
-                # PRの状態を確認
                 set pr_state (gh pr view "$branch" --json state --jq '.state' 2>/dev/null)
 
                 if test "$pr_state" = "MERGED" -o "$pr_state" = "CLOSED"

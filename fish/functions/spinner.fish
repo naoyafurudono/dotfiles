@@ -1,4 +1,6 @@
-function spinner -d 'コマンドをスピナー付きで実行' -a message command
+function spinner -d 'コマンドをスピナー付きで実行' -a message command timeout_sec
+    test -z "$timeout_sec"; and set timeout_sec 0
+
     set result_file (mktemp)
     fish -c "$command" > "$result_file" 2>/dev/null &
     set pid $last_pid
@@ -9,9 +11,18 @@ function spinner -d 'コマンドをスピナー付きで実行' -a message comm
     set f (count $colors)
     set wave 0
     set i 1
+    set elapsed 0
     set msg_chars (string split '' "$message")
     set msg_len (count $msg_chars)
     while kill -0 $pid 2>/dev/null
+        if test $timeout_sec -gt 0 -a $elapsed -ge $timeout_sec
+            kill $pid 2>/dev/null
+            printf "\r\033[K" >&2
+            echo "timeout" >&2
+            rm "$result_file"
+            return 1
+        end
+
         set output ""
         for j in (seq 1 $msg_len)
             set c (math "($wave - $j) % $f + 1")
@@ -22,6 +33,7 @@ function spinner -d 'コマンドをスピナー付きで実行' -a message comm
         set i (math $i % $frame_len + 1)
         set wave (math "$wave + 1 + $wave % 2")
         sleep 0.1
+        set elapsed (math "$elapsed + 0.1")
     end
     printf "\r\033[K" >&2
 

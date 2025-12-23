@@ -37,7 +37,7 @@ function hustle -d 'Claude Codeタスク管理'
 
 タスク: $task_description"
 
-            set suggested_branch (spinner "ブランチ名を考え中..." "claude -p '$prompt' --model haiku" | string trim | string lower | string replace -ra '[^0-9a-z-]' '')
+            set suggested_branch (spinner "ブランチ名を考え中..." "claude -p '$prompt' --model haiku" 30 | string trim | string lower | string replace -ra '[^0-9a-z-]' '')
 
             read -P "ブランチ名 [$suggested_branch]> " branch_name
             test -z "$branch_name"; and set branch_name "$suggested_branch"

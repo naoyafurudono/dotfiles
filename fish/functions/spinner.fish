@@ -11,16 +11,18 @@ function spinner -d 'コマンドをスピナー付きで実行' -a message comm
     set f (count $colors)
     set wave 0
     set i 1
-    set elapsed 0
+    set start_time (date +%s)
     set msg_chars (string split '' "$message")
     set msg_len (count $msg_chars)
     while kill -0 $pid 2>/dev/null
-        if test $timeout_sec -gt 0 -a $elapsed -ge $timeout_sec
-            kill $pid 2>/dev/null
-            printf "\r\033[K" >&2
-            echo "timeout" >&2
-            rm "$result_file"
-            return 1
+        if test $timeout_sec -gt 0
+            set elapsed (math (date +%s) - $start_time)
+            if test $elapsed -ge $timeout_sec
+                kill $pid 2>/dev/null
+                printf "\r\033[K" >&2
+                rm "$result_file"
+                return 0
+            end
         end
 
         set output ""
@@ -33,7 +35,6 @@ function spinner -d 'コマンドをスピナー付きで実行' -a message comm
         set i (math $i % $frame_len + 1)
         set wave (math "$wave + 1 + $wave % 2")
         sleep 0.1
-        set elapsed (math "$elapsed + 0.1")
     end
     printf "\r\033[K" >&2
 

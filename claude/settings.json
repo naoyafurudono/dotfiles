@@ -69,5 +69,8 @@
       }
     ]
   },
-  "alwaysThinkingEnabled": false
+  "alwaysThinkingEnabled": false,
+  "enabledPlugins": {
+    "gopls-lsp@claude-plugins-official": true
+  }
 }

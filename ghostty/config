@@ -2,7 +2,7 @@ theme = Atom One Light
 font-size = 8
 font-feature = -calt
 font-feature = -dlig
+font-family = ".ZedMono"
 shell-integration = fish
 
 keybind = shift+enter=text:\n
-

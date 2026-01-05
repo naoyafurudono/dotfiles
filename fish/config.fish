@@ -63,6 +63,18 @@ if status --is-interactive
 
     abbr --add a 'git add'
     abbr --add c 'git commit -m'
+    abbr --add cs colima start \
+                    --cpu $(sysctl -h hw.ncpu | awk '{printf "%d", $2 /2 }') \
+                    --memory $(sysctl hw.memsize | awk '{printf "%d", $2 / 1024 / 1024 / 1024 / 2}') \
+                    --disk 100 \
+                    --arch aarch64 \
+                    --vm-type vz \
+                    --vz-rosetta \
+                    --mount-inotify \
+                    --mount-type virtiofs \
+                    --runtime docker \
+                    --save-config \
+                    --dns 8.8.8.8
     abbr --add d 'git diff'
     abbr --add s 'git status'
     abbr --add gu 'git add -A && git commit -m update && git push' # 必要悪 :(

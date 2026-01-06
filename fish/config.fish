@@ -71,7 +71,7 @@ if status --is-interactive
                     --vm-type vz \
                     --vz-rosetta \
                     --mount-inotify \
-                    --mount-type virtiofs \
+                    --mount-type 9p \
                     --runtime docker \
                     --save-config \
                     --dns 8.8.8.8

@@ -67,7 +67,7 @@ if status --is-interactive
                     --cpu $(sysctl -h hw.ncpu | awk '{printf "%d", $2 /2 }') \
                     --memory $(sysctl hw.memsize | awk '{printf "%d", $2 / 1024 / 1024 / 1024 / 2}') \
                     --disk 100 \
-                    --arch aarch64 \
+                    --arch x86_64 \
                     --vm-type vz \
                     --vz-rosetta \
                     --mount-inotify \

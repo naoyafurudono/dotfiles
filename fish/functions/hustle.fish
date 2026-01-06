@@ -22,6 +22,9 @@ function hustle -d 'Claude Codeタスク管理'
 
             git fetch origin
 
+            set default_branch (git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
+            test -z "$default_branch"; and set default_branch main
+
             set tmpfile (mktemp)
             nvim "$tmpfile"
             set task_description (cat "$tmpfile" | string collect)
@@ -44,7 +47,7 @@ function hustle -d 'Claude Codeタスク管理'
             set branch_name (echo "$branch_name" | string lower | string replace -ra '[^0-9a-z-]' '')
 
             set worktree_dir "../"(basename (pwd))"-$branch_name"
-            git worktree add -b "$branch_name" "$worktree_dir" origin/main
+            git worktree add -b "$branch_name" "$worktree_dir" origin/$default_branch
 
             cd "$worktree_dir"
             git submodule update --init --recursive

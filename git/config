@@ -63,3 +63,8 @@
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/opt/homebrew/bin/gh auth git-credential
+[pager]
+        diff = nkf -w | LESS=-R less
+        log = nkf -w | LESS=-R less
+        show = nkf -w | LESS=-R less
+

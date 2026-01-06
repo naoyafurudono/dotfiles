@@ -91,6 +91,13 @@
 			}
 		}
 	},
+	"git_hosting_providers": [
+		{
+			"provider": "github",
+			"name": "GHES",
+			"base_url": "https://git.pepabo.com"
+		}
+	],
 
 	// # エディタの管理
 	// ファイル開いてもインストールを提案してくれない拡張を指定する。

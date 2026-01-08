@@ -1,6 +1,8 @@
 *
 !.gitignore
 !.gitmodules
+!.claude/
+!.claude/**
 !readme.md
 !setup.sh
 !CLAUDE.md

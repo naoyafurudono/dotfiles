@@ -6,3 +6,6 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = '診断一�
 
 -- grep
 vim.keymap.set('n', '<leader>g', ':Rg ', { desc = 'Grep' })
+
+-- quickfixフローティングを再度開く
+vim.keymap.set('n', '<leader>c', '<cmd>QfFloat<CR>', { desc = 'Quickfix float' })

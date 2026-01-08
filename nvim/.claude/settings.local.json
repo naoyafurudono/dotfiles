@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git clone:*)",
+      "Bash(git -C /Users/furudono/.config/nvim status)",
+      "Bash(git -C /Users/furudono/.config/nvim diff)",
+      "Bash(git -C /Users/furudono/.config/nvim log --oneline -5)",
+      "Bash(git -C /Users/furudono/.config/nvim add init.lua)",
+      "Bash(git -C /Users/furudono/.config/nvim commit -m \"$\\(cat <<''EOF''\nAdd Atom One Light colorscheme\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git -C /Users/furudono/.config/nvim rev-parse:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd Atom One Light colorscheme\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git rm:*)"
+    ]
+  }
+}

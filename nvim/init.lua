@@ -4,9 +4,17 @@ vim.lsp.enable('gopls')
 -- 行番号の表示
 vim.opt.number = true
 
+-- True Color有効化
+vim.opt.termguicolors = true
+
 -- カラースキーム (Atom One Light)
 require('onedark').setup({
   style = 'light',
+  highlights = {
+    GitSignsAdd = { fg = '#50a14f' },    -- 緑
+    GitSignsChange = { fg = '#c18401' }, -- 黄
+    GitSignsDelete = { fg = '#e45649' }, -- 赤
+  },
 })
 require('onedark').load()
 
@@ -29,16 +37,21 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = '次の診断へ' }
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = '診断を表示' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = '診断一覧' })
 
+-- gitsignsのハイライト定義
+vim.api.nvim_set_hl(0, 'MyGitSignsAdd', { fg = '#50a14f' })
+vim.api.nvim_set_hl(0, 'MyGitSignsChange', { fg = '#c18401' })
+vim.api.nvim_set_hl(0, 'MyGitSignsDelete', { fg = '#e45649' })
+
 -- gitsigns (git行ステータス表示)
 local ok_gitsigns, gitsigns = pcall(require, 'gitsigns')
 if ok_gitsigns then
   gitsigns.setup({
     signs = {
-      add          = { text = '│' },
-      change       = { text = '│' },
-      delete       = { text = '_' },
-      topdelete    = { text = '‾' },
-      changedelete = { text = '~' },
+      add          = { text = '│', hl = 'MyGitSignsAdd' },
+      change       = { text = '│', hl = 'MyGitSignsChange' },
+      delete       = { text = '_', hl = 'MyGitSignsDelete' },
+      topdelete    = { text = '‾', hl = 'MyGitSignsDelete' },
+      changedelete = { text = '~', hl = 'MyGitSignsChange' },
     },
   })
 end

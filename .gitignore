@@ -3,6 +3,7 @@
 !.gitmodules
 !readme.md
 !setup.sh
+!CLAUDE.md
 !test/*
 
 !autohotkey.ahk

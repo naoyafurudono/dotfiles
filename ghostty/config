@@ -6,3 +6,5 @@ font-family = ".ZedMono"
 shell-integration = fish
 
 keybind = shift+enter=text:\n
+keybind = super+d=new_split:down
+keybind = super+shift+d=new_split:right

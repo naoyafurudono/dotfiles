@@ -40,8 +40,8 @@ if status --is-interactive
     diary completion fish > ~/.config/fish/completions/diary.fish
     set -gx fish_user_abbreviations
 
-    set -gx EDITOR zed
-    set -gx IDE zed
+    set -gx EDITOR nvim
+    set -gx IDE nvim
 
     abbr --add v nvim
     abbr --add m $IDE

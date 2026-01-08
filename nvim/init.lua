@@ -4,6 +4,12 @@ vim.lsp.enable('gopls')
 -- 行番号の表示
 vim.opt.number = true
 
+-- カラースキーム (Atom One Light)
+require('onedark').setup({
+  style = 'light',
+})
+require('onedark').load()
+
 -- LSP診断の表示設定
 vim.diagnostic.config({
   virtual_text = true,      -- 行末に警告/エラーを表示

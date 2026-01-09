@@ -5,6 +5,11 @@ font-feature = -dlig
 font-family = "Lilex"
 shell-integration = fish
 
+keybind = clear
+keybind = super+c=copy_to_clipboard
+keybind = super+v=paste_from_clipboard
+keybind = super+n=new_window
+keybind = super+q=quit
 keybind = shift+enter=text:\n
 keybind = super+d=new_split:down
 keybind = super+shift+d=new_split:right

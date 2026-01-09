@@ -1,0 +1,8 @@
+dyld[59324]: Library not loaded: @executable_path/../lib/libpython3.12.dylib
+  Referenced from: <8D8A7533-332F-33AE-A732-4F6D6AE05130> /Users/furudono/.local/mise/installs/poetry/1.6.1/venv/bin/python3
+  Reason: tried: '/Users/furudono/.local/mise/installs/poetry/1.6.1/venv/lib/libpython3.12.dylib' (no such file)
+
+Traceback:
+
+  File "<stdin>", line 923, in main
+  File "<stdin>", line 562, in run

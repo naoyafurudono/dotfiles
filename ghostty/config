@@ -6,10 +6,9 @@ font-family = "Lilex"
 shell-integration = fish
 
 keybind = clear
+keybind = shift+enter=text:\n
 keybind = super+c=copy_to_clipboard
-keybind = super+v=paste_from_clipboard
+keybind = super+k=clear_screen
 keybind = super+n=new_window
 keybind = super+q=quit
-keybind = shift+enter=text:\n
-keybind = super+d=new_split:down
-keybind = super+shift+d=new_split:right
+keybind = super+v=paste_from_clipboard

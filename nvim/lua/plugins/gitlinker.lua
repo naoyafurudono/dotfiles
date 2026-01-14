@@ -3,7 +3,7 @@ return {
   dependencies = { "nvim-lua/plenary.nvim" },
   config = function()
     require('gitlinker').setup({
-      mappings = "<leader>gy",
+      mappings = "<leader>l",
     })
   end,
 }

@@ -14,3 +14,13 @@ vim.opt.clipboard = 'unnamedplus'
 
 -- ステータスラインを非表示
 vim.opt.laststatus = 0
+
+-- colorme 配下のPHPファイルはeuc-jpで開く
+vim.api.nvim_create_autocmd("BufReadPost", {
+  pattern = "*/colorme/*.php",
+  callback = function()
+    if vim.bo.fileencoding ~= "euc-jp" then
+      vim.cmd("edit ++enc=euc-jp")
+    end
+  end,
+})

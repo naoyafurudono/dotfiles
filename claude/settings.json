@@ -19,7 +19,8 @@
       "WebFetch(domain:github.com)",
       "WebFetch(domain:raw.githubusercontent.com)",
       "WebFetch(domain:pkg.go.dev)",
-      "Write(*)"
+      "Write(*)",
+      "Read(~/src/git.pepabo.com/colorme/*)"
     ],
     "deny": [
       "Bash(kubectl:*)"
@@ -69,8 +70,8 @@
       }
     ]
   },
-  "alwaysThinkingEnabled": false,
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true
-  }
+  },
+  "alwaysThinkingEnabled": false
 }

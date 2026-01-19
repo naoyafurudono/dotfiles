@@ -12,5 +12,6 @@ keybind = super+k=clear_screen
 keybind = super+n=new_window
 keybind = super+q=quit
 keybind = super+v=paste_from_clipboard
+keybind = super+w=close_surface
 keybind = super+d=new_split:right
 keybind = super+d+shift=new_split:down

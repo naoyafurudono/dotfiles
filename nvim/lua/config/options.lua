@@ -1,5 +1,10 @@
 vim.g.mapleader = " "
 
+-- インデント設定（デフォルト）
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 0  -- tabstopの値を使う
+vim.opt.expandtab = true
+
 -- 行番号の表示
 vim.opt.number = true
 

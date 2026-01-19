@@ -16,6 +16,8 @@
 !fish/
 !fish/**
 fish/fish_variables
+!ghostty/
+!ghostty/**
 !gh/
 !gh/**
 !git/

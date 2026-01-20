@@ -21,4 +21,4 @@ keybind = super+up=goto_split:top
 keybind = super+down=goto_split:bottom
 
 # 非アクティブなペインを暗くしてアクティブペインを目立たせる
-unfocused-split-opacity = 0.25
+unfocused-split-opacity = 0.1

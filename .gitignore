@@ -13,6 +13,8 @@
 !bat/**
 !claude/settings.json
 !deploy-ahk.sh
+!dprint/
+!dprint/**
 !fish/
 !fish/**
 fish/fish_variables

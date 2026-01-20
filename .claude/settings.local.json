@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "WebSearch"
+      "WebSearch",
+      "WebFetch(domain:dprint.dev)",
+      "WebFetch(domain:docs.rs)"
     ]
   }
 }

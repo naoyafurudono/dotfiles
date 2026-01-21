@@ -20,7 +20,6 @@ keybind = super+q=quit
 keybind = super+v=paste_from_clipboard
 keybind = super+w=close_surface
 keybind = super+equal=equalize_splits
-keybind = super+i=next_window
 
 # 非アクティブなペインを暗くしてアクティブペインを目立たせる
 unfocused-split-opacity = 0.1

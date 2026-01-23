@@ -12,7 +12,7 @@ keybind = super+d+shift=new_split:down
 keybind = super+d=new_split:right
 keybind = super+h=goto_split:left
 keybind = super+j=goto_split:bottom
-keybind = super+k=clear_screen
+keybind = super+y=clear_screen
 keybind = super+k=goto_split:top
 keybind = super+l=goto_split:right
 keybind = super+n=new_window

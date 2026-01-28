@@ -1,0 +1,1 @@
+- use `gh` command to access GitHub contents

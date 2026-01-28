@@ -44,4 +44,3 @@ docker run --rm test
 - [fish-kube-prompt](https://github.com/aluxian/fish-kube-prompt)
   - ほしければ手動でインストールする
   - プロンプトの設定はいい感じにしてあるので、手動で設定する必要はない
-

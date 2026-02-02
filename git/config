@@ -65,6 +65,5 @@
 	helper = !/opt/homebrew/bin/gh auth git-credential
 [pager]
         diff = nkf -w
-        log = nkf -w
         show = nkf -w
 

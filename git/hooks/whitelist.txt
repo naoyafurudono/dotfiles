@@ -1,5 +1,6 @@
 git@github.com:naoyafurudono/naoyafurudono.github.io.git
 https://git.pepabo.com/donokun/ci-repo.git
+https://git.pepabo.com/donokun/colorme.git
 https://git.pepabo.com/donokun/http-test.git
 https://git.pepabo.com/donokun/kinsta-mu-plugins.git
 https://git.pepabo.com/donokun/memo.git

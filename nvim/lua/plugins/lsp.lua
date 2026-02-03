@@ -24,6 +24,7 @@ return {
 
         -- リファクタリング
         vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, opts('リネーム'))
+        vim.keymap.set('n', '<D-r>', vim.lsp.buf.rename, opts('リネーム'))
         vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts('コードアクション'))
 
         -- フォーマット

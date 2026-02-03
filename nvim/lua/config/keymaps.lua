@@ -1,3 +1,6 @@
+-- Cmd+S で保存
+vim.keymap.set({ 'n', 'i', 'v' }, '<D-s>', '<Cmd>write<CR>', { desc = 'Save file' })
+
 -- 診断のキーマップ
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = '前の診断へ' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = '次の診断へ' })

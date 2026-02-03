@@ -11,11 +11,17 @@
 !autohotkey.ahk
 !bat/
 !bat/**
+!claude/
 !claude/settings.json
+!claude/CLAUDE.md
 !deploy-ahk.sh
+!dprint/
+!dprint/**
 !fish/
 !fish/**
 fish/fish_variables
+!ghostty/
+!ghostty/**
 !gh/
 !gh/**
 !git/

@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(fc-list:*)",
+      "Bash(system_profiler:*)",
+      "Bash(ghostty:*)",
+      "Bash(fc-query:*)",
+      "Bash(python3:*)",
+      "Bash(printf:*)",
+      "WebSearch",
+      "WebFetch(domain:github.com)"
+    ]
+  }
+}

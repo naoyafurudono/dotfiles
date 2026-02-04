@@ -6,6 +6,7 @@ https://git.pepabo.com/donokun/kinsta-mu-plugins.git
 https://git.pepabo.com/donokun/memo.git
 https://git.pepabo.com/donokun/nginx-sandbox.git
 https://git.pepabo.com/donokun/ts.git
+https://git.pepabo.com/donokun/colorme.git
 https://github.com/naoyafurudono/auth0-sandbox.git
 https://github.com/naoyafurudono/dirty.git
 https://github.com/naoyafurudono/dotfiles.git

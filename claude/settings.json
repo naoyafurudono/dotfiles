@@ -34,10 +34,6 @@
         "hooks": [
           {
             "type": "command",
-            "command": "afplay /Users/naoya-furudono/.config/claude/data/pause.wav"
-          },
-          {
-            "type": "command",
             "command": "terminal-notifier -title 'Claude Code' -subtitle '確認待ち' -message 'Claude Codeからのお知らせ'"
           }
         ]
@@ -47,10 +43,6 @@
       {
         "matcher": "",
         "hooks": [
-          {
-            "type": "command",
-            "command": "afplay /Users/naoya-furudono/.config/claude/data/1up.wav"
-          },
           {
             "type": "command",
             "command": "terminal-notifier -title 'Claude Code' -subtitle '処理終了' -message 'タスクが完了しました'"
@@ -82,5 +74,6 @@
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true
   },
-  "alwaysThinkingEnabled": false
+  "alwaysThinkingEnabled": false,
+  "autoUpdatesChannel": "stable"
 }

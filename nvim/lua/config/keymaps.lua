@@ -1,6 +1,17 @@
 -- Cmd+S で保存
 vim.keymap.set({ 'n', 'i', 'v' }, '<D-s>', '<Cmd>write<CR>', { desc = 'Save file' })
 
+-- ウィンドウ間の移動 (Ctrl+h/j/k/l)
+vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = '左のウィンドウへ' })
+vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = '下のウィンドウへ' })
+vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = '上のウィンドウへ' })
+vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = '右のウィンドウへ' })
+-- ターミナルモードでもウィンドウ移動
+vim.keymap.set('t', '<C-h>', '<C-\\><C-n><C-w>h', { desc = '左のウィンドウへ' })
+vim.keymap.set('t', '<C-j>', '<C-\\><C-n><C-w>j', { desc = '下のウィンドウへ' })
+vim.keymap.set('t', '<C-k>', '<C-\\><C-n><C-w>k', { desc = '上のウィンドウへ' })
+vim.keymap.set('t', '<C-l>', '<C-\\><C-n><C-w>l', { desc = '右のウィンドウへ' })
+
 -- 診断のキーマップ
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = '前の診断へ' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = '次の診断へ' })

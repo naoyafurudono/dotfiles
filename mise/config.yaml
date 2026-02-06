@@ -4,7 +4,7 @@ tools:
   deno:
     - latest
   ruby:
-    - "3.1"
+    - "3.3"
   python: 
     - latest
 settings:

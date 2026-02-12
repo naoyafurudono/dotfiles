@@ -25,7 +25,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   pattern = "*/colorme/*.php",
   callback = function()
     local filepath = vim.fn.expand("%:p")
-    if filepath:match("/colorme/mail/") then
+    if filepath:match("/mail/") then
       return
     end
     if vim.bo.fileencoding ~= "euc-jp" then

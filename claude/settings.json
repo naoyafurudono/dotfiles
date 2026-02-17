@@ -73,9 +73,12 @@
     ]
   },
   "enabledPlugins": {
-    "gopls-lsp@claude-plugins-official": true
+    "gopls-lsp@claude-plugins-official": true,
+    "ci-check@pepabo-marketplace": true,
+    "nippo@pepabo-marketplace": true,
+    "presentation@pepabo-marketplace": true
   },
+  "language": "日本語",
   "alwaysThinkingEnabled": false,
-  "autoUpdatesChannel": "stable",
-  "language": "日本語"
+  "autoUpdatesChannel": "stable"
 }

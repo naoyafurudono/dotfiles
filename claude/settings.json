@@ -76,9 +76,12 @@
     "gopls-lsp@claude-plugins-official": true,
     "ci-check@pepabo-marketplace": true,
     "nippo@pepabo-marketplace": true,
-    "presentation@pepabo-marketplace": true
+    "presentation@pepabo-marketplace": true,
+    "slack@claude-plugins-official": true,
+    "Notion@claude-plugins-official": true
   },
   "language": "日本語",
   "alwaysThinkingEnabled": false,
-  "autoUpdatesChannel": "stable"
+  "autoUpdatesChannel": "latest",
+  "skipDangerousModePermissionPrompt": true
 }

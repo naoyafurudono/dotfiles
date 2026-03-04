@@ -1,7 +1,7 @@
 ---
-name: session-analysis
+name: session-recall
 description: |
-  過去のClaude Codeセッションログを分析するスキル。
+  過去のClaude Codeセッションを思い出すスキル。
   「以前何をやったか」「過去にSESについて議論した？」「先週のセッション一覧」
   「以前の作業を振り返りたい」「セッションログを確認」などの
   過去のセッションや以前の作業に関する質問で自動トリガーされます。
@@ -9,13 +9,13 @@ description: |
 allowed-tools: Bash
 ---
 
-# セッション分析スキル
+# セッション呼び起こしスキル
 
 ユーザーの質問に応じて、以下のスクリプトでセッションデータを収集・分析します。
 
 ## データ収集
 
-!`bash ~/.claude/skills/session-analysis/scripts/collect.sh $ARGUMENTS`
+!`bash ~/.claude/skills/session-recall/scripts/collect.sh $ARGUMENTS`
 
 ## 使い方
 

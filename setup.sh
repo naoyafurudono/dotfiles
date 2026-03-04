@@ -1,16 +1,18 @@
 #!/bin/bash
 
-which git > /dev/null || (echo "git is not installed" >&2 && exit 1)
+command -v git > /dev/null || (echo "git is not installed" >&2 && exit 1)
 set -eu -o pipefail
 
 function init() {
-  cp -rf "dotfiles" "$HOME/.config"
-  cd "$HOME/.config"
+  cp -rf "dotfiles" "${HOME}/.config"
+  cd "${HOME}/.config"
 }
 
 function get_essentials () {
   # branch by the os
-  case "$(uname)" in
+  local os
+  os="$(uname)"
+  case "${os}" in
   Darwin)
     ;;
   Linux)
@@ -32,11 +34,15 @@ function get_essentials () {
 
 function get_common () {
   # branch by the os
-  case "$(uname)" in
+  local os
+  os="$(uname)"
+  case "${os}" in
   Darwin)
     # Install Homebrew
     # https://brew.sh/
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    local install_script
+    install_script="$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    /bin/bash -c "${install_script}"
 
     brew install \
       direnv \
@@ -72,7 +78,7 @@ function get_common () {
 function get_rust() {
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
   # shellcheck disable=SC1091
-  source "$HOME/.cargo/env"
+  source "${HOME}/.cargo/env"
   cargo install --locked \
     bat \
     easy-cp \
@@ -85,16 +91,19 @@ function get_rust() {
 }
 
 function setup() {
-    case "$(uname)" in
+    local os
+    os="$(uname)"
+    case "${os}" in
     Darwin)
       defaults delete com.apple.dock persistent-apps
     ;;
+    *)
+      ;;
     esac
 }
 
 get_essentials
 get_common
 get_rust
-setup 
+setup
 wait
-

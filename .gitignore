@@ -6,6 +6,7 @@
 !readme.md
 !setup.sh
 !CLAUDE.md
+!Makefile
 !test/*
 
 !autohotkey.ahk

@@ -7,13 +7,11 @@
 # 日付指定: today(デフォルト), yesterday, YYYY-MM-DD, YYYY-MM-DD..YYYY-MM-DD, 7d
 # subagents は除外（メインセッションのみ）
 #
-# 高速化: 並列grep→単一jqパイプラインでプロセス起動を最小化
+# 高速化: rg の内部スレッド並列化 → 単一 jq パイプラインでプロセス起動を最小化
 
 SESSIONS_DIR="$HOME/.claude/projects"
 TMPDIR_WORK=$(mktemp -d)
 trap 'rm -rf "$TMPDIR_WORK"' EXIT
-
-NPROC=$(sysctl -n hw.ncpu 2>/dev/null || nproc 2>/dev/null || echo 8)
 
 IS_MACOS=false
 [[ "$(uname)" == "Darwin" ]] && IS_MACOS=true
@@ -35,22 +33,14 @@ date_add_days() {
   fi
 }
 
-# 全 jsonl ファイルのパスを列挙（subagents 除外）
-find_session_files() {
-  find "$SESSIONS_DIR" -name "*.jsonl" -type f -not -path "*/subagents/*" 2>/dev/null
-}
-
-# バッチ grep ワーカー: 各ファイルの先頭N件のユーザー行を "filepath\tJSON" 形式で出力
-# $1=取得行数, $2..=ファイルパス
-write_grep_worker() {
-  cat > "$TMPDIR_WORK/grep_worker.sh" << 'WEOF'
-n="$1"; shift
-for f in "$@"; do
-  grep '"type":"user"' "$f" 2>/dev/null | head -"$n" | while IFS= read -r line; do
-    printf '%s\t%s\n' "$f" "$line"
-  done
-done
-WEOF
+# rg でユーザー行を取得し、"filepath\tJSON" 形式に変換して出力
+# $1=ファイルあたりの最大マッチ数, 残り=rg に渡す追加引数
+rg_user_lines() {
+  local max_count="$1"; shift
+  rg -m"$max_count" --no-ignore --with-filename --no-line-number \
+    '"type":"user"' "$SESSIONS_DIR" --glob '*.jsonl' "$@" 2>/dev/null | \
+    grep -v '/subagents/' | \
+    sed 's/\.jsonl:/\.jsonl\t/'
 }
 
 # --- list モード ---
@@ -70,12 +60,9 @@ list_sessions() {
   echo "# セッション一覧: $start_date ~ $end_date"
   echo ""
 
-  write_grep_worker
-
-  # 並列 grep (先頭3行) → 単一 jq で日付フィルタ+メッセージ抽出+Markdown整形を一括処理
+  # rg (先頭3行) → 単一 jq で日付フィルタ+メッセージ抽出+Markdown 整形を一括処理
   local output
-  output=$(find_session_files | \
-    xargs -P "$NPROC" -n 20 bash "$TMPDIR_WORK/grep_worker.sh" 3 | \
+  output=$(rg_user_lines 3 | \
     jq -r -R -s --arg start "$start_date" --arg end "$end_date" '
       # 入力を行に分割してパース
       [split("\n") | .[] | select(length > 0) |
@@ -143,14 +130,14 @@ search_sessions() {
   echo "# セッション検索: ${keywords[*]}"
   echo ""
 
-  # AND フィルタ: grep -li チェーン（xargs -P で並列）
+  # AND フィルタ: rg -l チェーン
   local matched_files
-  matched_files=$(find_session_files)
+  matched_files=$(rg -l --no-ignore -i "${keywords[0]}" "$SESSIONS_DIR" --glob '*.jsonl' 2>/dev/null | grep -v '/subagents/' || true)
 
   local kw
-  for kw in "${keywords[@]}"; do
-    matched_files=$(echo "$matched_files" | xargs -P "$NPROC" grep -li "$kw" 2>/dev/null || true)
+  for kw in "${keywords[@]:1}"; do
     [ -z "$matched_files" ] && break
+    matched_files=$(echo "$matched_files" | xargs rg -l --no-ignore -i "$kw" 2>/dev/null || true)
   done
 
   if [ -z "$matched_files" ]; then
@@ -158,11 +145,10 @@ search_sessions() {
     return
   fi
 
-  # マッチしたファイルのメタデータを一括取得（先頭1行のみ）
-  write_grep_worker
+  # メタデータ取得: マッチしたファイルの先頭ユーザー行を rg で一括取得
   local meta_tsv
-  meta_tsv=$(echo "$matched_files" | \
-    xargs -P "$NPROC" -n 20 bash "$TMPDIR_WORK/grep_worker.sh" 1 | \
+  meta_tsv=$(echo "$matched_files" | xargs rg -m1 --no-ignore --with-filename --no-line-number '"type":"user"' 2>/dev/null | \
+    sed 's/\.jsonl:/\.jsonl\t/' | \
     jq -r -R -s '
       [split("\n") | .[] | select(length > 0) |
         split("\t") | select(length >= 2) |
@@ -184,47 +170,61 @@ search_sessions() {
     return
   fi
 
-  # マッチ行の抽出を並列バッチ実行
-  local match_dir="$TMPDIR_WORK/matches"
-  mkdir -p "$match_dir"
+  # マッチ行の内容抽出: rg で一括取得 → 単一 jq でパース
+  # 全キーワード分のマッチ行を "filepath\tJSON" 形式で収集
+  local all_matches=""
+  for kw in "${keywords[@]}"; do
+    local kw_matches
+    kw_matches=$(echo "$matched_files" | xargs rg -m5 --no-ignore -i --with-filename --no-line-number "$kw" 2>/dev/null | \
+      sed 's/\.jsonl:/\.jsonl\t/' || true)
+    [ -n "$kw_matches" ] && all_matches="${all_matches}${kw_matches}"$'\n'
+  done
 
-  printf '%s\n' "${keywords[@]}" > "$TMPDIR_WORK/keywords.txt"
+  # マッチ行を jq でパースしてファイルパスごとにグループ化
+  local match_data
+  match_data=$(echo "$all_matches" | \
+    jq -r -R -s '
+      [split("\n") | .[] | select(length > 0) |
+        split("\t") | select(length >= 2) |
+        .[0] as $fp | ((.[1:] | join("\t")) | try fromjson catch null) as $obj |
+        select($obj != null) |
+        {
+          fp: $fp,
+          text: (
+            if $obj.message then
+              if ($obj.message.content | type) == "string" then
+                $obj.message.content | split("\n")[0][:150]
+              else
+                ([$obj.message.content[]? | select(.type == "text") | .text | split("\n")[0][:150]] | first // "")
+              end
+            elif $obj.content then
+              if ($obj.content | type) == "string" then
+                $obj.content | split("\n")[0][:150]
+              else
+                ([$obj.content[]? | select(.type == "text") | .text | split("\n")[0][:150]] | first // "")
+              end
+            else ""
+            end
+          )
+        } | select(.text | length > 0)
+      ] |
+      group_by(.fp) | map({
+        fp: .[0].fp,
+        lines: ([.[] | .text] | unique | map("- " + .) | join("\n"))
+      }) | .[] | (.fp + "\t" + .lines)
+    ' 2>/dev/null)
 
-  cat > "$TMPDIR_WORK/match_worker.sh" << 'WEOF'
-kw_file="$1" match_dir="$2"
-jq_filter='if .message then
-  if .message.content | type == "string" then .message.content | split("\n")[0][:150]
-  else ((.message.content[]? | select(.type == "text") | .text | split("\n")[0][:150]) // "") end
-elif .content then
-  if .content | type == "string" then .content | split("\n")[0][:150]
-  else ((.content[]? | select(.type == "text") | .text | split("\n")[0][:150]) // "") end
-else empty end'
-shift 2
-for filepath in "$@"; do
-  result=""
-  while IFS= read -r kw; do
-    matches=$(grep -i "$kw" "$filepath" 2>/dev/null | head -5 | jq -r "$jq_filter" 2>/dev/null | grep -v '^$' | sed 's/^/- /')
-    [ -n "$matches" ] && result="${result}${matches}"$'\n'
-  done < "$kw_file"
-  hash=$(echo "$filepath" | md5sum 2>/dev/null | cut -c1-8 || echo $$)
-  printf '%s' "$result" > "$match_dir/$hash"
-done
-WEOF
-
-  echo "$matched_files" | \
-    xargs -P "$NPROC" -n 10 bash "$TMPDIR_WORK/match_worker.sh" \
-      "$TMPDIR_WORK/keywords.txt" "$match_dir"
-
-  # 結果出力
+  # 結果出力: メタデータとマッチ行を結合
   while IFS=$'\t' read -r filepath session_date project cwd branch; do
     echo "## $project ($session_date)"
     echo "- 作業ディレクトリ: ${cwd:-unknown}"
     [ -n "$branch" ] && [ "$branch" != "null" ] && echo "- ブランチ: $branch"
     echo ""
     echo "### マッチした内容"
-    local hash
-    hash=$(echo "$filepath" | md5sum 2>/dev/null | cut -c1-8 || echo $$)
-    [ -f "$match_dir/$hash" ] && cat "$match_dir/$hash"
+    # match_data からこのファイルのマッチ行を取得
+    echo "$match_data" | while IFS=$'\t' read -r mfp mlines; do
+      [ "$mfp" = "$filepath" ] && echo "$mlines"
+    done
     echo ""
   done <<< "$meta_tsv" | head -n 500
 }

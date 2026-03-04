@@ -13,9 +13,15 @@
 !bat/**
 !claude/
 !claude/settings.json
-!claude/skills/**
-!claude/skills/
 !claude/CLAUDE.md
+!claude/agents/
+!claude/agents/**
+!claude/commands/
+!claude/commands/**
+!claude/skills/
+!claude/skills/**
+!claude/data/
+!claude/data/**
 !deploy-ahk.sh
 !dprint/
 !dprint/**

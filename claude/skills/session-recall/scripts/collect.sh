@@ -15,6 +15,9 @@ USAGE_LOG="${HOME}/.claude/usage/session-recall.tsv"
 TMPDIR_WORK=$(mktemp -d)
 trap 'rm -rf "${TMPDIR_WORK}"' EXIT
 
+# --query オプション: 元のユーザー質問をログに記録するためのオプション
+USER_QUERY=""
+
 IS_MACOS=false
 _uname=$(uname)
 [[ "${_uname}" == "Darwin" ]] && IS_MACOS=true
@@ -37,9 +40,12 @@ log_usage() {
   ts=$(date -u +%Y-%m-%dT%H:%M:%SZ)
   mkdir -p "$(dirname "${USAGE_LOG}")"
   if [[ ! -f "${USAGE_LOG}" ]]; then
-    printf "timestamp\tmode\targs\thit_count\telapsed_ms\n" > "${USAGE_LOG}"
+    printf "timestamp\tmode\targs\thit_count\telapsed_ms\tquery\n" > "${USAGE_LOG}"
   fi
-  printf "%s\t%s\t%s\t%d\t%d\n" "${ts}" "${mode}" "${args}" "${hit_count}" "${elapsed}" >> "${USAGE_LOG}"
+  # query 内のタブと改行をエスケープしてTSVを壊さないようにする
+  local safe_query
+  safe_query=$(printf '%s' "${USER_QUERY}" | tr '\t\n' '  ')
+  printf "%s\t%s\t%s\t%d\t%d\t%s\n" "${ts}" "${mode}" "${args}" "${hit_count}" "${elapsed}" "${safe_query}" >> "${USAGE_LOG}"
 }
 
 # --- 日付ユーティリティ ---
@@ -288,6 +294,17 @@ search_sessions() {
 }
 
 # --- メインエントリポイント ---
+
+# --query オプションを先にパース（位置に関わらず抽出）
+args=()
+for arg in "$@"; do
+  if [[ "${arg}" == --query=* ]]; then
+    USER_QUERY="${arg#--query=}"
+  else
+    args+=("${arg}")
+  fi
+done
+set -- "${args[@]}"
 
 mode="${1:-list}"
 shift 2>/dev/null || true

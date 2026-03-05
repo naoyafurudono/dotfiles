@@ -50,4 +50,7 @@ fish/fish_variables
 !tmux/tmux.conf
 !launchagents/
 !launchagents/**
+!claude-daemon/
+!claude-daemon/**
+claude-daemon/claude-daemon
 !zed/{config,keymap,tasks}.json

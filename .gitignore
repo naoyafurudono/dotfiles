@@ -21,6 +21,11 @@
 !claude/commands/**
 !claude/skills/
 !claude/skills/**
+!claude/cron/
+!claude/cron/**
+claude/cron/logs/
+claude/cron/state/
+claude/cron/jobs/
 !claude/data/
 !claude/data/**
 !deploy-ahk.sh
@@ -43,4 +48,6 @@ fish/fish_variables
 !nvim/**
 !systemd/user/xkeysnail.service
 !tmux/tmux.conf
+!launchagents/
+!launchagents/**
 !zed/{config,keymap,tasks}.json

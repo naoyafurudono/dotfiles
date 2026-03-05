@@ -83,5 +83,6 @@
   "language": "日本語",
   "alwaysThinkingEnabled": false,
   "autoUpdatesChannel": "latest",
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "effortLevel": "high"
 }

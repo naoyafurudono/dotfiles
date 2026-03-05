@@ -212,15 +212,13 @@ search_sessions() {
     return
   fi
 
-  # マッチ行の内容抽出: rg で一括取得 → 単一 jq でパース
-  # 全キーワード分のマッチ行を "filepath\tJSON" 形式で収集
-  local all_matches=""
-  for kw in "${keywords[@]}"; do
-    local kw_matches
-    kw_matches=$(echo "${matched_files}" | xargs rg -m5 --no-ignore -i --with-filename --no-line-number "${kw}" 2>/dev/null | \
-      grep -v '/subagents/' | sed 's/\.jsonl:/\.jsonl\t/' || true)
-    [[ -n "${kw_matches}" ]] && all_matches="${all_matches}${kw_matches}"$'\n'
-  done
+  # マッチ行の内容抽出: 全キーワードを OR パターンで1回の rg で取得 → 単一 jq でパース
+  # キーワード数に関わらず xargs rg は1回のみ実行
+  local or_pattern
+  or_pattern=$(printf '%s\n' "${keywords[@]}" | paste -sd'|' -)
+  local all_matches
+  all_matches=$(echo "${matched_files}" | xargs rg -m1 --no-ignore -i --with-filename --no-line-number "${or_pattern}" 2>/dev/null | \
+    grep -v '/subagents/' | sed 's/\.jsonl:/\.jsonl\t/' || true)
 
   # マッチ行をファイルパスごとにグループ化（ノイズ除外、テキストのみ） → JSON 配列
   local match_json

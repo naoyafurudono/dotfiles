@@ -6,7 +6,6 @@ https://git.pepabo.com/donokun/memo.git
 https://git.pepabo.com/donokun/nginx-sandbox.git
 https://git.pepabo.com/donokun/ts.git
 https://github.com/naoyafurudono/auth0-sandbox.git
-https://github.com/naoyafurudono/claude-daemon.git
 https://github.com/naoyafurudono/dirty.git
 https://github.com/naoyafurudono/dotfiles.git
 https://github.com/naoyafurudono/gitlink.git

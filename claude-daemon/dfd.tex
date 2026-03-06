@@ -48,13 +48,19 @@
 ]
 
 % =============================================
+%  Daemon オーケストレーター (全体を統括)
+% =============================================
+\node[process, fill=purple!12, minimum width=5cm] (daemon) at (11, 8)
+    {Daemon\\[2pt]{\small\normalfont RunCycle()}\\[1pt]{\scriptsize\normalfont launchd 30分間隔}};
+
+% =============================================
 %  メインフロー: プロセスの間にゲートを挟む
 %
-%  OBSERVE ─→ [Budget] ─→ JUDGE ─→ [Backoff] ─→ [Cooldown] ─→ EXECUTE
-%                                                                  │
-%                                                              [Sandbox]
-%                                                                  │
-%                                                              dotfiles
+%  OBSERVE ─→ JUDGE ─→ [Backoff] ─→ [Cooldown] ─→ EXECUTE
+%                                                      │
+%                                                  [Sandbox]
+%                                                      │
+%                                                  dotfiles
 % =============================================
 
 % --- プロセス ---
@@ -68,25 +74,35 @@
     {3. EXECUTE\\[2pt]{\small\normalfont executor}\\[1pt]{\scriptsize\normalfont コスト: \raisebox{0pt}{\~{}}\$1}};
 
 % --- ゲート: フロー矢印上に配置 ---
-\node[gate] (g_budget) at (5.5, 0)
-    {Budget Check\\{\tiny 日次\$3 / 月次\$30}};
-
 \node[gate] (g_backoff) at (16.5, 0.5)
     {Backoff\\{\tiny 3連続失敗 → 指数待機}};
 
 \node[gate] (g_cooldown) at (16.5, -0.5)
     {Cooldown\\{\tiny 同一target → 3h制限}};
 
-% --- メインフロー矢印 (ゲートを通過) ---
-\draw[flow] (observe) -- (g_budget)
-    node[lbl, midway, above=3pt] {統計レポート};
-\draw[flow] (g_budget) -- (judge);
+% --- Daemon → 各プロセスへの制御フロー ---
+% Daemon が各フェーズを順に起動し、ゲート判定も Daemon が行う
+\draw[flow, purple!60] (daemon.south -| 0, 0) -- (observe.north)
+    node[lbl, midway, left=3pt] {(1) 起動};
+\draw[flow, purple!60] (daemon.south) -- (judge.north -| 11, 4)
+    node[lbl, pos=0.7, left=3pt] {(2) 起動};
+\draw[flow, purple!60] (daemon.south -| 22, 0) -- (execute.north -| 22, 4)
+    node[lbl, pos=0.7, right=3pt] {(4) 起動};
 
-\draw[flow] (judge) -- (g_backoff.west);
-\draw[flow] (judge) -- (g_cooldown.west);
-\draw[flow] (g_backoff.east) -- (execute)
+% Daemon → ゲート判定
+\draw[flow, purple!60] (daemon.south -| 16.5, 0) -- (g_backoff.north)
+    node[lbl, midway, right=3pt] {(3) 判定};
+\draw[flow, purple!60] ([yshift=-2pt] g_backoff.south) -- ([yshift=2pt] g_cooldown.north);
+
+% --- メインフロー矢印 (データの流れ) ---
+\draw[data] (observe) -- (judge)
+    node[lbl, midway, below=3pt] {統計レポート};
+
+\draw[data] (judge) -- (g_backoff.west);
+\draw[data] (judge) -- (g_cooldown.west);
+\draw[data] (g_backoff.east) -- (execute)
     node[lbl, midway, above=3pt] {Decision JSON};
-\draw[flow] (g_cooldown.east) -- (execute);
+\draw[data] (g_cooldown.east) -- (execute);
 
 % --- Sandbox: EXECUTE → dotfiles の間 ---
 \node[gate] (g_sandbox) at (22, -3.5)
@@ -99,9 +115,9 @@
 % =============================================
 %  入力データストア (上段左)
 % =============================================
-\node[datastore] (usage)    at (-4, 4.5) {usage/*.tsv\\{\scriptsize スキル使用ログ}};
-\node[datastore] (sessions) at (0, 4.5)  {projects/*.jsonl\\{\scriptsize セッションログ}};
-\node[datastore] (errlogs)  at (4, 4.5)  {daemon/logs/*.log\\{\scriptsize エラーログ}};
+\node[datastore] (usage)    at (-6, 4) {usage/*.tsv\\{\scriptsize スキル使用ログ}};
+\node[datastore] (sessions) at (-6, 2.5)  {projects/*.jsonl\\{\scriptsize セッションログ}};
+\node[datastore] (errlogs)  at (-6, 1)  {daemon/logs/*.log\\{\scriptsize エラーログ}};
 
 \draw[data] (usage)    -- (observe);
 \draw[data] (sessions) -- (observe);
@@ -110,8 +126,8 @@
 % =============================================
 %  外部 LLM (上段右)
 % =============================================
-\node[external] (haiku)  at (11, 4.5) {Claude Haiku\\{\scriptsize\normalfont ツール使用禁止}};
-\node[external] (sonnet) at (22, 4.5) {Claude Sonnet\\{\scriptsize\normalfont ツール制限付き}};
+\node[external] (haiku)  at (11, 4) {Claude Haiku\\{\scriptsize\normalfont ツール使用禁止}};
+\node[external] (sonnet) at (22, 4) {Claude Sonnet\\{\scriptsize\normalfont ツール制限付き}};
 
 \draw[flow] ([xshift=2pt] judge.north) -- ([xshift=2pt] haiku.south)
     node[lbl, midway, right=3pt] {プロンプト};
@@ -128,7 +144,7 @@
 % =============================================
 \node[datastore] (state)    at (-1, -5.5) {daemon/state/\\{\scriptsize observer checkpoint}};
 \node[datastore] (history)  at (7, -5.5)  {history.jsonl\\{\scriptsize 改善履歴}};
-\node[datastore] (budgetdb) at (14, -5.5) {budget.json\\{\scriptsize コスト記録}};
+\node[datastore] (budgetdb) at (14, -5.5) {budget.json\\{\scriptsize 支出記録（上限なし）}};
 \node[datastore] (dotfiles) at (22, -7.5) {dotfiles リポジトリ\\{\scriptsize skills/ settings.json fish/ nvim/ git/}};
 
 \draw[data] (observe) -- (state)
@@ -154,11 +170,14 @@
     \begin{tikzpicture}[x=1cm, y=0.55cm]
         \node[font=\small\bfseries, anchor=west] at (0, 0) {凡例:};
 
-        \draw[flow] (1.8, 0) -- (3.3, 0);
-        \node[font=\scriptsize, anchor=west] at (3.5, 0) {制御フロー};
+        \draw[flow, purple!60] (1.8, 0) -- (3.3, 0);
+        \node[font=\scriptsize, anchor=west] at (3.5, 0) {Daemon制御};
 
         \draw[data] (6, 0) -- (7.5, 0);
         \node[font=\scriptsize, anchor=west] at (7.7, 0) {データフロー};
+
+        \draw[flow] (11, 0) -- (12.5, 0);
+        \node[font=\scriptsize, anchor=west] at (12.7, 0) {LLM呼び出し};
 
         \node[process, minimum width=1.2cm, minimum height=0.5cm, font=\tiny]
             at (1.3, -1) {Process};

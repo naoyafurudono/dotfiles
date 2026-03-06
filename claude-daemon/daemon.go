@@ -6,8 +6,8 @@
 //  2. JUDGE — ask an LLM whether improvement is needed (cost: ~$0.01–0.50)
 //  3. EXECUTE — apply the improvement via a sandboxed Claude session (cost: ~$1)
 //
-// Safety mechanisms prevent runaway spending and unintended changes:
-//   - Daily/monthly budget limits
+// Safety mechanisms prevent unintended changes:
+//   - Spend tracking (no limits, but recorded for visibility)
 //   - Exponential backoff after consecutive failures
 //   - Cooldown per improvement target
 //   - Executor tool whitelist (no network, no self-modification)
@@ -22,19 +22,18 @@ import (
 	"strings"
 	"time"
 
-	"github.com/naoyafurudono/dotfiles/claude-daemon/budget"
-	"github.com/naoyafurudono/dotfiles/claude-daemon/executor"
-	"github.com/naoyafurudono/dotfiles/claude-daemon/judge"
-	"github.com/naoyafurudono/dotfiles/claude-daemon/observer"
-	"github.com/naoyafurudono/dotfiles/claude-daemon/state"
+	"github.com/naoyafurudono/claude-daemon/budget"
+	"github.com/naoyafurudono/claude-daemon/executor"
+	"github.com/naoyafurudono/claude-daemon/judge"
+	"github.com/naoyafurudono/claude-daemon/observer"
+	"github.com/naoyafurudono/claude-daemon/state"
 )
 
-// Config holds paths and budget settings for the daemon.
+// Config holds paths for the daemon.
 type Config struct {
 	RepoDir  string
 	StateDir string
 	LogDir   string
-	Budget   budget.Config
 }
 
 // DefaultConfig returns the standard configuration for naoyafurudono's dotfiles setup.
@@ -44,11 +43,6 @@ func DefaultConfig() Config {
 		RepoDir:  filepath.Join(home, "src/github.com/naoyafurudono/dotfiles"),
 		StateDir: filepath.Join(home, ".claude/daemon/state"),
 		LogDir:   filepath.Join(home, ".claude/daemon/logs"),
-		Budget: budget.Config{
-			DailyUSD:   3.0,
-			MonthlyUSD: 30.0,
-			PerRunUSD:  1.0,
-		},
 	}
 }
 
@@ -77,7 +71,7 @@ func New(cfg Config) (*Daemon, error) {
 
 	home, _ := os.UserHomeDir()
 	store := state.NewStore(cfg.StateDir)
-	budgetMgr := budget.NewManager(cfg.Budget, cfg.StateDir)
+	budgetMgr := budget.NewManager(cfg.StateDir)
 
 	observers := []observer.Observer{
 		&observer.UsageLogObserver{
@@ -136,13 +130,6 @@ func (d *Daemon) RunCycle() string {
 	}
 
 	// Phase 2: JUDGE
-	canSpend, reason := d.budget.CanSpend()
-	if !canSpend {
-		msg := fmt.Sprintf("Budget limit reached: %s. Reports collected but not acted on.", reason)
-		d.logger.Println(msg)
-		return fmt.Sprintf("Observer reports:\n%s\n\n%s", strings.Join(reportSummary, "\n"), msg)
-	}
-
 	history, _ := d.store.LoadHistory(10)
 	decision, err := judge.Judge(reports, history)
 	if err != nil {
@@ -171,7 +158,7 @@ func (d *Daemon) RunCycle() string {
 	d.logger.Printf("Judge decided to improve: target=%s reason=%s", decision.Target, decision.Reason)
 
 	// Phase 3: EXECUTE
-	result := executor.Execute(decision, d.config.RepoDir, d.budget.Config().PerRunUSD)
+	result := executor.Execute(decision, d.config.RepoDir)
 
 	rec := state.RunRecord{
 		Timestamp: time.Now(),
@@ -186,9 +173,9 @@ func (d *Daemon) RunCycle() string {
 	} else {
 		rec.Result = "success"
 		rec.Commit = result.Commit
-		rec.CostUSD = d.budget.Config().PerRunUSD // approximate
-		d.budget.Spend(d.budget.Config().PerRunUSD)
-		d.logger.Printf("Execution succeeded: commit=%s", result.Commit)
+		rec.CostUSD = result.CostUSD
+		d.budget.Spend(result.CostUSD)
+		d.logger.Printf("Execution succeeded: commit=%s cost=$%.2f", result.Commit, result.CostUSD)
 	}
 
 	d.store.AppendHistory(rec)
@@ -212,7 +199,7 @@ func (d *Daemon) Observe() []observer.Report {
 
 // Status returns a human-readable summary of budget usage and recent history.
 func (d *Daemon) Status() string {
-	dayUsed, dayLimit, monthUsed, monthLimit, err := d.budget.Status()
+	dayUsed, monthUsed, err := d.budget.Status()
 	if err != nil {
 		return fmt.Sprintf("Budget error: %v", err)
 	}
@@ -221,8 +208,8 @@ func (d *Daemon) Status() string {
 
 	var sb strings.Builder
 	sb.WriteString("# claude-daemon status\n\n")
-	sb.WriteString(fmt.Sprintf("Budget: $%.2f/$%.2f daily | $%.2f/$%.2f monthly\n",
-		dayUsed, dayLimit, monthUsed, monthLimit))
+	sb.WriteString(fmt.Sprintf("Spend: $%.2f today | $%.2f this month\n",
+		dayUsed, monthUsed))
 	sb.WriteString(fmt.Sprintf("State dir: %s\n", d.store.Dir()))
 	sb.WriteString(fmt.Sprintf("Repo: %s\n\n", d.config.RepoDir))
 

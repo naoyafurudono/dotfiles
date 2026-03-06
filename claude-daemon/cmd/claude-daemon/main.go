@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"time"
 
-	daemon "github.com/naoyafurudono/dotfiles/claude-daemon"
+	daemon "github.com/naoyafurudono/claude-daemon"
 )
 
 func main() {

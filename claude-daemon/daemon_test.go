@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/naoyafurudono/dotfiles/claude-daemon/state"
+	"github.com/naoyafurudono/claude-daemon/state"
 )
 
 func TestCheckBackoff_NoHistory(t *testing.T) {

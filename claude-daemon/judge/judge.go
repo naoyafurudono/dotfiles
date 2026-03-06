@@ -11,9 +11,9 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/naoyafurudono/dotfiles/claude-daemon/internal/claudecli"
-	"github.com/naoyafurudono/dotfiles/claude-daemon/observer"
-	"github.com/naoyafurudono/dotfiles/claude-daemon/state"
+	"github.com/naoyafurudono/claude-daemon/internal/claudecli"
+	"github.com/naoyafurudono/claude-daemon/observer"
+	"github.com/naoyafurudono/claude-daemon/state"
 )
 
 // Decision is the structured output of the judge LLM call.

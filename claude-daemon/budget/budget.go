@@ -1,7 +1,5 @@
-// Package budget tracks API spend against daily and monthly limits.
-// It prevents the daemon from exceeding cost thresholds by checking
-// remaining budget before each executor run. Spend is recorded after
-// each successful execution.
+// Package budget tracks API spend.
+// It records daily and monthly costs without enforcing limits.
 package budget
 
 import (
@@ -11,13 +9,6 @@ import (
 	"time"
 )
 
-// Config defines the spending limits.
-type Config struct {
-	DailyUSD   float64
-	MonthlyUSD float64
-	PerRunUSD  float64
-}
-
 // Record is the persisted budget state, reset automatically on date/month rollover.
 type Record struct {
 	Date     string  `json:"date"`  // YYYY-MM-DD
@@ -26,23 +17,16 @@ type Record struct {
 	MonthUSD float64 `json:"month_usd"`
 }
 
-// Manager tracks spend against limits, persisting state to a JSON file.
+// Manager tracks spend, persisting state to a JSON file.
 type Manager struct {
-	config Config
-	path   string
+	path string
 }
 
 // NewManager creates a Manager that persists budget state in stateDir/budget.json.
-func NewManager(config Config, stateDir string) *Manager {
+func NewManager(stateDir string) *Manager {
 	return &Manager{
-		config: config,
-		path:   filepath.Join(stateDir, "budget.json"),
+		path: filepath.Join(stateDir, "budget.json"),
 	}
-}
-
-// Config returns the spending limits.
-func (m *Manager) Config() Config {
-	return m.config
 }
 
 func (m *Manager) load() (Record, error) {
@@ -85,22 +69,6 @@ func (m *Manager) current() (Record, error) {
 	return rec, nil
 }
 
-// CanSpend returns true if there is budget remaining for a run.
-func (m *Manager) CanSpend() (bool, string) {
-	rec, err := m.current()
-	if err != nil {
-		return false, "budget state error: " + err.Error()
-	}
-
-	if rec.DayUSD >= m.config.DailyUSD {
-		return false, "daily budget exhausted"
-	}
-	if rec.MonthUSD >= m.config.MonthlyUSD {
-		return false, "monthly budget exhausted"
-	}
-	return true, ""
-}
-
 // Spend records a cost.
 func (m *Manager) Spend(usd float64) error {
 	rec, err := m.current()
@@ -113,10 +81,10 @@ func (m *Manager) Spend(usd float64) error {
 }
 
 // Status returns the current budget usage.
-func (m *Manager) Status() (dayUsed, dayLimit, monthUsed, monthLimit float64, err error) {
+func (m *Manager) Status() (dayUsed, monthUsed float64, err error) {
 	rec, err := m.current()
 	if err != nil {
-		return 0, 0, 0, 0, err
+		return 0, 0, err
 	}
-	return rec.DayUSD, m.config.DailyUSD, rec.MonthUSD, m.config.MonthlyUSD, nil
+	return rec.DayUSD, rec.MonthUSD, nil
 }

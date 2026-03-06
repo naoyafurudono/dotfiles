@@ -7,19 +7,21 @@
 package executor
 
 import (
+	"encoding/json"
 	"fmt"
 	"os/exec"
 	"strings"
 
-	"github.com/naoyafurudono/dotfiles/claude-daemon/internal/claudecli"
-	"github.com/naoyafurudono/dotfiles/claude-daemon/judge"
+	"github.com/naoyafurudono/claude-daemon/internal/claudecli"
+	"github.com/naoyafurudono/claude-daemon/judge"
 )
 
 // Result is the outcome of an executor run.
 type Result struct {
-	Commit string
-	Output string
-	Error  string
+	Commit  string
+	Output  string
+	Error   string
+	CostUSD float64
 }
 
 // allowedTools is the whitelist of tools the executor can use.
@@ -45,14 +47,13 @@ var disallowedTools = []string{
 
 // Execute launches a sandboxed Claude session to apply the improvement
 // described in decision. It returns the commit hash on success, or an error message.
-func Execute(decision judge.Decision, repoDir string, budgetUSD float64) Result {
+func Execute(decision judge.Decision, repoDir string) Result {
 	prompt := buildPrompt(decision)
 
 	args := []string{
 		"-p",
 		"--model", "sonnet",
-		"--max-budget-usd", fmt.Sprintf("%.2f", budgetUSD),
-		"--output-format", "text",
+		"--output-format", "json",
 		"--allowed-tools", strings.Join(allowedTools, ","),
 		"--disallowed-tools", strings.Join(disallowedTools, ","),
 		"--permission-mode", "default",
@@ -72,12 +73,16 @@ func Execute(decision judge.Decision, repoDir string, budgetUSD float64) Result 
 
 	output := string(out)
 
+	// Parse cost from JSON output
+	costUSD := parseCost(output)
+
 	// Check if a commit was made
 	commit := extractCommit(repoDir)
 
 	return Result{
-		Commit: commit,
-		Output: truncateOutput(output, 2000),
+		Commit:  commit,
+		Output:  truncateOutput(output, 2000),
+		CostUSD: costUSD,
 	}
 }
 
@@ -138,4 +143,16 @@ func truncateOutput(s string, maxLen int) string {
 		return s
 	}
 	return s[:maxLen] + "\n...(truncated)"
+}
+
+// parseCost extracts the total cost from claude CLI JSON output.
+// The JSON output contains a "cost_usd" field at the top level.
+func parseCost(output string) float64 {
+	var result struct {
+		CostUSD float64 `json:"cost_usd"`
+	}
+	if err := json.Unmarshal([]byte(output), &result); err != nil {
+		return 0
+	}
+	return result.CostUSD
 }

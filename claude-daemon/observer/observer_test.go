@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/naoyafurudono/dotfiles/claude-daemon/state"
+	"github.com/naoyafurudono/claude-daemon/state"
 )
 
 func TestUsageLogObserver_NoFile(t *testing.T) {

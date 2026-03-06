@@ -17,7 +17,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/naoyafurudono/dotfiles/claude-daemon/state"
+	"github.com/naoyafurudono/claude-daemon/state"
 )
 
 // Report is the output of a single observer run.

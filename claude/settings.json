@@ -29,35 +29,13 @@
     "defaultMode": "acceptEdits"
   },
   "hooks": {
-    "Notification": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "terminal-notifier -title 'Claude Code' -subtitle '確認待ち' -message 'Claude Codeからのお知らせ'"
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "terminal-notifier -title 'Claude Code' -subtitle '処理終了' -message 'タスクが完了しました'"
-          }
-        ]
-      }
-    ],
     "PostToolUse": [
       {
         "matcher": "Write|Edit|MultiEdit",
         "hooks": [
           {
             "type": "command",
-            "command": "jq -r '.tool_input.file_path | select(endswith(\".go\"))' | xargs -r -I {} sh -c 'gofmt -w \"$1\" && goimports -w \"$1\"' _ {}"
+            "command": "jq -r '.tool_input.file_path | select(endswith(\".go\"))' | xargs -I {} sh -c 'gofmt -w \"$1\" && goimports -w \"$1\"' _ {}"
           }
         ]
       },
@@ -66,7 +44,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "jq -r '.tool_input.file_path | select(endswith(\".md\"))' | xargs -r -I {} dprint fmt --config ~/.config/dprint/config.json {}"
+            "command": "jq -r '.tool_input.file_path | select(endswith(\".md\"))' | xargs -I {} dprint fmt --config ~/.config/dprint/config.json {}"
           }
         ]
       }

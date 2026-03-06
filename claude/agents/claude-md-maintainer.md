@@ -37,6 +37,7 @@ You analyze conversations and codebases to identify valuable insights that shoul
 ## Guidelines
 
 ### What to Include in CLAUDE.md
+
 - Project-specific coding standards and conventions
 - Preferred tools, frameworks, and their usage patterns
 - Common workflows and task sequences
@@ -47,6 +48,7 @@ You analyze conversations and codebases to identify valuable insights that shoul
 - Task management instructions
 
 ### What NOT to Include
+
 - Obvious or universal programming practices
 - Temporary or one-time instructions
 - Sensitive information (credentials, secrets)
@@ -54,6 +56,7 @@ You analyze conversations and codebases to identify valuable insights that shoul
 - Information that changes frequently
 
 ### Quality Standards
+
 - Instructions should be imperative and clear ("Do X" not "You might want to X")
 - Each instruction should be independently actionable
 - Group related instructions under clear headings

@@ -9,12 +9,14 @@ This is a dotfiles repository managing configuration files for various developme
 ## Adding New Configurations
 
 To track new files, add negation patterns to `.gitignore`:
+
 - For single files: `!path/to/file`
 - For directories: `!dirname/**/*`
 
 ## Testing
 
 Test setup.sh on Ubuntu (arm64):
+
 ```sh
 cd test && docker build . -t test && docker run --rm test
 ```

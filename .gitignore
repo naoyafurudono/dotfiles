@@ -6,6 +6,7 @@
 !readme.md
 !setup.sh
 !CLAUDE.md
+!Makefile
 !test/*
 
 !autohotkey.ahk
@@ -14,6 +15,19 @@
 !claude/
 !claude/settings.json
 !claude/CLAUDE.md
+!claude/agents/
+!claude/agents/**
+!claude/commands/
+!claude/commands/**
+!claude/skills/
+!claude/skills/**
+!claude/cron/
+!claude/cron/**
+claude/cron/logs/
+claude/cron/state/
+claude/cron/jobs/
+!claude/data/
+!claude/data/**
 !deploy-ahk.sh
 !dprint/
 !dprint/**
@@ -34,4 +48,6 @@ fish/fish_variables
 !nvim/**
 !systemd/user/xkeysnail.service
 !tmux/tmux.conf
+!launchagents/
+!launchagents/**
 !zed/{config,keymap,tasks}.json

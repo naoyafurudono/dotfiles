@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:www.postfix.org)",
+      "WebFetch(domain:www.cise.ufl.edu)",
+      "WebFetch(domain:www.claudiokuenzler.com)",
+      "WebFetch(domain:www.mail-archive.com)"
+    ]
+  }
+}

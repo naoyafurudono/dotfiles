@@ -304,15 +304,36 @@ for arg in "$@"; do
 done
 set -- "${args[@]}"
 
-mode="${1:-list}"
-shift 2>/dev/null || true
+# mode が指定されず、--query= だけが渡された場合: query の中身をキーワードとして search する
+if [[ $# -eq 0 ]] && [[ -n "${USER_QUERY}" ]]; then
+  mode="search"
+  # USER_QUERY をキーワードとして分割して渡す
+  # shellcheck disable=SC2086  # 意図的な word splitting
+  set -- ${USER_QUERY}
+else
+  mode="${1:-list}"
+  shift 2>/dev/null || true
+fi
 
 _start=$(_start_ms)
 
 case "${mode}" in
-  list)   list_sessions "$@" ;;
-  search) search_sessions "$@" ;;
-  *)      search_sessions "${mode}" "$@" ;;
+  list|一覧) list_sessions "$@" ;;
+  search)    search_sessions "$@" ;;
+  --query|--query=*)
+    # --query がモードとして渡された場合: パース漏れした query 値をキーワードとして検索
+    remaining="${mode#--query}"
+    remaining="${remaining#=}"
+    if [[ -n "${remaining}" ]]; then
+      # shellcheck disable=SC2086  # 意図的な word splitting
+      search_sessions ${remaining} "$@"
+    elif [[ $# -gt 0 ]]; then
+      search_sessions "$@"
+    else
+      list_sessions
+    fi
+    ;;
+  *)         search_sessions "${mode}" "$@" ;;
 esac
 
 hit_count=$(cat "${TMPDIR_WORK}/hit_count" 2>/dev/null || echo 0)

@@ -56,7 +56,8 @@
     "nippo@pepabo-marketplace": true,
     "presentation@pepabo-marketplace": true,
     "slack@claude-plugins-official": true,
-    "Notion@claude-plugins-official": true
+    "Notion@claude-plugins-official": true,
+    "gws-setup@pepabo-marketplace": true
   },
   "language": "日本語",
   "alwaysThinkingEnabled": false,

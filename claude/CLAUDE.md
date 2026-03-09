@@ -1,4 +1,6 @@
-- use `gh` command to access GitHub contents
+- `gh` コマンドは Issue・PR 操作など、リモートでしかできない操作に使う
+- コードの調査・検索にはローカルにクローンしたリポジトリを優先して使う（Read, Grep, Glob ツール）
+- ローカルにクローンがない場合は、必要に応じてクローンしてから調査する
 
 ## Code Change Principles
 

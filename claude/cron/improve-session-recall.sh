@@ -18,7 +18,9 @@ DOTFILES_DIR="${HOME}/src/github.com/naoyafurudono/dotfiles"
 mkdir -p "${LOG_DIR}"
 
 log() {
-  echo "$(date '+%Y-%m-%d %H:%M:%S') $*" >> "${LOG_DIR}/improve-session-recall.log"
+  local ts
+  ts="$(date '+%Y-%m-%d %H:%M:%S')"
+  echo "${ts} $*" >> "${LOG_DIR}/improve-session-recall.log"
 }
 
 # --- Step 1: 分析レポート生成 ---

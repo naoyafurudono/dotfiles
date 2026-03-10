@@ -58,7 +58,7 @@ mode_counts=$(echo "${data}" | awk -F'\t' '{ modes[$2]++ } END { for (m in modes
 cat > "${REPORT_FILE}" << EOF
 # session-recall 分析レポート
 
-生成日時: $(date '+%Y-%m-%d %H:%M')
+生成日時: $(date '+%Y-%m-%d %H:%M' || true)
 対象データ: ${total_queries} 件
 
 ## サマリ

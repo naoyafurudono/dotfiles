@@ -47,7 +47,8 @@ fish/fish_variables
 !nvim/
 !nvim/**
 !systemd/user/xkeysnail.service
-!tmux/tmux.conf
+!tmux/
+!tmux/**
 !launchagents/
 !launchagents/**
 !zed/{config,keymap,tasks}.json

@@ -29,6 +29,26 @@
     "defaultMode": "acceptEdits"
   },
   "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.config/tmux/claude-session-save.sh"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.config/tmux/claude-session-save.sh"
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Write|Edit|MultiEdit",

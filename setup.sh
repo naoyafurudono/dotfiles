@@ -102,8 +102,16 @@ function setup() {
     esac
 }
 
+function get_tpm() {
+  local tpm_dir="${HOME}/.tmux/plugins/tpm"
+  if [[ ! -d "${tpm_dir}" ]]; then
+    git clone https://github.com/tmux-plugins/tpm "${tpm_dir}"
+  fi
+}
+
 get_essentials
 get_common
 get_rust
+get_tpm
 setup
 wait

@@ -14,6 +14,12 @@ vim.opt.termguicolors = true
 -- winbarにファイル名とカーソル位置を表示
 vim.opt.winbar = '%f  %l:%c'
 
+-- 外部でファイルが変更されたらバッファに自動反映
+vim.opt.autoread = true
+vim.api.nvim_create_autocmd({"FocusGained", "BufEnter", "CursorHold"}, {
+  command = "checktime",
+})
+
 -- クリップボードと同期
 vim.opt.clipboard = 'unnamedplus'
 

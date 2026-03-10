@@ -5,24 +5,46 @@ font-feature = -dlig
 font-family = "Lilex"
 shell-integration = fish
 
-keybind = clear
-keybind = shift+enter=text:\n
-keybind = super+c=copy_to_clipboard
-keybind = super+d+shift=new_split:down
-keybind = super+d=new_split:right
-keybind = super+h=goto_split:left
-keybind = super+j=goto_split:bottom
-keybind = super+y=clear_screen
-keybind = super+k=goto_split:top
-keybind = super+l=goto_split:right
-keybind = super+n=new_window
-keybind = super+q=quit
-keybind = super+v=paste_from_clipboard
-keybind = super+w=close_surface
-keybind = super+equal=equalize_splits
-keybind = super+equal+shift=increase_font_size:1
-keybind = super+minus=decrease_font_size:1
-keybind = shift+escape=toggle_split_zoom
+# Ghostty起動時にtmuxセッションに自動接続（なければ新規作成）
+command = /opt/homebrew/bin/tmux new -A -s main
 
-# 非アクティブなペインを暗くしてアクティブペインを目立たせる
-unfocused-split-opacity = 0.1
+# Ghosttyのウィンドウ状態も保存（レイアウトの復元補助）
+window-save-state = always
+
+# === キーバインド ===
+# まずデフォルトをクリア
+keybind = clear
+
+# tmuxに委譲するキーバインド（Ctrl+Space = \x00 をprefix として送信）
+# ペイン分割
+keybind = super+d=text:\x00|
+keybind = super+shift+d=text:\x00-
+
+# ペイン移動（vim風）
+keybind = super+h=text:\x00h
+keybind = super+j=text:\x00j
+keybind = super+k=text:\x00k
+keybind = super+l=text:\x00l
+
+# ペイン閉じ
+keybind = super+w=text:\x00x
+
+# ペインズーム
+keybind = shift+escape=text:\x00z
+
+# ペイン均等化
+keybind = super+equal=text:\x00=
+
+# 新しいウィンドウ（タブ相当）
+keybind = super+n=text:\x00n
+
+# 画面クリア
+keybind = super+y=text:\x00y
+
+# Ghosttyが直接処理するもの（tmuxに委譲しない）
+keybind = super+c=copy_to_clipboard
+keybind = super+v=paste_from_clipboard
+keybind = super+shift+equal=increase_font_size:1
+keybind = super+minus=decrease_font_size:1
+keybind = super+q=quit
+keybind = shift+enter=text:\n

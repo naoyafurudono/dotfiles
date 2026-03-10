@@ -96,6 +96,8 @@ function setup() {
     case "${os}" in
     Darwin)
       defaults delete com.apple.dock persistent-apps
+      # Cmd+H (Hide) を Ghostty で無効化し、キーバインドとして使えるようにする
+      defaults write com.mitchellh.ghostty NSUserKeyEquivalents -dict-add "Hide Ghostty" '\0'
     ;;
     *)
       ;;

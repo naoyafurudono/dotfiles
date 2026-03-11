@@ -1,0 +1,64 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: Open Default Keymap`
+// from the command palette.
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-tab": "pane::ActivateNextItem",
+      "ctrl-shift-tab": "pane::ActivatePreviousItem"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-r": "editor::Rename"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "g i": "editor::GoToImplementation"
+    }
+  },
+  {
+    "bindings": {
+      "cmd-o": "workspace::ToggleRightDock",
+      "cmd-g": "git_panel::ToggleFocus"
+    }
+  },
+  {
+    "bindings": {
+      "cmd-l": [
+        "task::Spawn",
+        {
+          "task_name": "gitlink"
+        }
+      ]
+    }
+  },
+  {
+    "bindings": {
+      "cmd-u": [
+        "task::Spawn",
+        {
+          "task_name": "copylocation"
+        }
+      ]
+    }
+  },
+  {
+    "bindings": {
+      "cmd-m": [
+        "task::Spawn",
+        {
+          "task_name": "memo"
+        }
+      ]
+    }
+  }
+]

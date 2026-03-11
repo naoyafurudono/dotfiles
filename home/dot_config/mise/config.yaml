@@ -1,0 +1,13 @@
+tools:
+  node:
+    - latest
+  deno:
+    - latest
+  ruby:
+    - "3.3"
+  python: 
+    - latest
+settings:
+  jobs: 4
+  experimental: true
+

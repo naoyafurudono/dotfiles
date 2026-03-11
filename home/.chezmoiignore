@@ -1,0 +1,29 @@
+# Dynamic files that should not be managed by chezmoi
+.config/fish/fish_variables
+.config/fish/config.fish.backup
+
+# Claude Code local settings (machine-specific)
+.config/**/.claude/settings.local.json
+
+# Claude Code runtime data
+.config/claude/cron/logs/**
+.config/claude/cron/state/**
+.config/claude/cron/jobs/**
+
+# Machine-specific credentials
+.config/gh/hosts.yml
+
+# Zed conversations and prompt DB (machine-local data)
+.config/zed/conversations/**
+.config/zed/prompts/**
+.config/zed/settings_backup.json
+
+# Mise error logs
+.config/mise/poetry-installer-error-*.log
+
+# gh extension cache
+.config/gh/extensions/gh-otui/cache.json
+
+# nvim generated files
+.config/nvim/.neoconf.json
+.config/nvim/lazy-lock.json

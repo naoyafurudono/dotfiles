@@ -1,0 +1,50 @@
+theme = Atom One Light
+font-size = 8
+font-feature = -calt
+font-feature = -dlig
+font-family = "Lilex"
+shell-integration = fish
+
+# Ghostty起動時にtmuxセッションに自動接続（なければ新規作成）
+command = /opt/homebrew/bin/tmux new -A -s main -c /Users/naoya-furudono/src/git.pepabo.com/donokun/memo
+
+# Ghosttyのウィンドウ状態も保存（レイアウトの復元補助）
+window-save-state = always
+
+# === キーバインド ===
+# まずデフォルトをクリア
+keybind = clear
+
+# tmuxに委譲するキーバインド（Ctrl+Space = \x00 をprefix として送信）
+# ペイン分割
+keybind = super+d=text:\x00|
+keybind = super+shift+d=text:\x00-
+
+# ペイン移動（vim風）
+keybind = super+h=text:\x00h
+keybind = super+j=text:\x00j
+keybind = super+k=text:\x00k
+keybind = super+l=text:\x00l
+
+# ペイン閉じ
+keybind = super+w=text:\x00x
+
+# ペインズーム
+keybind = shift+escape=text:\x00z
+
+# ペイン均等化
+keybind = super+equal=text:\x00=
+
+# 新しいウィンドウ（タブ相当）
+keybind = super+n=text:\x00n
+
+# 画面クリア
+keybind = super+y=text:\x00y
+
+# Ghosttyが直接処理するもの（tmuxに委譲しない）
+keybind = super+c=copy_to_clipboard
+keybind = super+v=paste_from_clipboard
+keybind = super+shift+equal=increase_font_size:1
+keybind = super+minus=decrease_font_size:1
+keybind = super+q=quit
+keybind = shift+enter=text:\n

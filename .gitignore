@@ -1,6 +1,7 @@
 *
 !.gitignore
 !.gitmodules
+!.chezmoiroot
 !.claude/
 !.claude/**
 !readme.md
@@ -8,6 +9,8 @@
 !CLAUDE.md
 !Makefile
 !test/*
+!home/
+!home/**
 
 !autohotkey.ahk
 !bat/

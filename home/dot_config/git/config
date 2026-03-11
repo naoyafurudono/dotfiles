@@ -1,0 +1,70 @@
+[column]
+   ui = auto 
+[branch]
+    sort = -committerdate
+[tag]
+    sort = version:refname
+[init]
+    defaultBranch = main
+[diff]
+    algorithm = histogram
+    colorMoved = plain
+    mnemonicPrefix = true
+    renames = true
+[push]
+    default = simple
+    autoSetupRemote = true
+    followTags = true
+[fetch]
+    prune = true
+    pruneTags = true
+    all = true
+[help]
+    autocorrect = 10
+[commit]
+    verbose = true
+[rerere]
+    enabled = true
+    autoupdate = true
+[rebase]
+    autoSquash = true
+    autoStash = true
+    updateRefs = true
+[pull]
+    rebase = false
+[core]
+    editor = nvim
+    symlinks = false
+    hooksPath = ~/.config/git/hooks
+[alias]
+    bc = !git branch --merged | grep -Ev '\\*|main|master|development' | xargs git branch -d
+    c = commit -m
+    cl = clean -fd
+    d = diff
+    s = status
+    w = worktree
+[user]
+    name = Naoya Furudono
+    email = naoyafurudono@gmail.com
+[ghq]
+    root = ~/src
+    user = naoyafurudono
+[ghq "https://git.pepabo.com/"]
+    vcs = git
+[include]
+    path = ~/.local/git/config
+
+[credential "https://git.pepabo.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://github.com"]
+	helper =
+	helper = !~/.config/git/credential-helper.sh
+	useHttpPath = true
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[pager]
+        diff = nkf -w
+        show = nkf -w
+

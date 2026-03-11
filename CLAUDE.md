@@ -33,15 +33,15 @@ chezmoi add ~/.config/<path>
 
 `home/dot_config/` 配下に chezmoi 形式でファイルが追加される。
 
-### 設定の変更を反映
+### 設定ファイルの変更ワークフロー
 
-ローカルの `~/.config` 以下で設定を変更した後:
+設定ファイルを変更する際は以下の手順に従うこと:
 
-```sh
-chezmoi re-add   # ローカルの変更を chezmoi ソースに反映
-```
+1. **`~/.config/` 配下のファイルを直接編集する**（chezmoi ソースではなく実体を編集）
+2. **`chezmoi re-add` を実行** して変更を chezmoi ソースに反映
+3. **dotfiles リポジトリで適切なコミットメッセージと共にコミット・push する**
 
-または `sconf` fish 関数を使うと、`chezmoi re-add` + git commit/push をまとめて実行できる。
+この3ステップを設定変更のたびに必ず完了させること。
 
 ### 動的ファイルの除外
 

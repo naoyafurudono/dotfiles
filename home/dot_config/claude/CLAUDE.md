@@ -26,3 +26,10 @@
 
 - 人間にレビュー依頼する前に、必ず pre-review スキルで検証を行う（レビュー依頼・PR作成時に自動トリガーされる）
 - linter/test がパスしていることを確認してからレビュー依頼する
+
+## dotfiles (設定ファイル) の変更
+
+`~/.config/` 配下の設定ファイルは chezmoi で管理されている。設定ファイルを変更した場合は以下を必ず実行すること:
+
+1. `chezmoi re-add` で変更を chezmoi ソースに反映
+2. dotfiles リポジトリ (`~/src/github.com/naoyafurudono/dotfiles`) で適切なコミットメッセージと共にコミット・push

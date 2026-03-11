@@ -1,43 +1,42 @@
 # dotfiles
 
+[chezmoi](https://www.chezmoi.io/) で管理している dotfiles リポジトリ。
+
 ## インストール
 
-gitをあらかじめインストールしてください。
-
 ```sh
-git clone https://github.com/naoyafurudono/dotfiles.git
-bash dotfiles/setup.sh
+# chezmoi をインストール
+sh -c "$(curl -fsLS get.chezmoi.io)"
+
+# dotfiles を適用
+chezmoi init --apply https://github.com/naoyafurudono/dotfiles.git
 ```
 
-## TODO
+## 設定の変更
 
-- [ ] gitのインストールを自動化
-- [ ] テストの実施・自動テストの整備
-  - [x] コンテナ環境で手動テストを実施 (ubuntu)
-  - [ ] コンテナ環境で手動テストを実施 (mac os)
-  - [x] 自動テストを実施 (ubuntu)
-  - [ ] 自動テストを実施 (mac os)
-  - [ ] CIを設定する
-
-## 設定の追加
-
-`.gitignore`をおしゃれに記述することで、ブラックリストではなくホワイトリストとして運用している。
-リポジトリに追加したければ`.gitignore`を雰囲気で編集すること。
-
-参考: <https://qiita.com/sventouz/items/574bd67c7e43fff10546>
-
-## test
-
-setup.shのテスト。
-今はarmのubuntuだけ。
-実際に動かして正常終了するかをみる。
-それぞれのコマンドが動くかは見ていない。
+ローカルで設定を変更した後、chezmoi ソースに反映する:
 
 ```sh
-cd test
-docker build . -t test && \
-docker run --rm test
+chezmoi re-add
 ```
+
+または fish shell の `sconf` 関数で re-add + git commit/push をまとめて実行できる。
+
+## 新しい設定ファイルの追加
+
+```sh
+chezmoi add ~/.config/<path>
+```
+
+動的ファイル（マシン固有の設定等）は `home/.chezmoiignore` に追加して除外する。
+
+## リポジトリ構造
+
+- `home/` -- chezmoi ソースディレクトリ（`.chezmoiroot` で指定）
+  - `home/dot_config/` -- `~/.config/` に配置される設定ファイル群
+  - `home/.chezmoiignore` -- 管理対象から除外するファイル定義
+  - `home/symlink_dot_claude` -- `~/.claude` シンボリックリンク定義
+  - `home/Library/LaunchAgents/` -- macOS LaunchAgents
 
 ## memo
 

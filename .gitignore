@@ -4,6 +4,7 @@
 !.chezmoiroot
 !.claude/
 !.claude/**
+.claude/settings.local.json
 !readme.md
 !setup.sh
 !CLAUDE.md

@@ -29,6 +29,18 @@
     "defaultMode": "acceptEdits"
   },
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'CMD=$(cat | jq -r \".tool_input.command // empty\"); if echo \"$CMD\" | grep -qiE \"(imgur|imgbb|0x0\\.st|transfer\\.sh|file\\.io|pasteboard|ibb\\.co|catbox\\.moe|uguu\\.se|gyazo\\.com|firestorage\\.jp|gigafile\\.nu|data-bin\\.com|tenpu\\.me|uploader\\.jp|axfc\\.net|dotup\\.org|filesend\\.to|sendanywhere\\.com)\"; then echo \"BLOCKED: 外部アップロードサービスへの送信はセキュリティポリシーにより禁止されています\" >&2; exit 2; fi'",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
     "SessionStart": [
       {
         "hooks": [

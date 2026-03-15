@@ -83,7 +83,6 @@ if status --is-interactive
     switch (uname -s)
         case Darwin
             abbr --add less bat
-            set -gx VISUAL bat
             direnv hook fish | source
         case Linux
             switch (uname --all)
@@ -95,7 +94,6 @@ if status --is-interactive
             case '*'
               abbr --add less batcat
             end
-            set -gx VISUAL batcat
             abbr --add xremap xremap $XDG_CONFIG_HOME/xremap/xremap.conf --device \'Topre REALFORCE 87 US\'
         case '*'
             echo "unknown uname"

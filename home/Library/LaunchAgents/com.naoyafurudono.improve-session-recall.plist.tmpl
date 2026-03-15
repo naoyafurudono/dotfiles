@@ -6,7 +6,7 @@
 	<string>com.naoyafurudono.improve-session-recall</string>
 	<key>ProgramArguments</key>
 	<array>
-		<string>/Users/naoya-furudono/.claude/cron/improve-session-recall.sh</string>
+		<string>{{ .chezmoi.homeDir }}/.claude/cron/improve-session-recall.sh</string>
 	</array>
 	<key>StartCalendarInterval</key>
 	<dict>
@@ -16,8 +16,8 @@
 		<integer>0</integer>
 	</dict>
 	<key>StandardOutPath</key>
-	<string>/Users/naoya-furudono/.claude/cron/logs/launchd-stdout.log</string>
+	<string>{{ .chezmoi.homeDir }}/.claude/cron/logs/launchd-stdout.log</string>
 	<key>StandardErrorPath</key>
-	<string>/Users/naoya-furudono/.claude/cron/logs/launchd-stderr.log</string>
+	<string>{{ .chezmoi.homeDir }}/.claude/cron/logs/launchd-stderr.log</string>
 </dict>
 </plist>

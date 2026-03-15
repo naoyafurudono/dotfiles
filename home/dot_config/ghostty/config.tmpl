@@ -6,7 +6,7 @@ font-family = "Lilex"
 shell-integration = fish
 
 # Ghostty起動時にtmuxセッションに自動接続（なければ新規作成）
-command = /opt/homebrew/bin/tmux new -A -s main -c /Users/naoya-furudono/src/git.pepabo.com/donokun/memo
+command = /opt/homebrew/bin/tmux new -A -s main -c {{ if .ghosttyStartDir }}{{ .ghosttyStartDir }}{{ else }}{{ .chezmoi.homeDir }}{{ end }}
 
 # Ghosttyのウィンドウ状態も保存（レイアウトの復元補助）
 window-save-state = always

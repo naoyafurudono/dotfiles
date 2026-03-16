@@ -5,6 +5,7 @@ return {
   config = function()
     require('onedark').setup({
       style = 'light',
+      transparent = true,
       highlights = {
         GitSignsAdd = { fg = '#50a14f' },
         GitSignsChange = { fg = '#c18401' },

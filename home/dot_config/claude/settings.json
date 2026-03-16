@@ -89,12 +89,13 @@
     "presentation@pepabo-marketplace": true,
     "slack@claude-plugins-official": true,
     "Notion@claude-plugins-official": true,
-    "gws-setup@pepabo-marketplace": true
+    "gws-setup@pepabo-marketplace": true,
+    "engineer-interview-qa@pepabo-marketplace": true
   },
   "language": "日本語",
   "alwaysThinkingEnabled": false,
   "effortLevel": "high",
   "autoUpdatesChannel": "latest",
-  "skipDangerousModePermissionPrompt": true,
-  "voiceEnabled": true
+  "voiceEnabled": true,
+  "skipDangerousModePermissionPrompt": true
 }

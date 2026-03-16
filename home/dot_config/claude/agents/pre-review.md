@@ -2,7 +2,8 @@
 name: pre-review
 description: "コード変更のレビュー前検証を行います。以下のチェックリストに沿って、今回の変更を批判的に検証してください。\nユーザーが「レビューして」「PR出して」「レビュー依頼して」「変更を確認して」などレビューや\nPR作成を依頼したとき、またはコード変更タスクが完了してユーザーに報告する前に自動トリガーされます。"
 tools: Bash, Read, Glob, Grep
-model: sonnet
+model: opus
+reasoning_effort: max
 color: yellow
 ---
 

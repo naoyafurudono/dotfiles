@@ -8,7 +8,9 @@ COST=$(echo "$input" | jq -r '.cost.total_cost_usd // 0')
 DURATION_MS=$(echo "$input" | jq -r '.cost.total_duration_ms // 0')
 ADDED=$(echo "$input" | jq -r '.cost.total_lines_added // 0')
 REMOVED=$(echo "$input" | jq -r '.cost.total_lines_removed // 0')
-VIM_MODE=$(echo "$input" | jq -r '.vim.mode // empty')
+SESSION_ID=$(echo "$input" | jq -r '.session_id // empty')
+CWD=$(echo "$input" | jq -r '.workspace.current_dir // empty')
+AGENT=$(echo "$input" | jq -r '.agent.name // empty')
 
 # === カラー定義 (Atom One Light パレット) ===
 BLUE='\033[38;2;64;120;242m'    # #4078f2
@@ -20,12 +22,38 @@ CYAN='\033[38;2;1;132;188m'     # #0184bc
 DIM='\033[38;2;160;160;160m'    # dimmed text
 RESET='\033[0m'
 
-# === プログレスバー (グラデーション) ===
-BAR_WIDTH=15
+# === セッション ID (先頭8文字に短縮) ===
+SHORT_SESSION=""
+if [ -n "$SESSION_ID" ]; then
+  SHORT_SESSION="${DIM}${SESSION_ID:0:8}${RESET}"
+fi
+
+# === ディレクトリ (末尾のディレクトリ名のみ) ===
+DIR_STR=""
+if [ -n "$CWD" ]; then
+  DIR_NAME="${CWD##*/}"
+  DIR_STR="${BLUE}▷${RESET} ${DIR_NAME}"
+fi
+
+# === エージェント名 (アイコン付き) ===
+AGENT_ICONS=("⬡" "◎" "✦" "⏣" "◈" "❖" "⬢" "◉" "★" "⟐")
+AGENT_STR=""
+if [ -n "$AGENT" ]; then
+  # エージェント名からハッシュしてアイコンを決定 (名前ごとに固定のアイコン)
+  HASH=0
+  for ((i=0; i<${#AGENT}; i++)); do
+    CHAR_VAL=$(printf '%d' "'${AGENT:$i:1}")
+    HASH=$(( (HASH + CHAR_VAL) % ${#AGENT_ICONS[@]} ))
+  done
+  ICON="${AGENT_ICONS[$HASH]}"
+  AGENT_STR=" ${DIM}│${RESET} ${PURPLE}${ICON} ${AGENT}${RESET}"
+fi
+
+# === プログレスバー ===
+BAR_WIDTH=12
 FILLED=$((PCT * BAR_WIDTH / 100))
 EMPTY=$((BAR_WIDTH - FILLED))
 
-# 使用率に応じた色
 if [ "$PCT" -ge 90 ]; then
   BAR_COLOR="$RED"
 elif [ "$PCT" -ge 70 ]; then
@@ -48,21 +76,14 @@ SECS=$((DURATION_SEC % 60))
 # === コストフォーマット ===
 COST_FMT=$(printf '%.2f' "$COST")
 
-# === Vim モード表示 ===
-MODE_STR=""
-if [ -n "$VIM_MODE" ]; then
-  if [ "$VIM_MODE" = "NORMAL" ]; then
-    MODE_STR="${BLUE} N ${RESET}"
-  else
-    MODE_STR="${GREEN} I ${RESET}"
-  fi
-fi
-
 # === 変更行数 ===
 CHANGES=""
 if [ "$ADDED" -gt 0 ] || [ "$REMOVED" -gt 0 ]; then
-  CHANGES=" ${DIM}│${RESET} ${GREEN}+${ADDED}${RESET} ${RED}-${REMOVED}${RESET}"
+  CHANGES=" ${GREEN}+${ADDED}${RESET} ${RED}-${REMOVED}${RESET}"
 fi
 
-# === 出力 ===
-echo -e "${MODE_STR}${PURPLE}◆${RESET} ${DIM}${MODEL}${RESET}  ${BAR_COLOR}${BAR}${RESET} ${DIM}${PCT}%${RESET}  ${ORANGE}\$${COST_FMT}${RESET}  ${CYAN}${MINS}m${SECS}s${RESET}${CHANGES}"
+# === 出力 (2行) ===
+# 1行目: セッション・ディレクトリ・エージェント
+echo -e "${PURPLE}◆${RESET} ${DIR_STR}  ${DIM}${SHORT_SESSION}${RESET}${AGENT_STR}"
+# 2行目: モデル・プログレスバー・コスト・時間・変更行数
+echo -e "  ${DIM}${MODEL}${RESET} ${BAR_COLOR}${BAR}${RESET} ${DIM}${PCT}%${RESET}  ${ORANGE}\$${COST_FMT}${RESET}  ${CYAN}${MINS}m${SECS}s${RESET}${CHANGES}"

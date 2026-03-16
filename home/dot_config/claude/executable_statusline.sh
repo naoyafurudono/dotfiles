@@ -20,7 +20,18 @@ RED='\033[38;2;228;86;73m'      # #e45649
 PURPLE='\033[38;2;166;38;164m'  # #a626a4
 CYAN='\033[38;2;1;132;188m'     # #0184bc
 DIM='\033[38;2;160;160;160m'    # dimmed text
+LIGHT_PURPLE='\033[38;2;200;120;200m'  # パープル明るめ
 RESET='\033[0m'
+
+# === ◆ アイコン (コンテキスト使用率で3段階に色変化) ===
+# 余裕あり: パープル(通常) → 注意: 明るいパープル → 危険: 赤
+if [ "$PCT" -ge 80 ]; then
+  DIAMOND="${RED}◆${RESET}"
+elif [ "$PCT" -ge 50 ]; then
+  DIAMOND="${LIGHT_PURPLE}◆${RESET}"
+else
+  DIAMOND="${PURPLE}◆${RESET}"
+fi
 
 # === セッション ID (先頭8文字に短縮) ===
 SHORT_SESSION=""
@@ -32,14 +43,13 @@ fi
 DIR_STR=""
 if [ -n "$CWD" ]; then
   DIR_NAME="${CWD##*/}"
-  DIR_STR="${BLUE}▷${RESET} ${DIR_NAME}"
+  DIR_STR="${DIR_NAME}"
 fi
 
 # === エージェント名 (アイコン付き) ===
 AGENT_ICONS=("⬡" "◎" "✦" "⏣" "◈" "❖" "⬢" "◉" "★" "⟐")
 AGENT_STR=""
 if [ -n "$AGENT" ]; then
-  # エージェント名からハッシュしてアイコンを決定 (名前ごとに固定のアイコン)
   HASH=0
   for ((i=0; i<${#AGENT}; i++)); do
     CHAR_VAL=$(printf '%d' "'${AGENT:$i:1}")
@@ -54,14 +64,12 @@ BAR_WIDTH=12
 FILLED=$((PCT * BAR_WIDTH / 100))
 EMPTY=$((BAR_WIDTH - FILLED))
 
-if [ "$PCT" -ge 90 ]; then
+if [ "$PCT" -ge 80 ]; then
   BAR_COLOR="$RED"
-elif [ "$PCT" -ge 70 ]; then
-  BAR_COLOR="$ORANGE"
-elif [ "$PCT" -ge 40 ]; then
-  BAR_COLOR="$CYAN"
+elif [ "$PCT" -ge 50 ]; then
+  BAR_COLOR="$LIGHT_PURPLE"
 else
-  BAR_COLOR="$GREEN"
+  BAR_COLOR="$PURPLE"
 fi
 
 BAR=""
@@ -83,7 +91,5 @@ if [ "$ADDED" -gt 0 ] || [ "$REMOVED" -gt 0 ]; then
 fi
 
 # === 出力 (2行) ===
-# 1行目: セッション・ディレクトリ・エージェント
-echo -e "${PURPLE}◆${RESET} ${DIR_STR}  ${DIM}${SHORT_SESSION}${RESET}${AGENT_STR}"
-# 2行目: モデル・プログレスバー・コスト・時間・変更行数
+echo -e "${DIAMOND} ${DIR_STR}  ${SHORT_SESSION}${AGENT_STR}"
 echo -e "  ${DIM}${MODEL}${RESET} ${BAR_COLOR}${BAR}${RESET} ${DIM}${PCT}%${RESET}  ${ORANGE}\$${COST_FMT}${RESET}  ${CYAN}${MINS}m${SECS}s${RESET}${CHANGES}"

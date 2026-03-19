@@ -33,10 +33,10 @@ else
   DIAMOND="${PURPLE}◆${RESET}"
 fi
 
-# === セッション ID (先頭8文字に短縮) ===
+# === セッション ID (完全表示) ===
 SHORT_SESSION=""
 if [ -n "$SESSION_ID" ]; then
-  SHORT_SESSION="${DIM}${SESSION_ID:0:8}${RESET}"
+  SHORT_SESSION="${DIM}${SESSION_ID}${RESET}"
 fi
 
 # === ディレクトリ (末尾のディレクトリ名のみ) ===

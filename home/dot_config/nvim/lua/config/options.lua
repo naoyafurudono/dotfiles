@@ -42,7 +42,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 -- ファイル保存時に自動コミット＆プッシュ
 local auto_push_repos = {
-  ["donokun/memo"] = true,
   ["naoyafurudono/dotfiles"] = true,
 }
 vim.api.nvim_create_autocmd("BufWritePost", {

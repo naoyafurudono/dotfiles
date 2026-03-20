@@ -82,6 +82,10 @@
       }
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.config/claude/statusline.sh"
+  },
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true,
     "ci-check@pepabo-marketplace": true,

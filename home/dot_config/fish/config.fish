@@ -58,6 +58,7 @@ if status --is-interactive
     abbr --add ka 'kubectl get (kubectl api-resources --namespaced=true --verbs=list -o name | tr "\n" "," | sed -e "s/,\$//")'
     abbr --add kp killport
     abbr --add l eza
+    abbr --add pk 'tmux kill-pane -t'
     abbr --add pn plug-nvim
     abbr --add rg 'rg --no-heading --smart-case'
     abbr --add t 'tree --gitignore'

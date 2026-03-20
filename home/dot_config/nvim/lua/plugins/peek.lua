@@ -19,7 +19,7 @@ return {
   end,
   keys = {
     {
-      "<D-p>",
+      "<leader>p",
       function()
         local peek = require("peek")
         if peek.is_open() then

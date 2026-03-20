@@ -1,5 +1,6 @@
 return {
   "3rd/image.nvim",
+  enabled = false,
   ft = { "markdown" },
   opts = {
     backend = "kitty",
@@ -7,8 +8,8 @@ return {
     integrations = {
       markdown = {
         enabled = true,
-        clear_in_insert_mode = true,
-        only_render_image_at_cursor = false,
+        clear_in_insert_mode = false,
+        only_render_image_at_cursor = true,
         resolve_image_path = function(document_path, image_path, fallback)
           -- 相対パスを記事ディレクトリからの絶対パスに解決
           return fallback(document_path, image_path)

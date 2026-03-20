@@ -65,7 +65,7 @@ if status --is-interactive
     abbr --add a 'git add'
     abbr --add c 'git commit -m'
     abbr --add d 'git diff'
-    abbr --add s 'git status'
+    abbr --add s 'git status -u'
     abbr --add gu 'git add -A && git commit -m update && git push' # 必要悪 :(
     abbr --add p 'git pull'
 

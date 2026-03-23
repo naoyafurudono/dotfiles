@@ -44,7 +44,7 @@ if status --is-interactive
     set -gx IDE nvim
 
     abbr --add v nvim
-    abbr --add m $IDE
+    abbr --add m "cd $MEMO_DIR && claude"
     abbr --add n "$IDE ."
 
     abbr --add - 'cd -'

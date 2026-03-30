@@ -70,7 +70,7 @@ if status --is-interactive
     abbr --add gu 'git add -A && git commit -m update && git push' # 必要悪 :(
     abbr --add p 'git pull'
 
-    abbr --add eip 'curl http://checkip.amazonaws.com'
+    abbr --add eip 'curl https://checkip.amazonaws.com'
 
 
     set -gx LS_COLORS 1 # for fd

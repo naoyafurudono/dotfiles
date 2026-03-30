@@ -92,14 +92,15 @@
     "nippo@pepabo-marketplace": true,
     "presentation@pepabo-marketplace": true,
     "slack@claude-plugins-official": true,
-    "Notion@claude-plugins-official": true,
     "gws-setup@pepabo-marketplace": true,
-    "lua-lsp@claude-plugins-official": true
+    "engineer-interview-qa@pepabo-marketplace": true,
+    "notion@claude-plugins-official": true,
+    "sentry@pepabo-marketplace": true
   },
   "language": "日本語",
   "alwaysThinkingEnabled": false,
-  "autoUpdatesChannel": "latest",
-  "skipDangerousModePermissionPrompt": true,
   "effortLevel": "high",
-  "voiceEnabled": true
+  "autoUpdatesChannel": "stable",
+  "voiceEnabled": true,
+  "skipDangerousModePermissionPrompt": true
 }

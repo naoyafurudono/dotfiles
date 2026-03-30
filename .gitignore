@@ -1,0 +1,31 @@
+# chezmoi 管理外のローカルデータ
+# chezmoi source-path は home/ なので、それ以外のトップレベルディレクトリを無視
+# /prefix でリポジトリルート直下に限定
+
+# Claude Code runtime data
+/claude/
+/claude-daemon/
+
+# App local data
+/.wrangler/
+/chezmoi/
+/colima/
+/colorme/
+/composer/
+/configstore/
+/crossnote/
+/gatsby/
+/gcloud/
+/github-copilot/
+/helm/
+/htop/
+/nvim.bak/
+/op/
+/temporalio/
+/zed/
+
+# Fish shell runtime
+/fish/
+
+# Misc
+/code-change-requirement.md

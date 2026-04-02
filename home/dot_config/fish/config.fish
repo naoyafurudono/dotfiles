@@ -45,6 +45,7 @@ if status --is-interactive
 
     abbr --add v nvim
     abbr --add m "cd $MEMO_DIR && claude"
+    abbr --add mm "cd $MEMO_DIR"
     abbr --add n "$IDE ."
 
     abbr --add - 'cd -'

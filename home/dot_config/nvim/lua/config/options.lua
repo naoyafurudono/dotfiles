@@ -37,9 +37,9 @@ vim.opt.clipboard = 'unnamedplus'
 -- ステータスラインを非表示
 vim.opt.laststatus = 0
 
--- colorme 配下のPHPファイルはeuc-jpで開く（mail/は除外）
+-- colorme 配下のPHP/tplファイルはeuc-jpで開く（mail/は除外）
 vim.api.nvim_create_autocmd("BufReadPost", {
-  pattern = "*/colorme/*.php",
+  pattern = { "*/colorme/*.php", "*/colorme/*.tpl" },
   callback = function()
     local filepath = vim.fn.expand("%:p")
     if filepath:match("/mail/") then

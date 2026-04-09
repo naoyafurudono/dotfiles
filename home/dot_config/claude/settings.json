@@ -61,6 +61,17 @@
         ]
       }
     ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"hookSpecificOutput\":{\"hookEventName\":\"UserPromptSubmit\",\"additionalContext\":\"Current time: '$(date +%H:%M:%S%z)'\"}}'"
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Write|Edit|MultiEdit",
@@ -92,7 +103,6 @@
     "nippo@pepabo-marketplace": true,
     "presentation@pepabo-marketplace": true,
     "slack@claude-plugins-official": true,
-    "gws-setup@pepabo-marketplace": true,
     "engineer-interview-qa@pepabo-marketplace": true,
     "notion@claude-plugins-official": true,
     "sentry@pepabo-marketplace": true

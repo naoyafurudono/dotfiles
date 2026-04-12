@@ -44,7 +44,8 @@ if status --is-interactive
     set -gx IDE nvim
 
     abbr --add v nvim
-    abbr --add m $IDE
+    abbr --add m "cd $MEMO_DIR && claude"
+    abbr --add mm "cd $MEMO_DIR"
     abbr --add n "$IDE ."
 
     abbr --add - 'cd -'
@@ -70,7 +71,7 @@ if status --is-interactive
     abbr --add gu 'git add -A && git commit -m update && git push' # 必要悪 :(
     abbr --add p 'git pull'
 
-    abbr --add eip 'curl http://checkip.amazonaws.com'
+    abbr --add eip 'curl https://checkip.amazonaws.com'
 
 
     set -gx LS_COLORS 1 # for fd

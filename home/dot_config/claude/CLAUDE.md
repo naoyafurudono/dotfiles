@@ -53,8 +53,8 @@
 
 ## dotfiles (設定ファイル) の変更
 
-`~/.config/` 配下の設定ファイルは chezmoi で管理されている。設定ファイルを変更した場合は以下を必ず実行すること:
+`~/.config/` 配下の設定ファイルは chezmoi で管理されている。`~/.claude/` は `~/.config/claude/` へのシンボリックリンクである。設定ファイルを変更した場合は以下を必ず実行すること:
 
-1. `chezmoi re-add` で変更を chezmoi ソースに反映
+1. `chezmoi re-add` で変更を chezmoi ソースに反映（パスは `~/.config/` 以下で指定すること。`~/.claude/` パスでは chezmoi が認識しない）
 2. dotfiles リポジトリ (`~/src/github.com/naoyafurudono/dotfiles`) で適切なコミットメッセージと共にコミット
 3. `git pull --rebase` してからpush（リモートに先行コミットがあることが多い）

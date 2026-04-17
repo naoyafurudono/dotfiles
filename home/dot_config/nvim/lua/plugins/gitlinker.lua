@@ -3,7 +3,7 @@ return {
   dependencies = { "nvim-lua/plenary.nvim" },
   config = function()
     require('gitlinker').setup({
-      mappings = "<D-S-l>",
+      mappings = "<leader>gl",
       callbacks = {
         ["git.pepabo.com"] = require('gitlinker.hosts').get_github_type_url,
       },

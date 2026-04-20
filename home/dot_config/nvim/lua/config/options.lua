@@ -38,15 +38,13 @@ vim.opt.clipboard = 'unnamedplus'
 vim.opt.laststatus = 0
 
 -- colorme 配下のPHP/tplファイルはeuc-jpで開く（mail/は除外）
+local encoding = require("config.encoding")
 vim.api.nvim_create_autocmd("BufReadPost", {
   pattern = { "*/colorme/*.php", "*/colorme/*.tpl" },
   callback = function()
-    local filepath = vim.fn.expand("%:p")
-    if filepath:match("/mail/") then
-      return
-    end
-    if vim.bo.fileencoding ~= "euc-jp" then
-      vim.cmd("edit ++enc=euc-jp")
+    local enc = encoding.detect(vim.fn.expand("%:p"))
+    if enc and vim.bo.fileencoding ~= enc then
+      vim.cmd("edit ++enc=" .. enc)
     end
   end,
 })

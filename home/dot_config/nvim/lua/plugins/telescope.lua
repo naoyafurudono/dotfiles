@@ -8,6 +8,8 @@ return {
   config = function()
     local telescope = require('telescope')
     local builtin = require('telescope.builtin')
+    local previewers = require('telescope.previewers')
+    local encoding = require('config.encoding')
 
     telescope.setup({
       defaults = {
@@ -15,6 +17,15 @@ return {
         layout_config = {
           prompt_position = 'top',
         },
+        buffer_previewer_maker = function(filepath, bufnr, opts)
+          opts = opts or {}
+          filepath = vim.fn.expand(filepath)
+          local enc = encoding.detect(filepath)
+          if enc then
+            opts.file_encoding = enc
+          end
+          previewers.buffer_previewer_maker(filepath, bufnr, opts)
+        end,
       },
     })
     pcall(telescope.load_extension, 'fzf')

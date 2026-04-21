@@ -37,6 +37,9 @@ vim.opt.clipboard = 'unnamedplus'
 -- ステータスラインを非表示
 vim.opt.laststatus = 0
 
+-- auto-session 推奨のセッション保存項目
+vim.opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
 -- colorme 配下のPHP/tplファイルはeuc-jpで開く（mail/は除外）
 local encoding = require("config.encoding")
 vim.api.nvim_create_autocmd("BufReadPost", {

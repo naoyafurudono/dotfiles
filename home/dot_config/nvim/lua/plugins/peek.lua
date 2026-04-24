@@ -18,8 +18,10 @@ return {
     vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
   end,
   keys = {
+    -- Ghostty 側で Cmd+P を text:\x1bp にバインドしているので nvim には <M-p> として届く
+    -- (kitty keyboard protocol の <D-p> は tmux が super 修飾を扱えず断念。2026-04-23)
     {
-      "<D-p>",
+      "<M-p>",
       function()
         local peek = require("peek")
         if peek.is_open() then

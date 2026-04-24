@@ -42,6 +42,14 @@ keybind = super+n=text:\x00N
 # 画面クリア
 keybind = super+y=text:\x00y
 
+# nvim 用: Cmd+P を Esc+p (= Alt+P / <M-p>) として送る。
+# kitty keyboard protocol の CSI u は tmux が super 修飾を扱いきれず paste されてしまう
+# (検証 2026-04-23) ため、tmux が確実に透過する Esc プレフィックス方式に切り替え。
+keybind = super+p=text:\x1bp
+
+# 設定の再読み込み（チェーン式: Cmd+Shift+R）
+keybind = super+shift+r=reload_config
+
 # Ghosttyが直接処理するもの（tmuxに委譲しない）
 keybind = super+c=copy_to_clipboard
 keybind = super+v=paste_from_clipboard

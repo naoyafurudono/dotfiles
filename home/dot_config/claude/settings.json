@@ -156,6 +156,11 @@
             "type": "command",
             "command": "bash -c 'CMD=$(cat | jq -r \".tool_input.command // empty\"); if echo \"$CMD\" | grep -qE \"(^|[;&|])[[:space:]]*gh[[:space:]]\" && echo \"$CMD\" | grep -q -- \"--admin\"; then echo \"BLOCKED: gh コマンドの --admin オプションはセキュリティポリシーにより禁止されています\" >&2; exit 2; fi'",
             "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "python3 ~/.config/claude/hooks/gh-pr-guard.py",
+            "timeout": 5
           }
         ]
       }

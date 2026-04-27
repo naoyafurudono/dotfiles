@@ -10,6 +10,13 @@
 - コードの調査・検索にはローカルにクローンしたリポジトリを優先して使う（Read, Grep, Glob ツール）
 - ローカルにクローンがない場合は、必要に応じてクローンしてから調査する
 
+### `gh pr create` のポリシー
+
+- 常に `--draft` を付けて作成する（CODEOWNERS / チーム振り分けによる自動レビュワー付与を draft で抑止するため）
+- `--reviewer` / `-r` は使わない（レビュワーは人間が後で必要に応じて追加する）
+- ready にするときは `gh pr ready <number>` を別途使う
+- これらは `~/.config/claude/hooks/gh-pr-guard.py` で強制されており、違反すると hook がブロックする
+
 ## Code Change Principles
 
 コード変更時は以下の原則に従うこと：

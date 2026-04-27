@@ -24,7 +24,9 @@
       "Read(~/src/git.pepabo.com/colorme/*)"
     ],
     "deny": [
-      "Bash(kubectl:*)"
+      "Bash(kubectl:*)",
+      "Bash(gh *--admin*)",
+      "Bash(gh --admin*)"
     ],
     "defaultMode": "acceptEdits"
   },

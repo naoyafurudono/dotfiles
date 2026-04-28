@@ -54,7 +54,6 @@ if status --is-interactive
     abbr --add .... 'cd ../../../'
     abbr --add ..... 'cd ../../../../'
     abbr --add di 'diary --dir'
-    abbr --add dp 'diary --dir -t post --title'
     abbr --add h hustle
     abbr --add k kubectl
     abbr --add ka 'kubectl get (kubectl api-resources --namespaced=true --verbs=list -o name | tr "\n" "," | sed -e "s/,\$//")'
@@ -64,6 +63,7 @@ if status --is-interactive
     abbr --add pn plug-nvim
     abbr --add rg 'rg --no-heading --smart-case'
     abbr --add t 'tree --gitignore'
+    abbr --add tar 'tar -xvf'
 
     abbr --add a 'git add'
     abbr --add c 'git commit -m'

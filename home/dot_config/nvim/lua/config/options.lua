@@ -40,10 +40,10 @@ vim.opt.laststatus = 0
 -- auto-session 推奨のセッション保存項目
 vim.opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
--- colorme 配下のPHP/tplファイルはeuc-jpで開く（mail/は除外）
+-- PHP/tpl ファイルは nkf で文字コードを判定して開き直す
 local encoding = require("config.encoding")
 vim.api.nvim_create_autocmd("BufReadPost", {
-  pattern = { "*/colorme/*.php", "*/colorme/*.tpl" },
+  pattern = { "*.php", "*.tpl" },
   callback = function()
     local enc = encoding.detect(vim.fn.expand("%:p"))
     if enc and vim.bo.fileencoding ~= enc then

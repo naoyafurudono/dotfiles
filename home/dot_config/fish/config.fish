@@ -44,6 +44,7 @@ if status --is-interactive
     set -gx IDE nvim
 
     abbr --add v nvim
+    abbr --add vv 'nvim --cmd "let g:auto_session_enabled = v:false"'
     abbr --add m "cd $MEMO_DIR && claude"
     abbr --add mm "cd $MEMO_DIR"
     abbr --add n "$IDE ."

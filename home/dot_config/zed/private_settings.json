@@ -8,7 +8,19 @@
 // from the command palette
 {
 	// # 表示
-	"agent_servers": {
+	"project_panel": {
+  "dock": "left"
+ },
+ "outline_panel": {
+  "dock": "left"
+ },
+ "collaboration_panel": {
+  "dock": "left"
+ },
+ "git_panel": {
+  "dock": "left"
+ },
+ "agent_servers": {
 		"claude": {
 			"default_mode": "acceptEdits"
 		}
@@ -56,7 +68,8 @@
 		"enabled": true
 	},
 	"agent": {
-		"always_allow_tool_actions": true,
+		"dock": "right",
+  "always_allow_tool_actions": true,
 		"play_sound_when_agent_done": true,
 		"default_profile": "write",
 		"profiles": {

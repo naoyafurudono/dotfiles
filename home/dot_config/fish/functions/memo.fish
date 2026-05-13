@@ -2,7 +2,7 @@ function memo -d 'Create a new memo file (weekly by default, daily if MEMO_DAILY
   if not set -q MEMO_DIR
     set -l memo_dir_candidates \
         "$HOME/src/git.pepabo.com/donokun/memo" \
-        "$HOME/src/github.com/naoyafurudono/naoyafurudono.github.io" \
+        "$HOME/src/github.com/naoyafurudono/memo" \
         "$HOME/Desktop"
 
     for dir in $memo_dir_candidates

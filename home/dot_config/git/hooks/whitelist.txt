@@ -4,6 +4,8 @@ https://git.pepabo.com/donokun/http-test.git
 https://git.pepabo.com/donokun/kinsta-mu-plugins.git
 https://git.pepabo.com/donokun/kwc-mail-probe.git
 git@git.pepabo.com:donokun/kwc-mail-probe.git
+https://git.pepabo.com/donokun/kwc-mail-probe-v2.git
+git@git.pepabo.com:donokun/kwc-mail-probe-v2.git
 https://git.pepabo.com/donokun/memo.git
 https://git.pepabo.com/donokun/nginx-sandbox.git
 https://git.pepabo.com/donokun/ts.git

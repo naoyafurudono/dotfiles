@@ -40,12 +40,19 @@ if status --is-interactive
     diary completion fish > ~/.config/fish/completions/diary.fish
     set -gx fish_user_abbreviations
 
-    set -gx EDITOR nvim
-    set -gx IDE nvim
-
-    abbr --add v nvim
-    abbr --add vv 'nvim --cmd "let g:auto_session_enabled = v:false"'
-    abbr --add m "cd $MEMO_DIR && claude"
+    if test "$TERM_PROGRAM" = zed
+        set -gx EDITOR "zed --wait"
+        set -gx IDE zed
+        abbr --add v zed
+        abbr --add vv zed
+        abbr --add m zed
+    else
+        set -gx EDITOR nvim
+        set -gx IDE nvim
+        abbr --add v nvim
+        abbr --add vv 'nvim --cmd "let g:auto_session_enabled = v:false"'
+        abbr --add m "cd $MEMO_DIR && claude"
+    end
     abbr --add mm "cd $MEMO_DIR"
     abbr --add n "$IDE ."
 

@@ -185,6 +185,9 @@
       "WebFetch(domain:future-architect.github.io)"
     ],
     "deny": [
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git push --force-with-lease:*)",
       "Bash(kubectl delete:*)",
       "Bash(kubectl apply:*)",
       "Bash(kubectl create:*)",
@@ -312,13 +315,9 @@
   },
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true,
-    "nippo@pepabo-marketplace": true,
     "presentation@pepabo-marketplace": true,
-    "slack@claude-plugins-official": true,
-    "notion@claude-plugins-official": true,
-    "sentry@pepabo-marketplace": true,
-    "colorme-blacklist-add-ip@pepabo-marketplace": true,
-    "chrome-devtools-mcp@claude-plugins-official": true
+    "notion@claude-plugins-official": false,
+    "sentry@pepabo-marketplace": true
   },
   "language": "日本語",
   "effortLevel": "low",

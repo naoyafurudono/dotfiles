@@ -1,5 +1,8 @@
 vim.g.mapleader = " "
 
+-- Esc 始まりの key sequence (Alt-キー等) の待ち時間を短縮
+vim.opt.ttimeoutlen = 10
+
 -- インデント設定（デフォルト）
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 0  -- tabstopの値を使う

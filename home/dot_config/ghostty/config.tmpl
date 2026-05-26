@@ -60,3 +60,10 @@ keybind = super+shift+equal=increase_font_size:1
 keybind = super+minus=decrease_font_size:1
 keybind = super+q=quit
 keybind = shift+enter=text:\n
+
+# nvim 用: Ctrl+Tab / Ctrl+Shift+Tab をバッファ切り替えに使う
+keybind = ctrl+tab=text:\x1b[1;5I
+keybind = ctrl+shift+tab=text:\x1b[1;6I
+
+# nvim 用: Cmd+W でバッファを閉じる (<M-w> として送る)
+keybind = super+w=text:\x1bw

@@ -317,7 +317,9 @@
     "gopls-lsp@claude-plugins-official": true,
     "presentation@pepabo-marketplace": true,
     "notion@claude-plugins-official": false,
-    "sentry@pepabo-marketplace": true
+    "sentry@pepabo-marketplace": true,
+    "pepabo-slides-v2@pepabo-marketplace": true,
+    "chrome-devtools-mcp@claude-plugins-official": true
   },
   "language": "日本語",
   "effortLevel": "low",

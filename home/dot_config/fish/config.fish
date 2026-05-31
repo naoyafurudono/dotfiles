@@ -1,3 +1,5 @@
+source $HOME/.local/fish/pre-config.fish
+
 # ---- environment ----
 
 set -gx XDG_CONFIG_PATH $HOME/.config

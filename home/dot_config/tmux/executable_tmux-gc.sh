@@ -38,6 +38,11 @@ log() {
 #   $1: セッション名
 #   $2: attached (0/1)
 # 戻り値: 0=残す, 1=GC対象
+#
+# 方針: GC してよいのは「放置された素のシェルだけのセッション」のみ。
+# 1つでも実プログラム（ssh / vim / claude / ビルド等）が動いていれば
+# 意味のある作業とみなして残す。これにより Ghostty クラッシュで離脱した
+# ssh セッション等を誤って殺すのを防ぐ。
 keep_session() {
   local name="$1" attached="$2"
   # main は母艦セッション。Ghostty クラッシュ時に全クライアントが落ちて
@@ -48,11 +53,14 @@ keep_session() {
   if [[ "${attached}" != "0" ]]; then
     return 0
   fi
-  # ペインのコマンドに *.*.*（Claude Code のバージョン文字列）があるか
+  # 全ペインが素のログインシェルなら GC 対象。1つでも非シェル（実プログラム）が
+  # 動いていれば残す。Claude Code は argv[0] にバージョン文字列を書くため
+  # 素のシェル名には一致せず、自動的に「実プログラム」側として残る。
   local cmd
   while IFS= read -r cmd; do
     case "${cmd}" in
-      *.*.*) return 0 ;;
+      fish|bash|zsh|sh|-fish|-bash|-zsh|-sh) ;; # 素のシェル: ゴミ候補のまま継続
+      *) return 0 ;;                            # それ以外が動いている: 残す
     esac
   done < <(tmux list-panes -t "${name}" -F '#{pane_current_command}' 2>/dev/null)
   return 1

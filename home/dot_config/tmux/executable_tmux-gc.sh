@@ -40,6 +40,11 @@ log() {
 # 戻り値: 0=残す, 1=GC対象
 keep_session() {
   local name="$1" attached="$2"
+  # main は母艦セッション。Ghostty クラッシュ時に全クライアントが落ちて
+  # 一時的に未アタッチになっても消さず、再起動時の自動再接続先として常に残す。
+  if [[ "${name}" == "main" ]]; then
+    return 0
+  fi
   if [[ "${attached}" != "0" ]]; then
     return 0
   fi

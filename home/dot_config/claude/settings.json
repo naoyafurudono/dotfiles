@@ -322,7 +322,7 @@
     "chrome-devtools-mcp@claude-plugins-official": true
   },
   "language": "日本語",
-  "effortLevel": "low",
+  "effortLevel": "xhigh",
   "autoUpdatesChannel": "latest",
   "skipDangerousModePermissionPrompt": true,
   "theme": "light",
@@ -330,7 +330,7 @@
   "autoCompactEnabled": false,
   "terminalProgressBarEnabled": false,
   "teammateMode": "auto",
-  "remoteControlAtStartup": true,
+  "remoteControlAtStartup": false,
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
   "voiceEnabled": true

@@ -43,10 +43,13 @@ vim.opt.laststatus = 0
 -- auto-session 推奨のセッション保存項目
 vim.opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
--- PHP/tpl ファイルは nkf で文字コードを判定して開き直す
+-- nvim 標準の文字コード自動判定（nkf が無い環境向けのフォールバック）
+vim.opt.fileencodings = "utf-8,euc-jp,cp932,iso-2022-jp"
+
+-- 全ファイルを nkf で文字コード判定して開き直す（utf-8/ascii は no-op）
 local encoding = require("config.encoding")
 vim.api.nvim_create_autocmd("BufReadPost", {
-  pattern = { "*.php", "*.tpl" },
+  pattern = "*",
   callback = function()
     local enc = encoding.detect(vim.fn.expand("%:p"))
     if enc and vim.bo.fileencoding ~= enc then

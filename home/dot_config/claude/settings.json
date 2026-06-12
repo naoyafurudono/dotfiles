@@ -322,7 +322,8 @@
     "chrome-devtools-mcp@claude-plugins-official": true
   },
   "language": "日本語",
-  "effortLevel": "xhigh",
+  "autoMemoryEnabled": false,
+  "effortLevel": "low",
   "autoUpdatesChannel": "latest",
   "skipDangerousModePermissionPrompt": true,
   "theme": "light",
@@ -333,5 +334,13 @@
   "remoteControlAtStartup": false,
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
-  "voiceEnabled": true
+  "voiceEnabled": true,
+  "extraKnownMarketplaces": {
+    "pepabo-internal-marketplace": {
+      "source": {
+        "source": "git",
+        "url": "git@git.pepabo.com:pepabo/pepabo-internal-marketplace.git"
+      }
+    }
+  }
 }

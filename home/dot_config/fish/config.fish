@@ -41,13 +41,13 @@ if status --is-interactive
     set -gx fish_user_abbreviations
 
     if test "$TERM_PROGRAM" = zed
-        set -gx EDITOR "zed --wait"
+        set -gx EDITOR nvim
         set -gx IDE zed
         abbr --add v zed
         abbr --add vv 'zed .'
         abbr --add m zed
     else
-        set -gx EDITOR "zed --wait"
+        set -gx EDITOR nvim
         set -gx IDE zed
         abbr --add v zed
         abbr --add vv 'zed .'

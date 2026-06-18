@@ -44,13 +44,13 @@ if status --is-interactive
         set -gx EDITOR "zed --wait"
         set -gx IDE zed
         abbr --add v zed
-        abbr --add vv zed
+        abbr --add vv 'zed .'
         abbr --add m zed
     else
         set -gx EDITOR "zed --wait"
         set -gx IDE zed
         abbr --add v zed
-        abbr --add vv zed
+        abbr --add vv 'zed .'
         abbr --add m "cd $MEMO_DIR && claude"
     end
     abbr --add mm "cd $MEMO_DIR"

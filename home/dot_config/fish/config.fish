@@ -47,10 +47,10 @@ if status --is-interactive
         abbr --add vv zed
         abbr --add m zed
     else
-        set -gx EDITOR nvim
-        set -gx IDE nvim
-        abbr --add v nvim
-        abbr --add vv 'nvim --cmd "let g:auto_session_enabled = v:false"'
+        set -gx EDITOR "zed --wait"
+        set -gx IDE zed
+        abbr --add v zed
+        abbr --add vv zed
         abbr --add m "cd $MEMO_DIR && claude"
     end
     abbr --add mm "cd $MEMO_DIR"

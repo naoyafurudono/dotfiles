@@ -56,14 +56,12 @@
     path = ~/.local/git/config
 
 [credential "https://git.pepabo.com"]
-	helper = 
 	helper = !/opt/homebrew/bin/gh auth git-credential
 [credential "https://github.com"]
 	helper =
 	helper = !~/.config/git/credential-helper.sh
 	useHttpPath = true
 [credential "https://gist.github.com"]
-	helper = 
 	helper = !/opt/homebrew/bin/gh auth git-credential
 [pager]
         diff = nkf -w

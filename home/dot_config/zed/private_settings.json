@@ -8,7 +8,8 @@
 // from the command palette
 {
 	// # 表示
-	"project_panel": {
+	"cli_default_open_behavior": "new_window",
+ "project_panel": {
   "dock": "left"
  },
  "outline_panel": {
@@ -21,14 +22,15 @@
   "dock": "left"
  },
  "agent_servers": {
-		"claude": {
-			"default_mode": "acceptEdits"
-		}
-	},
+  "claude-acp": {
+   "type": "registry",
+   "default_mode": "acceptEdits"
+  }
+ },
 	"tabs": {
 		"git_status": true
 	},
-	"soft_wrap": "preferred_line_length",
+	"soft_wrap": "prefer_line",
 	"preferred_line_length": 300,
 	"ui_font_size": 10,
 	"agent_ui_font_size": 10,
@@ -68,15 +70,18 @@
 		"enabled": true
 	},
 	"agent": {
-		"dock": "right",
-  "always_allow_tool_actions": true,
-		"play_sound_when_agent_done": true,
+		"tool_permissions": {
+   "default": "allow"
+  },
+  "dock": "right",
+		"play_sound_when_agent_done": "always",
 		"default_profile": "write",
 		"profiles": {
 			"write": {
 				"name": "Write",
 				"tools": {
-					"batch_tool": false,
+					"search_web": true,
+     "batch_tool": false,
 					"code_actions": true,
 					"code_symbols": true,
 					"contents": true,
@@ -96,7 +101,6 @@
 					"symbol_info": true,
 					"terminal": true,
 					"thinking": true,
-					"web_search": true,
 					"create_directory": true
 				},
 				"enable_all_context_servers": true,
@@ -127,7 +131,8 @@
 	// lang
 	"languages": {
 		"Markdown": {
-			"format_on_save": "on"
+			"format_on_save": "on",
+			"tab_size": 4
 		},
 		"YAML": {
 			"formatter": "language_server"

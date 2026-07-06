@@ -349,6 +349,9 @@
     },
     {
       "serverUrl": "https://mcp.mixpanel.com/*"
+    },
+    {
+      "serverUrl": "https://local.agent.shop-pro.localhost/*"
     }
   ]
 }

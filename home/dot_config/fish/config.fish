@@ -68,7 +68,6 @@ if status --is-interactive
     abbr --add kp killport
     abbr --add l eza
     abbr --add pk 'tmux kill-pane -t'
-    abbr --add pn plug-nvim
     abbr --add rg 'rg --no-heading --smart-case'
     abbr --add t 'tree --gitignore'
     abbr --add tar 'tar -xvf'

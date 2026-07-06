@@ -1,6 +1,6 @@
 function jc -d 'colormeリポジトリをfzfで選択してcdする'
     set root $COLORME_REPO_ROOT
-    set selected (ghq list | fzf)
+    set selected (ls $root | fzf)
 
     if test -n "$selected"
         cd "$root/$selected"

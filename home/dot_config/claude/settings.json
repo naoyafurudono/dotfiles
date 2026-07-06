@@ -37,16 +37,6 @@
       "mcp__claude_ai_Slack__slack_search_public_and_private",
       "mcp__claude_ai_Slack__slack_read_thread",
       "mcp__claude_ai_Slack__slack_read_channel",
-      "mcp__chrome-devtools__navigate_page",
-      "mcp__chrome-devtools__take_snapshot",
-      "mcp__chrome-devtools__take_screenshot",
-      "mcp__chrome-devtools__fill_form",
-      "mcp__chrome-devtools__click",
-      "mcp__chrome-devtools__wait_for",
-      "mcp__chrome-devtools__list_pages",
-      "mcp__chrome-devtools__evaluate_script",
-      "mcp__chrome-devtools__select_page",
-      "mcp__chrome-devtools__new_page",
       "mcp__datadog__search_datadog_spans",
       "mcp__datadog__search_datadog_logs",
       "mcp__datadog__search_datadog_metrics",
@@ -54,16 +44,11 @@
       "mcp__bigquery__list-tables",
       "mcp__bigquery__describe-table",
       "mcp__bigquery__execute-query",
-      "mcp__plugin_Notion_notion__notion-fetch",
-      "mcp__plugin_Notion_notion__notion-update-page",
-      "mcp__plugin_Notion_notion__notion-create-pages",
       "Skill(session-recall)",
       "WebFetch(domain:nasa.gmo.jp)",
       "WebFetch(domain:claude.com)",
-      "mcp__plugin_Notion_notion__notion-search",
       "WebFetch(domain:git.pepabo.com)",
       "WebFetch(domain:ghostty.org)",
-      "mcp__plugin_Notion_notion__notion-query-data-sources",
       "Skill(report)",
       "WebFetch(domain:internaldeveloperplatform.org)",
       "WebFetch(domain:tag-app-delivery.cncf.io)",
@@ -72,7 +57,6 @@
       "WebFetch(domain:medium.com)",
       "WebFetch(domain:platformengineering.org)",
       "WebFetch(domain:tenshoku.mynavi.jp)",
-      "mcp__chrome-devtools__list_console_messages",
       "WebFetch(domain:www.notion.so)",
       "mcp__plugin_sentry_sentry__get_issue_details",
       "WebFetch(domain:tech.pepabo.com)",
@@ -94,7 +78,6 @@
       "mcp__claude_ai_Slack__slack_read_canvas",
       "WebFetch(domain:zenn.dev)",
       "WebFetch(domain:conoha.shop)",
-      "mcp__chrome-devtools__fill",
       "WebFetch(domain:img.shop-pro.jp)",
       "WebFetch(domain:api.jquery.com)",
       "mcp__claude_ai__getProducts",
@@ -112,10 +95,6 @@
       "WebFetch(domain:developer.chrome.com)",
       "Skill(schedule)",
       "mcp__plugin_sentry_sentry__get_sentry_resource",
-      "mcp__plugin_slack_slack__slack_read_thread",
-      "mcp__plugin_slack_slack__slack_search_channels",
-      "mcp__plugin_slack_slack__slack_read_channel",
-      "mcp__plugin_slack_slack__slack_search_public_and_private",
       "WebFetch(domain:tiki.miraheze.org)",
       "WebFetch(domain:y-parktown.fanbox.cc)",
       "WebFetch(domain:namaste-parivaar.com)",
@@ -153,8 +132,6 @@
       "WebFetch(domain:www.stanford.edu)",
       "WebFetch(domain:nikoniko-26cc3.web.app)",
       "Skill(update-config)",
-      "mcp__plugin_Notion_notion__notion-get-users",
-      "mcp__plugin_Notion_notion__notion-get-comments",
       "WebFetch(domain:webkit.org)",
       "WebFetch(domain:c4model.com)",
       "WebFetch(domain:www.infoq.com)",
@@ -182,7 +159,28 @@
       "WebFetch(domain:rinaarts.com)",
       "WebFetch(domain:www.sei.cmu.edu)",
       "WebFetch(domain:www.m3tech.blog)",
-      "WebFetch(domain:future-architect.github.io)"
+      "WebFetch(domain:future-architect.github.io)",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__navigate_page",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__take_snapshot",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__take_screenshot",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__fill_form",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__click",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__wait_for",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__list_pages",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__evaluate_script",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__select_page",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__new_page",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__list_console_messages",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__fill",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__press_key",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__close_page",
+      "mcp__claude_ai_Notion__notion-fetch",
+      "mcp__claude_ai_Notion__notion-update-page",
+      "mcp__claude_ai_Notion__notion-create-pages",
+      "mcp__claude_ai_Notion__notion-search",
+      "mcp__claude_ai_Notion__notion-query-data-sources",
+      "mcp__claude_ai_Notion__notion-get-users",
+      "mcp__claude_ai_Notion__notion-get-comments"
     ],
     "deny": [
       "Bash(git push --force:*)",
@@ -234,6 +232,7 @@
     ],
     "defaultMode": "acceptEdits"
   },
+  "model": "claude-fable-5[1m]",
   "hooks": {
     "PreToolUse": [
       {
@@ -241,12 +240,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash -c 'CMD=$(cat | jq -r \".tool_input.command // empty\"); if echo \"$CMD\" | grep -qiE \"(imgur|imgbb|0x0\\.st|transfer\\.sh|file\\.io|pasteboard|ibb\\.co|catbox\\.moe|uguu\\.se|gyazo\\.com|firestorage\\.jp|gigafile\\.nu|data-bin\\.com|tenpu\\.me|uploader\\.jp|axfc\\.net|dotup\\.org|filesend\\.to|sendanywhere\\.com)\"; then echo \"BLOCKED: 外部アップロードサービスへの送信はセキュリティポリシーにより禁止されています\" >&2; exit 2; fi'",
-            "timeout": 5
-          },
-          {
-            "type": "command",
-            "command": "bash -c 'CMD=$(cat | jq -r \".tool_input.command // empty\"); if echo \"$CMD\" | grep -qE \"(^|[;&|])[[:space:]]*gh[[:space:]]\" && echo \"$CMD\" | grep -q -- \"--admin\"; then echo \"BLOCKED: gh コマンドの --admin オプションはセキュリティポリシーにより禁止されています\" >&2; exit 2; fi'",
+            "command": "python3 ~/.config/claude/hooks/bash-guard.py",
             "timeout": 5
           },
           {
@@ -321,10 +315,18 @@
     "pepabo-slides-v2@pepabo-marketplace": true,
     "chrome-devtools-mcp@claude-plugins-official": true
   },
+  "extraKnownMarketplaces": {
+    "pepabo-internal-marketplace": {
+      "source": {
+        "source": "git",
+        "url": "git@git.pepabo.com:pepabo/pepabo-internal-marketplace.git"
+      }
+    }
+  },
   "language": "日本語",
-  "autoMemoryEnabled": false,
-  "effortLevel": "low",
+  "effortLevel": "high",
   "autoUpdatesChannel": "latest",
+  "autoMemoryEnabled": false,
   "skipDangerousModePermissionPrompt": true,
   "theme": "light",
   "editorMode": "vim",
@@ -335,12 +337,18 @@
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
   "voiceEnabled": true,
-  "extraKnownMarketplaces": {
-    "pepabo-internal-marketplace": {
-      "source": {
-        "source": "git",
-        "url": "git@git.pepabo.com:pepabo/pepabo-internal-marketplace.git"
-      }
+  "deniedMcpServers": [
+    {
+      "serverUrl": "https://mcp.canva.com/*"
+    },
+    {
+      "serverUrl": "https://mcp.hubspot.com/*"
+    },
+    {
+      "serverUrl": "https://mcp.figma.com/*"
+    },
+    {
+      "serverUrl": "https://mcp.mixpanel.com/*"
     }
-  }
+  ]
 }

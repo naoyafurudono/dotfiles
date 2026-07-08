@@ -43,7 +43,7 @@ if status --is-interactive
     if test "$TERM_PROGRAM" = zed
         set -gx EDITOR nvim
         set -gx IDE zed
-        abbr --add v zed
+        abbr --add v nvim
         abbr --add vv 'zed .'
         abbr --add m zed
     else

@@ -46,7 +46,6 @@ if status --is-interactive
         abbr --add m zed
     else
         set -gx EDITOR nvim
-        set -gx EDITOR zed
         abbr --add v nvim
         abbr --add mm 'zed .'
         abbr --add m "cd $MEMO_DIR && claude"

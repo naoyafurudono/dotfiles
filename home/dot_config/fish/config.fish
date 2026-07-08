@@ -41,20 +41,18 @@ if status --is-interactive
     set -gx fish_user_abbreviations
 
     if test "$TERM_PROGRAM" = zed
-        set -gx EDITOR nvim
-        set -gx IDE zed
+        set -gx EDITOR zed
         abbr --add v nvim
-        abbr --add vv 'zed .'
         abbr --add m zed
     else
         set -gx EDITOR nvim
-        set -gx IDE zed
+        set -gx EDITOR zed
         abbr --add v nvim
-        abbr --add vv 'zed .'
+        abbr --add mm 'zed .'
         abbr --add m "cd $MEMO_DIR && claude"
     end
     abbr --add mm "cd $MEMO_DIR"
-    abbr --add n "$IDE ."
+    abbr --add n "$EDITOR ."
 
     abbr --add - 'cd -'
     abbr --add .. 'cd ../'

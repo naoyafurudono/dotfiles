@@ -27,7 +27,7 @@ function memo -d 'Create a new memo file (weekly by default, daily if MEMO_DAILY
         echo -e "---\ndate: $(date -I)\n---" > "$filename"
       end
     end
-    $IDE "$filename"
+    $EDITOR "$filename"
   else
     # Weekly mode (default)
     set -l week_number (date +%G-W%V)
@@ -46,6 +46,6 @@ function memo -d 'Create a new memo file (weekly by default, daily if MEMO_DAILY
         echo -e "---\ndate: $week_start\nweek: $week_number\n---" > "$filename"
       end
     end
-    $IDE "$filename"
+    $EDITOR "$filename"
   end
 end

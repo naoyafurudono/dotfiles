@@ -8,8 +8,6 @@ set -gx GHE_USER donokun
 set -gx GOBIN $HOME/go/bin
 
 set -gx PATH \
-    /opt/homebrew/opt/ruby/bin \
-    /opt/homebrew/lib/ruby/gems/3.4.0/bin \
     $HOME/.krew/bin \
     $HOME/.local/bin \
     $HOME/.cargo/bin \
@@ -17,27 +15,35 @@ set -gx PATH \
     $PATH
 
 if test (uname -s) = Darwin
-    set -gx PATH $PATH \
-        /opt/homebrew/bin \
-        /opt/homebrew/opt/mysql-client@8.0/bin
-    # The next line updates PATH for the Google Cloud SDK.
-    if [ -f '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc' ]
-        source '/Users/naoya-furudono/google-cloud-sdk/path.fish.inc'
+    for prefix in /opt/homebrew /usr/local
+        if test -d $prefix/bin
+            fish_add_path $prefix/bin
+        end
     end
-    if [ -f '/Users/furudono/.local/google-cloud-sdk/path.fish.inc' ];
-      source '/Users/furudono/.local/google-cloud-sdk/path.fish.inc'
+
+    if test -d /opt/homebrew/opt/mysql-client@8.0/bin
+        fish_add_path /opt/homebrew/opt/mysql-client@8.0/bin
+    end
+
+    # The next line updates PATH for the Google Cloud SDK.
+    for sdk_path in $HOME/google-cloud-sdk/path.fish.inc $HOME/.local/google-cloud-sdk/path.fish.inc
+        if test -f $sdk_path
+            source $sdk_path
+            break
+        end
     end
 else
-    if [ -f '/home/furudono/dev/google-cloud-sdk/path.fish.inc' ]
-        source '/home/furudono/dev/google-cloud-sdk/path.fish.inc'
+    for sdk_path in $HOME/google-cloud-sdk/path.fish.inc $HOME/.local/google-cloud-sdk/path.fish.inc $HOME/dev/google-cloud-sdk/path.fish.inc
+        if test -f $sdk_path
+            source $sdk_path
+            break
+        end
     end
 end
 
 # --- interactive ---
 
 if status --is-interactive
-    gh completion -s fish > ~/.config/fish/completions/gh.fish
-    diary completion fish > ~/.config/fish/completions/diary.fish
     set -gx fish_user_abbreviations
 
     if test "$TERM_PROGRAM" = zed
@@ -82,7 +88,9 @@ if status --is-interactive
     set -gx LS_COLORS 1 # for fd
 
     set -gx _ZO_DATA_DIR $XDG_DATA_HOME/zoxide
-    zoxide init fish --cmd j | source
+    if command -q zoxide
+        zoxide init fish --cmd j | source
+    end
     set -gx FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 
     set -gx fish_tmux_config $HOME/.config/tmux/tmux.conf
@@ -90,7 +98,9 @@ if status --is-interactive
     switch (uname -s)
         case Darwin
             abbr --add less bat
-            direnv hook fish | source
+            if command -q direnv
+                direnv hook fish | source
+            end
         case Linux
             switch (uname --all)
             case '*raspi*'
@@ -121,4 +131,6 @@ end
 
 # ---- load ----
 
-source ~/.local/fish/config.fish
+if test -f ~/.local/fish/config.fish
+    source ~/.local/fish/config.fish
+end

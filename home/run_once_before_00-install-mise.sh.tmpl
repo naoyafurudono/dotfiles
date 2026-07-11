@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -eu
+
+if command -v mise >/dev/null 2>&1 || [ -x "$HOME/.local/bin/mise" ]; then
+    exit 0
+fi
+
+if ! command -v curl >/dev/null 2>&1; then
+    echo "curl is required to install mise" >&2
+    exit 1
+fi
+
+MISE_VERSION=v2026.2.6
+export MISE_VERSION
+curl -fsSL https://mise.run | sh

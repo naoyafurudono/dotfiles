@@ -1,12 +1,9 @@
-.PHONY: lint test
+.PHONY: check lint test
 
-SHELL_SCRIPTS := $(shell find . -name '*.sh' \
-	-not -path './.git/*' \
-	-not -path './claude/plugins/*' \
-	-not -path './claude/shell-snapshots/*')
+check: lint test
 
 lint:
-	shellcheck -o all $(SHELL_SCRIPTS)
+	./scripts/lint.sh
 
 test:
-	cd test && docker build . -t test && docker run --rm test
+	./scripts/test.sh

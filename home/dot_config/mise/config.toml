@@ -4,6 +4,11 @@ node = "21"
 python = "3.12"
 deno = "2.1.10"
 ruby = "3.1.3"
+bat = "latest"
+eza = "latest"
+fd = "latest"
+ripgrep = "latest"
+zoxide = "latest"
 
 [settings]
 jobs = 4

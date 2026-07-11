@@ -21,6 +21,14 @@
 # Mise error logs
 .config/mise/poetry-installer-error-*.log
 
+# OS-specific package manifests
+{{ if ne .chezmoi.os "darwin" }}
+.config/dotfiles/Brewfile
+{{ end }}
+{{ if ne .chezmoi.os "linux" }}
+.config/dotfiles/packages-debian.txt
+{{ end }}
+
 # gh extension cache
 .config/gh/extensions/gh-otui/cache.json
 

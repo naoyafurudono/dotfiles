@@ -1,0 +1,9 @@
+build-essential
+curl
+fish
+fzf
+htop
+jq
+neovim
+tmux
+yq

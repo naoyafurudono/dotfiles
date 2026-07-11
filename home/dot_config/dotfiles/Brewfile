@@ -1,0 +1,12 @@
+brew "direnv"
+brew "fish"
+brew "fzf"
+brew "htop"
+brew "jq"
+brew "kubectx"
+brew "neovim"
+brew "tmux"
+brew "typos-cli"
+brew "yq"
+
+cask "ghostty"

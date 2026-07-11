@@ -1,6 +1,5 @@
-# chezmoi 管理外のローカルデータ
-# chezmoi source-path は home/ なので、それ以外のトップレベルディレクトリを無視
-# /prefix でリポジトリルート直下に限定
+# 過去にこのリポジトリを ~/.config として使っていた際のローカルデータ。
+# リポジトリ直下に残っても、chezmoi の source state には含めない。
 
 # Claude Code runtime data
 /claude/

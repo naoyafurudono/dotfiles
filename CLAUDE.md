@@ -1,72 +1,35 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+このリポジトリは chezmoi と mise で dotfiles と開発ツールを管理する。変更前に [docs/management-policy.md](docs/management-policy.md) を読み、その責務境界と変更ワークフローに従うこと。
 
-## Repository Overview
+## 必須ルール
 
-This is a dotfiles repository managing configuration files for various development tools using **chezmoi**.
+- `.chezmoiroot` が指定する `home/` を唯一の source of truth とする。
+- トップレベルに `fish/`、`nvim/`、`git/` などの複製を作らない。
+- エージェントは実 HOME ではなく、原則として `home/` 以下を直接編集する。
+- 実体から取り込む場合は `chezmoi re-add <target>` と対象を限定する。引数なしの `chezmoi re-add` は使わない。
+- 秘密情報、認証情報、キャッシュ、マシン固有の絶対パスをコミットしない。`private_` は暗号化ではない。
+- 言語ランタイムとポータブル CLI は mise、GUI・OSパッケージは Brewfile または apt 一覧に追加する。同じツールを複数の仕組みで管理しない。
+- プロジェクト固有のバージョンをグローバル mise 設定へ追加しない。
+- OS 差分には chezmoi の template data と `.chezmoiignore` を使い、ユーザー名やホームディレクトリをハードコードしない。
+- bootstrap script の順序と `run_once_` / `run_onchange_` の意味を維持する。
+- 変更後は `make check` を実行し、一つの意図ごとにコミットする。
+- ユーザーの明示的な依頼なしに push しない。
 
-## Repository Structure
+## 主要パス
 
-- `home/` -- chezmoi ソースディレクトリ（`.chezmoiroot` で指定）
-  - `home/dot_config/` -- `~/.config/` に配置される設定ファイル群
-  - `home/.chezmoiignore` -- chezmoi 管理対象から除外するファイル（fish_variables 等の動的ファイル）
-  - `home/symlink_dot_claude` -- `~/.claude` -> `~/.config/claude` のシンボリックリンク定義
-  - `home/Library/LaunchAgents/` -- macOS の LaunchAgents plist
-- トップレベルの旧設定ディレクトリ（`fish/`, `git/`, `nvim/` 等）は移行前の残存物で、将来削除予定
+- `home/dot_config/`: `~/.config/` に配置する設定
+- `home/dot_config/mise/config.toml`: グローバルな mise ツール
+- `home/dot_config/dotfiles/`: OS パッケージの宣言
+- `home/.chezmoi.toml.tmpl`: マシン固有データの初期化
+- `home/.chezmoiignore`: OS 別・動的ファイルの除外
+- `home/run_*`: bootstrap と依存導入
+- `scripts/`: リポジトリ自体の lint/test
 
-chezmoi の命名規則に従い、`dot_` プレフィックスはドットファイル、`executable_` プレフィックスは実行可能ファイル、`symlink_` プレフィックスはシンボリックリンク、`private_` プレフィックスはパーミッション制限付きファイルを示す。
-
-## Configuration Management with chezmoi
-
-### 設定の適用
+主要コマンド:
 
 ```sh
-chezmoi apply
+chezmoi diff
+chezmoi apply --dry-run --verbose --exclude=scripts
+make check
 ```
-
-### 新しい設定ファイルの追加
-
-```sh
-chezmoi add ~/.config/<path>
-```
-
-`home/dot_config/` 配下に chezmoi 形式でファイルが追加される。
-
-### 設定ファイルの変更ワークフロー
-
-設定ファイルを変更する際は以下の手順に従うこと:
-
-1. **`~/.config/` 配下のファイルを直接編集する**（chezmoi ソースではなく実体を編集）
-2. **`chezmoi re-add` を実行** して変更を chezmoi ソースに反映
-3. **dotfiles リポジトリで適切なコミットメッセージと共にコミット・push する**
-
-この3ステップを設定変更のたびに必ず完了させること。
-
-### 動的ファイルの除外
-
-chezmoi で管理すべきでないファイル（マシン固有の設定、ランタイムデータ等）は `home/.chezmoiignore` に追加する。
-
-## Key Configuration Paths
-
-設定ファイルは `home/dot_config/` 配下にある。主要なものは以下の通り:
-
-- **nvim/**: Neovim config using lazy.nvim plugin manager
-  - `init.lua` loads `config/options`, `config/lazy`, `config/keymaps`
-  - Plugins defined in `lua/plugins/`
-- **fish/**: Fish shell config
-  - `config.fish` main config, loads `~/.local/fish/config.fish` for machine-specific settings
-- **git/**: Git configuration with global hooks in `hooks/`
-- **zed/**: Zed editor settings
-- **ghostty/**: Terminal emulator config
-- **claude/**: Claude Code settings and custom commands
-
-## Git Workflow Notes
-
-- git hooks are stored in `home/dot_config/git/hooks/` and configured via `core.hooksPath`
-- Abbreviations for common git commands defined in fish config (a=add, c=commit, d=diff, s=status, p=pull)
-
-## Working Preferences
-
-- Review and update the task list after completing each task
-- When the user's goal is achieved, improve the repository's CLAUDE.md based on the conversation if there are meaningful improvements

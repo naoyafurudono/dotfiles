@@ -1,5 +1,12 @@
-function sconf --description "Syncs the local config repository with the remote one"
-    set -l repo_dir (chezmoi source-path | string replace '/home' '')
-    chezmoi re-add
-    _ (cd $repo_dir && git add -A && git commit -m "update" && git pull && git push)
+function sconf --description "Re-add selected targets to the chezmoi source"
+    if test (count $argv) -eq 0
+        echo "usage: sconf <target> [...]" >&2
+        return 2
+    end
+
+    for target in $argv
+        chezmoi re-add "$target"; or return
+    end
+
+    chezmoi diff
 end

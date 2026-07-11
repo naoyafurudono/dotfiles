@@ -29,6 +29,14 @@
 .config/dotfiles/packages-debian.txt
 {{ end }}
 
+# Platform-specific input settings
+{{ if ne .chezmoi.os "linux" }}
+.config/mozc
+{{ end }}
+{{ if ne .chezmoi.os "windows" }}
+AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/autohotkey.ahk
+{{ end }}
+
 # gh extension cache
 .config/gh/extensions/gh-otui/cache.json
 

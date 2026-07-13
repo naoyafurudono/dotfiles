@@ -86,10 +86,19 @@ EOF
 git.pepabo.com の colorme org リポジトリで PR を作成した場合は、必ずチームタスクボードに登録し assignee を設定する：
 
 ```
-GH_HOST=git.pepabo.com gh project item-add 123 --owner colorme --url <PR URL>
+GH_HOST=git.pepabo.com gh project item-add 123 --owner colorme --url <PR URL> --format json  # 返却 JSON の id を控える
 GH_HOST=git.pepabo.com gh pr edit <番号> --add-assignee donokun
 ```
 
+さらに Status フィールドを In Progress にする（ID は project 123 で固定）：
+
+```
+PROJ_ID=$(GH_HOST=git.pepabo.com gh project view 123 --owner colorme --format json | jq -r .id)
+GH_HOST=git.pepabo.com gh project item-edit --id <item-addのid> --project-id $PROJ_ID \
+  --field-id MDI2OlByb2plY3RWMlNpbmdsZVNlbGVjdEZpZWxkNDkzNw== --single-select-option-id 47fc9ee4
+```
+
+- Status オプション ID: Backlog=f75ad846, Ready=50380717, In Progress=47fc9ee4, In Review=c39c9d61, Done=98236657
 - assignee 設定はボードの `sliceBy=donokun` で表示させるために必要
 - `gh project` にはスコープ `read:project`/`project` が必要。権限エラーの場合は `gh auth refresh -h git.pepabo.com -s project` を案内する
 

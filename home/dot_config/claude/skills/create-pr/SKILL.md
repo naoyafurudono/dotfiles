@@ -81,8 +81,21 @@ EOF
 - コメント本文は「なぜ」を書く。「何をしているか」の言い換えは書かない
 - git.pepabo.com のリポジトリはリポジトリ内で実行すれば host が自動解決される。解決しない場合は `GH_HOST=git.pepabo.com` を付ける
 
-### 5. 報告
+### 5. プロジェクトボード登録（colorme org の PR のみ）
+
+git.pepabo.com の colorme org リポジトリで PR を作成した場合は、必ずチームタスクボードに登録し assignee を設定する：
+
+```
+GH_HOST=git.pepabo.com gh project item-add 123 --owner colorme --url <PR URL>
+GH_HOST=git.pepabo.com gh pr edit <番号> --add-assignee donokun
+```
+
+- assignee 設定はボードの `sliceBy=donokun` で表示させるために必要
+- `gh project` にはスコープ `read:project`/`project` が必要。権限エラーの場合は `gh auth refresh -h git.pepabo.com -s project` を案内する
+
+### 6. 報告
 
 - PR URL を `<URL> 「<タイトル>」` の形式で報告する
 - draft のまま。ready 化はユーザー判断（`gh pr ready <番号>` を案内）
 - 投稿したインラインコメントの件数と対象箇所（`path:line`）を列挙する。0 件ならその旨と理由を 1 行で報告する
+- colorme org の PR はボード登録・assignee 設定を行ったことを報告する

@@ -28,3 +28,8 @@
 
 # Misc
 /code-change-requirement.md
+
+# mise dotfiles 運用の安全網: 万一実体側から取り込んでも動的ファイル・秘密情報はコミットしない
+/config/fish/fish_variables
+/config/gh/hosts.yml
+/config/claude/settings.local.json

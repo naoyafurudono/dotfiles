@@ -2,35 +2,27 @@
 
 set -eu
 
-repo_root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
-test_root=$(mktemp -d "${TMPDIR:-/tmp}/dotfiles-test.XXXXXX")
-trap 'rm -rf "$test_root"' EXIT HUP INT TERM
+repo_root=$(CDPATH='' cd -- "$(dirname -- "$0")/.." && pwd)
 
-destination="$test_root/home"
-config="$test_root/chezmoi.toml"
-mkdir -p "$destination"
+# 主要ファイルの存在と権限
+test -f "${repo_root}/config/fish/config.fish"
+test -f "${repo_root}/config/mise/config.toml"
+test -x "${repo_root}/config/git/credential-helper.sh"
+test -x "${repo_root}/scripts/install-packages.sh"
+test -f "${repo_root}/templates/ghostty-config.tmpl"
+test -f "${repo_root}/templates/com.naoyafurudono.improve-session-recall.plist.tmpl"
 
-chezmoi \
-    --config "$config" \
-    --source "$repo_root/home" \
-    --destination "$destination" \
-    init --promptString 'Machine type (personal/work/server)=personal'
+# 動的ファイル・秘密情報がソースに紛れ込んでいないこと
+test ! -e "${repo_root}/config/fish/fish_variables"
+test ! -e "${repo_root}/config/gh/hosts.yml"
+test ! -e "${repo_root}/config/claude/settings.local.json"
 
-chezmoi \
-    --config "$config" \
-    --source "$repo_root/home" \
-    --destination "$destination" \
-    apply --exclude=scripts
+# [dotfiles] 設定が parse でき、マッピングが解決できること
+MISE_GLOBAL_CONFIG_FILE="${repo_root}/config/mise/config.toml" \
+    mise dotfiles status >/dev/null
 
-test -f "$destination/.config/fish/config.fish"
-test -f "$destination/.config/mise/config.toml"
-test -x "$destination/.config/git/credential-helper.sh"
-test -L "$destination/.claude"
-test "$(readlink "$destination/.claude")" = ".config/claude"
-test ! -e "$destination/.config/fish/fish_variables"
+# dry-run が成功すること（実 HOME には書き込まない）
+MISE_GLOBAL_CONFIG_FILE="${repo_root}/config/mise/config.toml" \
+    mise dotfiles apply --dry-run >/dev/null
 
-chezmoi \
-    --config "$config" \
-    --source "$repo_root/home" \
-    --destination "$destination" \
-    verify --exclude=scripts
+echo "ok"

@@ -1,0 +1,72 @@
+theme = Atom One Light
+font-size = 7
+font-feature = -calt
+font-feature = -dlig
+font-family = "PlemolJP Console NF"
+shell-integration = fish
+
+# Ghostty起動時にtmuxセッションに自動接続（なければ新規作成）
+command = /opt/homebrew/bin/tmux new -A -s main -c {{ env.HOME }}
+
+# Ghosttyのウィンドウ状態も保存（レイアウトの復元補助）
+window-save-state = always
+
+# === キーバインド ===
+# まずデフォルトをクリア
+keybind = clear
+
+# tmuxに委譲するキーバインド（Ctrl+Space = \x00 をprefix として送信）
+# ペイン分割
+keybind = super+d=text:\x00|
+keybind = super+shift+d=text:\x00-
+
+# ペイン移動（vim風）
+keybind = super+h=text:\x00h
+keybind = super+j=text:\x00j
+keybind = super+k=text:\x00k
+keybind = super+l=text:\x00l
+
+# ペイン閉じ
+keybind = super+w=text:\x00x
+
+# セッションツリー（プレビュー付き session/window/pane 一覧。prefix+s = choose-tree -Zs）
+keybind = super+s=text:\x00s
+
+# ペインズーム
+keybind = shift+escape=text:\x00z
+
+# ペイン均等化
+keybind = super+equal=text:\x00=
+
+# 新 Ghostty ウィンドウで fresh な tmux セッションを開始
+# (tmux 側で prefix+N を `open -na Ghostty.app --command=...` にバインド)
+keybind = super+n=text:\x00N
+
+# 画面クリア
+keybind = super+y=text:\x00y
+
+# nvim 用: Cmd+P を Esc+p (= Alt+P / <M-p>) として送る。
+# kitty keyboard protocol の CSI u は tmux が super 修飾を扱いきれず paste されてしまう
+# (検証 2026-04-23) ため、tmux が確実に透過する Esc プレフィックス方式に切り替え。
+keybind = super+p=text:\x1bp
+
+# nvim 用: Cmd+G で gitlinker (<leader>gl, leader=Space) を発火
+keybind = super+g=text:\x20gl
+
+# 設定の再読み込み（チェーン式: Cmd+Shift+R）
+keybind = super+shift+r=reload_config
+
+# Ghosttyが直接処理するもの（tmuxに委譲しない）
+keybind = super+c=copy_to_clipboard
+keybind = super+v=paste_from_clipboard
+keybind = super+shift+equal=increase_font_size:1
+keybind = super+minus=decrease_font_size:1
+keybind = super+q=quit
+keybind = shift+enter=text:\n
+
+# nvim 用: Ctrl+Tab / Ctrl+Shift+Tab をバッファ切り替えに使う
+keybind = ctrl+tab=text:\x1b[1;5I
+keybind = ctrl+shift+tab=text:\x1b[1;6I
+
+# nvim 用: Cmd+W でバッファを閉じる (<M-w> として送る)
+keybind = super+w=text:\x1bw

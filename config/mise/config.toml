@@ -1,0 +1,29 @@
+[tools]
+go = "1.22"
+node = "21"
+python = "3.12"
+deno = "2.1.10"
+ruby = "3.1.3"
+bat = "latest"
+# eza: mise の asdf/ubi バックエンドは macOS 向けバイナリを配布しておらず
+# インストールできない。このマシンでは cargo (~/.cargo/bin/eza) で導入済み。
+fd = "latest"
+ripgrep = "latest"
+zoxide = "latest"
+
+[settings]
+jobs = 4
+dotfiles.root = "~/src/github.com/naoyafurudono/dotfiles"
+dotfiles.default_mode = "symlink"
+
+# dotfiles の適用は `mise dotfiles apply`。
+# 相対 source はこの設定ファイルのディレクトリ基準で解決されるため、
+# symlink 経由の読み込みでも壊れないよう ~ 起点の絶対パスで書く。
+[dotfiles]
+# リポジトリの config/ 以下を ~/.config/ に1ファイルずつ symlink する。
+# 実体ディレクトリは維持されるため、アプリが生成する動的ファイル
+# (fish_variables, gh/hosts.yml など) は管理外の実ファイルとして共存する。
+"~/.config" = { source = "~/src/github.com/naoyafurudono/dotfiles/config", mode = "symlink-each" }
+# マシン依存の値を含むものはテンプレートから実ファイルを生成する
+"~/.config/ghostty/config" = { source = "~/src/github.com/naoyafurudono/dotfiles/templates/ghostty-config.tmpl", mode = "template" }
+"~/Library/LaunchAgents/com.naoyafurudono.improve-session-recall.plist" = { source = "~/src/github.com/naoyafurudono/dotfiles/templates/com.naoyafurudono.improve-session-recall.plist.tmpl", mode = "template" }

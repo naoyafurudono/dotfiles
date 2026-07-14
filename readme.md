@@ -1,56 +1,55 @@
 # dotfiles
 
-chezmoi で設定ファイルを配置し、mise で言語ランタイムとポータブルな CLI を管理する dotfiles リポジトリです。
+mise で設定ファイル・言語ランタイム・ポータブル CLI・OS パッケージを管理する dotfiles リポジトリです。
 
-## セットアップ
+## 構成
+
+- `config/`: `~/.config/` に 1 ファイルずつ symlink される設定の実体（mise dotfiles の `symlink-each`）
+- `templates/`: マシン依存の値を含む設定の Tera テンプレート（ghostty、LaunchAgent plist）
+- `config/mise/config.toml`: グローバルな mise 設定。`[tools]` と `[dotfiles]` マッピングを含む
+- `config/dotfiles/`: OS パッケージの宣言（`Brewfile` / `packages-debian.txt`）
+- `windows/`: Windows 用ファイル（現在は自動配置していない）
+- `scripts/`, `Makefile`, `mise.toml`: リポジトリ自体の検証・運用タスク
+
+## セットアップ（新しいマシン）
 
 ```sh
-sh -c "$(curl -fsLS get.chezmoi.io)" -- \
-  init --apply https://github.com/naoyafurudono/dotfiles.git
+curl https://mise.run | sh
+git clone https://github.com/naoyafurudono/dotfiles.git ~/src/github.com/naoyafurudono/dotfiles
+cd ~/src/github.com/naoyafurudono/dotfiles
+
+# 初回のみグローバル設定を明示して dotfiles を配置する
+MISE_GLOBAL_CONFIG_FILE="$PWD/config/mise/config.toml" mise dotfiles apply --yes
+
+ln -s .config/claude ~/.claude   # Claude Code 用の symlink
+mise run packages                # OS パッケージ (macOS: brew bundle / Debian: apt)
+mise install --yes               # 言語ランタイム・CLI
 ```
 
-初回実行時にマシン種別を入力します。その後、chezmoi が次の順序でセットアップします。
-
-1. 固定バージョンの mise を `~/.local/bin` に導入する
-2. macOS では Brewfile、Debian 系 Linux では apt の一覧からシステムパッケージを導入する
-3. dotfiles を配置する
-4. mise のグローバルツールを導入する
-
-システムパッケージの導入では、ネットワーク接続や `sudo` の入力が必要になる場合があります。
+2 回目以降は `~/.config/mise/config.toml` が symlink されているため、環境変数の指定は不要です。
 
 ## 日常操作
 
-```sh
-# 適用前の確認
-chezmoi diff
+設定ファイルは symlink なので、`~/.config/` 側を直接編集してもリポジトリの実体が変わります。`chezmoi re-add` のような取り込み操作は不要です。
 
-# 適用
-chezmoi apply
+```sh
+# 変更の確認とコミット
+git -C ~/src/github.com/naoyafurudono/dotfiles status
+git -C ~/src/github.com/naoyafurudono/dotfiles diff
+
+# 状態確認・再適用（新規ファイル追加後など）
+mise dotfiles status
+mise dotfiles apply --dry-run
+mise dotfiles apply
 
 # リポジトリ全体の検証
 make check
 ```
 
-設定は原則として `home/` 以下の chezmoi ソースを編集します。対象ファイルだけを対話的に編集する場合は、次も利用できます。
-
-```sh
-chezmoi edit --apply ~/.config/fish/config.fish
-```
-
-アプリが実体側を書き換える設定を取り込む場合は、対象を必ず限定します。
-
-```sh
-chezmoi re-add ~/.config/zed/settings.json
-```
-
-引数なしの `chezmoi re-add` は、キャッシュやマシン固有値を意図せず取り込む可能性があるため使用しません。
-
 ## 新しいファイルの追加
 
-```sh
-chezmoi add ~/.config/<path>
-```
+リポジトリの `config/` 以下にファイルを置き、`mise dotfiles apply` で symlink を作成します。
 
-追加後は `chezmoi diff` と `make check` で、秘密情報・ランタイムデータ・マシン固有の絶対パスが含まれていないことを確認してください。
+追加後は `git diff` と `make check` で、秘密情報・ランタイムデータ・マシン固有の絶対パスが含まれていないことを確認してください。
 
 詳細な責務分担、ファイル配置、更新手順は [管理方針](docs/management-policy.md) を参照してください。

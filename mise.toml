@@ -1,0 +1,10 @@
+# このリポジトリ内で使う開発・運用タスク。
+# dotfiles の配置そのものは config/mise/config.toml の [dotfiles] で管理する。
+
+[tasks.packages]
+description = "OS パッケージを導入する (macOS: brew bundle / Debian: apt)"
+run = "scripts/install-packages.sh"
+
+[tasks.check]
+description = "リポジトリの lint と test"
+run = "make check"

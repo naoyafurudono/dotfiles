@@ -18,7 +18,11 @@ curl https://mise.run | sh
 git clone https://github.com/naoyafurudono/dotfiles.git ~/src/github.com/naoyafurudono/dotfiles
 cd ~/src/github.com/naoyafurudono/dotfiles
 
+# `mise dotfiles` が使えない古い mise は先に更新する
+mise self-update --yes
+
 # 初回のみグローバル設定を明示して dotfiles を配置する
+MISE_GLOBAL_CONFIG_FILE="$PWD/config/mise/config.toml" mise dotfiles apply --dry-run
 MISE_GLOBAL_CONFIG_FILE="$PWD/config/mise/config.toml" mise dotfiles apply --yes
 
 ln -s .config/claude ~/.claude   # Claude Code 用の symlink
@@ -27,6 +31,24 @@ mise install --yes               # 言語ランタイム・CLI
 ```
 
 2 回目以降は `~/.config/mise/config.toml` が symlink されているため、環境変数の指定は不要です。
+
+### 既存の `~/.config` と衝突する場合
+
+dry-run が `refusing to overwrite existing files` と表示した場合は、対象ファイルをバックアップしてから `--force` で適用します。バックアップを確認せずに `--force` を実行しないでください。
+
+```sh
+# 例: ~/.config 全体を退避する
+backup="$HOME/.config-backup-before-dotfiles-$(date +%Y%m%d-%H%M%S).tar.gz"
+tar -czf "$backup" -C "$HOME" .config
+
+# リポジトリの設定へ置き換える
+MISE_GLOBAL_CONFIG_FILE="$PWD/config/mise/config.toml" mise dotfiles apply --yes --force
+
+# 適用状態を確認する
+mise dotfiles status
+```
+
+適用後、`config/` 以下の管理対象は `~/.config/` からリポジトリへの symlink になります。アプリが生成する管理対象外ファイルは `~/.config/` の実ファイルとして共存します。
 
 ## 日常操作
 

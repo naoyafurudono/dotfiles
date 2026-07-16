@@ -6,7 +6,7 @@ font-family = "PlemolJP Console NF"
 shell-integration = fish
 
 # Ghostty起動時にtmuxセッションに自動接続（なければ新規作成）
-command = /opt/homebrew/bin/tmux new -A -s main -c {{ env.HOME }}
+command = /opt/homebrew/bin/tmux new -A -s main -c {{ vars.ghostty_start_dir | default(value=env.HOME) }}
 
 # Ghosttyのウィンドウ状態も保存（レイアウトの復元補助）
 window-save-state = always

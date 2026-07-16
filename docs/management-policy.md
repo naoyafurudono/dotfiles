@@ -33,6 +33,8 @@ chezmoi のようなファイル名プレフィックスは使わない。ファ
 
 マシン依存の値（ホームディレクトリなど）を含む設定は `templates/` に Tera テンプレートとして置き、`[dotfiles]` で `mode = "template"` を指定してレンダリング結果を実ファイルとして配置する。テンプレートからは `{{ env.HOME }}` のように環境変数を参照でき、ユーザー名やホームパスをハードコードしない。
 
+マシンごとに値を変えたい場合は、管理外の `~/.config/mise/config.local.toml` の `[vars]` に定義し、テンプレートから `{{ vars.<name> | default(value=...) }}` で参照する（旧 chezmoi の `[data]` に相当。例: `ghostty_start_dir`）。テンプレートを変更したら `mise dotfiles apply` で再レンダリングする。
+
 特定 OS にだけ必要なファイルも `config/` に含める。symlink が作られるだけで害がないものはそのまま許容し、配置自体が問題になるもの（Windows の `AppData` など）はマッピングせず `windows/` などに保管する。
 
 ## bootstrap と適用順序

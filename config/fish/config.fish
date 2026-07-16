@@ -49,11 +49,12 @@ if status --is-interactive
     if test "$TERM_PROGRAM" = zed
         set -gx EDITOR zed
         abbr --add v nvim
+        abbr --add vv 'zed .'
         abbr --add m zed
     else
         set -gx EDITOR nvim
         abbr --add v nvim
-        abbr --add mm 'zed .'
+        abbr --add vv 'zed .'
         abbr --add m "cd $MEMO_DIR && claude"
     end
     abbr --add mm "cd $MEMO_DIR"

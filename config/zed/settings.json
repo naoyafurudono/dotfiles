@@ -30,8 +30,8 @@
 	"tabs": {
 		"git_status": true
 	},
-	"soft_wrap": "prefer_line",
-	"preferred_line_length": 300,
+	"soft_wrap": "editor_width",
+	"preferred_line_length": 80,
 	"ui_font_size": 10,
 	"agent_ui_font_size": 10,
 	"buffer_font_size": 9.0,

@@ -302,6 +302,17 @@
     ],
     "PostToolUse": [
       {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.config/claude/hooks/colorme-board-register.sh",
+            "timeout": 60,
+            "statusMessage": "colorme チームタスクボードに登録中..."
+          }
+        ]
+      },
+      {
         "matcher": "Write|Edit|MultiEdit",
         "hooks": [
           {

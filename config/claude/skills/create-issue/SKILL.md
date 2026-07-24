@@ -41,24 +41,15 @@ c. `~/.claude/state/current-issues.md` の先頭付近のエントリ
 
 ### 3. プロジェクトボード登録（colorme org の issue のみ）
 
-git.pepabo.com の colorme org リポジトリで issue を作成した場合は、必ずチームタスクボードに登録し assignee を設定する：
+**hook が自動で行うので、自分では実行しない。** colorme org で `gh issue create` が成功すると、PostToolUse hook（`~/.config/claude/hooks/colorme-board-register.sh`）がチームタスクボード（project 123）への登録・Status=Backlog 設定・assignee(donokun) 設定を実行し、結果を additionalContext で報告してくる。
 
-```
-GH_HOST=git.pepabo.com gh project item-add 123 --owner colorme --url <Issue URL> --format json  # 返却 JSON の id を控える
-GH_HOST=git.pepabo.com gh issue edit <番号> --add-assignee donokun
-```
+自分で操作するのは以下の場合のみ：
 
-さらに Status フィールドを設定する（ID は project 123 で固定）。デフォルトは **Backlog**。すぐ着手する等の指示があれば適切なステータスを選ぶ：
-
-```
-PROJ_ID=$(GH_HOST=git.pepabo.com gh project view 123 --owner colorme --format json | jq -r .id)
-GH_HOST=git.pepabo.com gh project item-edit --id <item-addのid> --project-id $PROJ_ID \
-  --field-id MDI2OlByb2plY3RWMlNpbmdsZVNlbGVjdEZpZWxkNDkzNw== --single-select-option-id f75ad846
-```
-
-- Status オプション ID: Backlog=f75ad846, Ready=50380717, In Progress=47fc9ee4, In Review=c39c9d61, Done=98236657
-- assignee 設定はボードの `sliceBy=donokun` で表示させるために必要
-- `gh project` にはスコープ `read:project`/`project` が必要。権限エラーの場合は `gh auth refresh -h git.pepabo.com -s project` を案内する
+- hook が失敗を報告した場合、または完了報告が来ない場合の手動登録:
+  `~/.config/claude/hooks/colorme-board-register.sh <Issue URL>`
+- 「すぐ着手する」等の指示で Backlog 以外にしたい場合:
+  `~/.config/claude/hooks/colorme-board-register.sh <Issue URL> <backlog|ready|in-progress|in-review|done>`
+- `gh project` の権限エラー時は `gh auth refresh -h git.pepabo.com -s project` を案内する
 
 ### 4. 報告
 
